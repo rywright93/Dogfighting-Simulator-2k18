@@ -2,7 +2,7 @@
 Program Title: Dogfighting Simulator 2k18
 Program Description: 
 Authors: 
-Comments:
+Comments: Testing if stuff works
 */
 
 int points;
