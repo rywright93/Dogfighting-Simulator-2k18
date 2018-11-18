@@ -25,9 +25,6 @@ void setup()
 void draw()
 {
   background(0);
-  fill(0, 255, 0);
-  rect(500,500, 200, 200);
-  noFill();
   pewpew.display(); //used for testing
 }
 
