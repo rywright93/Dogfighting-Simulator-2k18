@@ -37,6 +37,10 @@ class Projectile
   
   public void enemyCollision()
   {
+    for (Boss b : bosses) 
+    {
+      drawColPoint(b.getXPos(), b.getYPos(), b.getBossHeight(), b.getBossWidth());
+    }
   }
   
   public void playerCollision()

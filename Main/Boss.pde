@@ -8,8 +8,8 @@ class Boss
 {
   private float xPos;
   private float yPos;
-  private int bossWidth;
-  private int bossHeight;
+  private float bossWidth;
+  private float bossHeight;
   private PImage bossPic;
   private int hitPoints;
   
@@ -47,12 +47,12 @@ class Boss
     return yPos;
   }
   
-  public int getBossHeight()
+  public float getBossHeight()
   {
     return bossHeight;
   }
   
-  public int getBossWidth()
+  public float getBossWidth()
   {
     return bossWidth;
   }
