@@ -45,8 +45,8 @@ class Projectile
   
   public void move()
   {
-    xPos = mouseX;
-    yPos = mouseY;
+    xPos += xSpeed;
+    yPos += ySpeed;
   }
   
   public void display()
@@ -60,7 +60,7 @@ class Projectile
     {
       fill(0,0,255);
     }
-    //this is a boss
+    //this represents is a boss
     rect(400,300, 200, 200);
     noFill();
     //move the projectile's position
@@ -71,25 +71,25 @@ class Projectile
     noStroke();
   }
   
-  //Checks collision between a projectile and a rectangle. Returns true if they collide
+  //Checks collision between a projectile and a rectangle. The parameters it takes are that of the Enemy/Player picture. Returns true if they collide
   public boolean drawColPoint(float picX, float picY, float picHeight, float picWidth)
   {
     float closestX = 0;
     float closestY = 0;
     //Checks top side of rect
-    if(yPos < picY && xPos > picX && xPos < picX + picWidth)
+    if(yPos < picY && xPos >= picX && xPos <= picX + picWidth)
     {
       closestX = xPos;
       closestY = picY;
     }
     //Checks bottom side of rect
-    else if (yPos > picY + picHeight && xPos > picX && xPos < picX + picWidth)
+    else if (yPos > picY + picHeight && xPos >= picX && xPos <= picX + picWidth)
     {
       closestX = xPos;
       closestY = picY + picHeight;
     }
     //Checks left side of rect
-    else if (xPos < picX)
+    else if (xPos <= picX)
     {
       //If projectile's y-position is less than the target the collision point is on the top corner
       if(yPos < picY)
@@ -111,7 +111,7 @@ class Projectile
       }
     }
     //Checks right side of rect
-    else if (xPos > picX + picWidth)
+    else if (xPos >= picX + picWidth)
     {
       //If projectile's y-position is less than the target the collision point is on the top corner
       if(yPos < picY)

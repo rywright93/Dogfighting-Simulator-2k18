@@ -15,7 +15,7 @@ Player player;
 ArrayList<Boss> bosses;
 ArrayList<Enemy> enemies;
 
-Projectile pewpew = new Projectile(100.0, 100.0, 2.0, 2.0, "Name", color(255,0,0)); //Used for testing
+Projectile pewpew = new Projectile(450, 900.0, 0, -1, "Name", color(255,0,0)); //Used for testing
 
 void setup()
 {
