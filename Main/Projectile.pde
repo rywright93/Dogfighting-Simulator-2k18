@@ -19,6 +19,14 @@ class Projectile
   
   Projectile(float newXPos, float newYPos, float newXSpeed, float newYSpeed, String newShotBy, color newColor)
   {
+    xPos = newXPos;
+    yPos = newYPos;
+    xSpeed = newXSpeed;
+    ySpeed = newYSpeed;
+    diameter = 20;
+    shotBy = newShotBy;
+    c = newColor;
+    
   }
   
   public void bossCollision()

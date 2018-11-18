@@ -11,6 +11,9 @@ int gameState;
 String inputName;
 int[] highscore;
 String[] highscoreNames;
+Player player;
+ArrayList<Boss> bosses;
+ArrayList<Enemy> enemies;
 
 void setup()
 {
