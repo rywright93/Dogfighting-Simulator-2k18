@@ -6,16 +6,16 @@ Comments:
 
 class Projectile
 {
-  private float xPos;
-  private float yPos;
-  private float xSpeed;
-  private float ySpeed;
-  private int diameter;
-  private String shotBy;
-  private ArrayList<Boss> bosses;
-  private ArrayList<Enemy> enemies;
-  Player player;
-  color c;
+  private float xPos; //current x-position
+  private float yPos; //current y-position
+  private float xSpeed; //speed on x-axis
+  private float ySpeed; //speed on y-axis
+  private int diameter; //diameter of projectile
+  private String shotBy; //indicates if projectile was fired by Enemy or Player
+  private ArrayList<Boss> bosses; //Collection of Boss instances
+  private ArrayList<Enemy> enemies; //Collection of Enemy instances
+  Player player; //Reference to Player instance
+  color c; //Color of projectile
   
   Projectile(float newXPos, float newYPos, float newXSpeed, float newYSpeed, String newShotBy, color newColor)
   {
