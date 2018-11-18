@@ -15,6 +15,8 @@ Player player;
 ArrayList<Boss> bosses;
 ArrayList<Enemy> enemies;
 
+Projectile pewpew = new Projectile(100.0, 100.0, 2.0, 2.0, "Name", color(255,0,0)); //Used for testing
+
 void setup()
 {
   size(1600, 900);
@@ -22,6 +24,11 @@ void setup()
 
 void draw()
 {
+  background(0);
+  fill(0, 255, 0);
+  rect(500,500, 200, 200);
+  noFill();
+  pewpew.display(); //used for testing
 }
 
 void keyReleased()

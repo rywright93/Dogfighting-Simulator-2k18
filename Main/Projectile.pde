@@ -51,8 +51,13 @@ class Projectile
   public void display()
   {
     fill(255, 0, 0);
+    ellipse(mouseX, mouseY, diameter, diameter);
+    
+    if(mouseY < 500)
+    {
+      ellipse(mouseX, 500,5,5);
+    }
     noStroke();
-    ellipse(xPos, yPos, diameter, diameter);
   }
   
 }
