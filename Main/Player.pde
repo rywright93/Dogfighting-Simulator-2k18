@@ -65,10 +65,12 @@ class Player
   
   public int getPlayerHeight()
   {
+    return playerHeight;
   }
   
   public int getPlayerWidth()
   {
+    return playerWidth;
   }
   
   public void display()

@@ -24,6 +24,15 @@ void draw()
 {
 }
 
+void keyReleased()
+{
+  //Press the "r" key to terminate the program
+  if(key == 114)
+  {
+    exit();
+  }
+}
+
 void spawnPlayer()
 {
 }
