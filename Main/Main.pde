@@ -53,7 +53,7 @@ void draw()
       itr.remove();
     }
   } 
-  println(pewpews.size());
+  println(points);
 }
 
 void keyReleased()

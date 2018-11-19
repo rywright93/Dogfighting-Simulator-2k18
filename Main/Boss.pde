@@ -6,15 +6,15 @@ Comments:
 
 class Boss
 {
-  private float xPos;
-  private float yPos;
-  private float bossWidth;
-  private float bossHeight;
-  private PImage bossPic;
-  private int hitPoints;
-  private int speed = 10;
-  
-  public int colorTest = 0;
+  private float xPos; //current x position of the boss
+  private float yPos; //current y position of the boss
+  private float bossWidth; //width of the boss image
+  private float bossHeight; //height of the boss image
+  private PImage bossPic; //Image of the boss
+  private int hitPoints; //Boss' health
+  private int xSpeed = 6; //Speed by which it moves
+  private int ySpeed = 3;
+  private boolean enteredLevel; //Indicates whether it has entered the screen
   
   Boss(int newHitPoints)
   {
@@ -22,25 +22,39 @@ class Boss
     bossWidth = 300;
     bossHeight = 200;
     xPos = 400;
-    yPos = 300;
+    yPos = -200;
+    enteredLevel = false;
   }
   
   public void update()
   {
     display();
-    move();
+    if(yPos < 100)
+    {
+      enterLevel();
+    }
+    else{
+      move();
+    }
   }
   
+  //Slowly ascends into the screen from the top
+  public void enterLevel()
+  {
+    yPos += ySpeed;
+  }
+  
+  //Moves the boss from side to side
   public void move()
   {
-    xPos += speed;
+    xPos += xSpeed;
     if(xPos + bossWidth > 1600)
     {
-      speed = -speed;
+      xSpeed = -xSpeed;
     }
     if(xPos < 0)
     {
-      speed = -speed;
+      xSpeed = -xSpeed;
     }
   }
   
@@ -51,19 +65,28 @@ class Boss
   public void isHit()
   {
     hitPoints--;
+    //When the Boss reaches 0 HP it will be destroyed
+    if(hitPoints <= 0)
+    {
+      destroy();
+    }
   }
 
   public void destroy()
   {
+    givePoints();
   }
   
   public void display()
   {
-    fill(colorTest, 0, 255);
-    rect(xPos, yPos, bossWidth, bossHeight);
-    noFill();
-    textSize(25);
-    text(hitPoints + " HP", xPos, yPos);
+    if(hitPoints > 0)
+    {
+      fill(0, 0, 255);
+      rect(xPos, yPos, bossWidth, bossHeight);
+      noFill();
+      textSize(25);
+      text(hitPoints + " HP", xPos, yPos);
+    }
   }
   
   public float getXPos()
@@ -86,7 +109,9 @@ class Boss
     return bossWidth;
   }
   
+  //Yields points to the player upon death
   public void givePoints()
   {
+    points = points + 1000;
   }
 }
