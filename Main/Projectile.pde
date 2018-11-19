@@ -1,5 +1,5 @@
 /*
-Description:
+Description: Projectiles that the Player and enemies fire.
 Authors:
 Comments:
 */
@@ -12,6 +12,7 @@ class Projectile
   private float ySpeed; //speed on y-axis
   private float diameter; //diameter of projectile
   private String shotBy; //indicates if projectile was fired by Enemy or Player
+  private boolean destroyed;
   /*
   private ArrayList<Boss> bs; //Collection of Boss instances
   private ArrayList<Enemy> es; //Collection of Enemy instances
@@ -28,7 +29,8 @@ class Projectile
     ySpeed = newYSpeed;
     diameter = 20;
     shotBy = newShotBy;
-    c = newColor;    
+    c = newColor;
+    destroyed = false;
   }
   
   public void update()
@@ -49,17 +51,20 @@ class Projectile
         b.isHit();
         destroy();
       }
-    }
-    
+    } 
   }
   
   //Used to move the projectile off-screen and stop it when it hits something (or misses entirely)
   public void destroy()
   {
+    //Moves the Projectile to the corner of the screen
     xPos = 0;
     yPos = 0;
+    //Stops its velocity
     xSpeed = 0;
     ySpeed = 0;
+    //shotBy = "Destroyed";
+    destroyed = true;
   }
   
   public void enemyCollision()
@@ -195,6 +200,16 @@ class Projectile
     {
       return false;
     }
+  }
+  
+  public boolean getDestroyed()
+  {
+    return destroyed;
+  }
+  
+  public String getShotBy()
+  {
+    return shotBy;
   }
   
 }

@@ -12,6 +12,7 @@ class Boss
   private float bossHeight;
   private PImage bossPic;
   private int hitPoints;
+  private int speed = 10;
   
   public int colorTest = 0;
   
@@ -27,10 +28,20 @@ class Boss
   public void update()
   {
     display();
+    move();
   }
   
   public void move()
   {
+    xPos += speed;
+    if(xPos + bossWidth > 1600)
+    {
+      speed = -speed;
+    }
+    if(xPos < 0)
+    {
+      speed = -speed;
+    }
   }
   
   public void shoot()

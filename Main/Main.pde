@@ -5,6 +5,7 @@ Authors:
 Comments: Testing if stuff works
 Ryan's also testing if stuff works
 */
+import java.util.*; //imports the Iterator class
 
 int points;
 int gameState;
@@ -41,6 +42,18 @@ void draw()
   {
     p.update();
   }
+  
+  //Iterator used to remove Projectiles from the ArrayList if they are dead.
+  Iterator<Projectile> itr = pewpews.iterator();
+  while (itr.hasNext()) 
+  { 
+    Projectile element = itr.next(); 
+    if (element.getDestroyed() == true) 
+    { 
+      itr.remove();
+    }
+  } 
+  println(pewpews.size());
 }
 
 void keyReleased()
