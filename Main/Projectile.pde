@@ -75,6 +75,18 @@ class Projectile
   {
     xPos += xSpeed;
     yPos += ySpeed;
+    
+    //If the Projectile is above the screen, destroy it
+    if(yPos + diameter/2 < 0)
+    {
+      destroy();
+    }
+    
+    //If the Projectile is above the screen, destroy it
+    if(yPos + diameter/2 > height)
+    {
+      destroy();
+    }
   }
   
   //Displays the projectile in the window

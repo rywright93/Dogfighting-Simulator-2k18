@@ -51,7 +51,8 @@ class Boss
     fill(colorTest, 0, 255);
     rect(xPos, yPos, bossWidth, bossHeight);
     noFill();
-    println(hitPoints);
+    textSize(25);
+    text(hitPoints + " HP", xPos, yPos);
   }
   
   public float getXPos()
