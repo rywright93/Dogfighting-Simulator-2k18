@@ -20,7 +20,7 @@ ArrayList<Projectile> pewpews;
 
 void setup()
 {
-  size(1600, 900);
+  size(700, 900);
   bosses = new ArrayList<Boss>(); //Used for testing
   bosses.add(new Boss(20)); //Used for testing
   

@@ -63,7 +63,7 @@ class Projectile
     //Stops its velocity
     xSpeed = 0;
     ySpeed = 0;
-    //shotBy = "Destroyed";
+    
     destroyed = true;
   }
   

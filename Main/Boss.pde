@@ -19,9 +19,9 @@ class Boss
   Boss(int newHitPoints)
   {
     hitPoints = newHitPoints;
-    bossWidth = 300;
+    bossWidth = 200;
     bossHeight = 200;
-    xPos = 400;
+    xPos = width/2 - bossWidth/2;
     yPos = -200;
     enteredLevel = false;
   }
@@ -48,7 +48,7 @@ class Boss
   public void move()
   {
     xPos += xSpeed;
-    if(xPos + bossWidth > 1600)
+    if(xPos + bossWidth > width)
     {
       xSpeed = -xSpeed;
     }
