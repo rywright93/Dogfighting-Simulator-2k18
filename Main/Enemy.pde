@@ -9,8 +9,8 @@ class Enemy
   private float xPos;
   private float yPos;
   private int typeOfGun;
-  private int enemyWidth;
-  private int enemyHeight;
+  private float enemyWidth;
+  private float enemyHeight;
   private int hitPoints;
   private PImage enemyPic;
   
@@ -52,12 +52,12 @@ class Enemy
     return yPos;
   }
   
-  public int getEnemyHeight()
+  public float getEnemyHeight()
   {
     return enemyHeight;
   }
   
-  public int getEnemyWidth()
+  public float getEnemyWidth()
   {
     return enemyWidth;
   }

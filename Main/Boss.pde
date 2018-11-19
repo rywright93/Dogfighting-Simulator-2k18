@@ -13,8 +13,20 @@ class Boss
   private PImage bossPic;
   private int hitPoints;
   
+  public int colorTest = 0;
+  
   Boss(int newHitPoints)
   {
+    hitPoints = newHitPoints;
+    bossWidth = 300;
+    bossHeight = 200;
+    xPos = 400;
+    yPos = 300;
+  }
+  
+  public void update()
+  {
+    display();
   }
   
   public void move()
@@ -27,14 +39,19 @@ class Boss
   
   public void isHit()
   {
+    hitPoints--;
   }
-  
+
   public void destroy()
   {
   }
   
   public void display()
   {
+    fill(colorTest, 0, 255);
+    rect(xPos, yPos, bossWidth, bossHeight);
+    noFill();
+    println(hitPoints);
   }
   
   public float getXPos()

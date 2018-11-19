@@ -15,17 +15,25 @@ Player player;
 ArrayList<Boss> bosses;
 ArrayList<Enemy> enemies;
 
-Projectile pewpew = new Projectile(450, 900.0, 0, -1, "Name", color(255,0,0)); //Used for testing
+Projectile pewpew = new Projectile(450, 900.0, 0, -3, "Name", color(255,0,0)); //Used for testing
 
 void setup()
 {
   size(1600, 900);
+  bosses = new ArrayList<Boss>(); //Used for testing
+  bosses.add(new Boss(20)); //Used for testing
 }
 
 void draw()
 {
   background(0);
-  pewpew.display(); //used for testing
+  
+  //Used for testing
+  for(Boss b : bosses)
+  {
+    b.update();
+  }
+  pewpew.update(); //used for testing
 }
 
 void keyReleased()
