@@ -7,8 +7,8 @@ Ryan's also testing if stuff works
 */
 import java.util.*; //imports the Iterator class
 
-int points;
-int gameState;
+int points; //the players current score
+int gameState; //indicates the current game state
 String inputName;
 int[] highscore;
 String[] highscoreNames;
@@ -53,7 +53,6 @@ void draw()
       itr.remove();
     }
   } 
-  println(points);
 }
 
 void keyReleased()

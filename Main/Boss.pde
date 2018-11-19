@@ -74,6 +74,11 @@ class Boss
 
   public void destroy()
   {
+    //Moves the boss off-screen and stops its speed
+    xPos = - 1000;
+    xSpeed = 0;
+    ySpeed = 0;
+    
     givePoints();
   }
   
