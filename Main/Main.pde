@@ -24,6 +24,9 @@ void setup()
   bosses = new ArrayList<Boss>(); //Used for testing
   bosses.add(new Boss(20)); //Used for testing
   
+  enemies = new ArrayList<Enemy>(); //Used for testing
+  enemies.add(new Enemy(100, 0, 3, 1)); //Used for testing
+  
   pewpews = new ArrayList<Projectile>(); //Used for testing
 }
 
@@ -52,7 +55,12 @@ void draw()
     { 
       itr.remove();
     }
-  } 
+  }
+  
+  for(Enemy e : enemies)
+  {
+    e.update();
+  }
 }
 
 void keyReleased()
