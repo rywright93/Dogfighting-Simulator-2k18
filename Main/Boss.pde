@@ -14,7 +14,6 @@ class Boss
   private int hitPoints; //Boss' health
   private int xSpeed = 6; //Speed by which it moves along the x-axis
   private int ySpeed = 3; //speed by which it moves along the y-axis
-  private boolean enteredLevel; //Indicates whether it has entered the screen
   private float fireRate = 500;
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   
@@ -25,7 +24,6 @@ class Boss
     bossHeight = 200;
     xPos = width/2 - bossWidth/2;
     yPos = -200;
-    enteredLevel = false;
   }
   
   public void update()

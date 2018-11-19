@@ -13,11 +13,6 @@ class Projectile
   private float diameter; //diameter of projectile
   private String shotBy; //indicates if projectile was fired by Enemy or Player
   private boolean destroyed;
-  /*
-  private ArrayList<Boss> bs; //Collection of Boss instances
-  private ArrayList<Enemy> es; //Collection of Enemy instances
-  Player p; //Reference to Player instance
-  */
   color c; //Color of projectile
   
   //Constructor

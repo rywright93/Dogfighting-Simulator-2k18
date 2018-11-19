@@ -31,13 +31,13 @@ void draw()
 {
   background(0);
   
-  //Used for testing
+  //Used for testing. Updates every instance of Boss in the ArrayList
   for(Boss b : bosses)
   {
     b.update();
   }
   
-  //update every Projectile in the array. Used for testing
+  //update every Projectile in the ArrayList. Used for testing
   for(Projectile p : pewpews)
   {
     p.update();
