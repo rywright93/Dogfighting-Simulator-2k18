@@ -12,9 +12,11 @@ class Boss
   private float bossHeight; //height of the boss image
   private PImage bossPic; //Image of the boss
   private int hitPoints; //Boss' health
-  private int xSpeed = 6; //Speed by which it moves
-  private int ySpeed = 3;
+  private int xSpeed = 6; //Speed by which it moves along the x-axis
+  private int ySpeed = 3; //speed by which it moves along the y-axis
   private boolean enteredLevel; //Indicates whether it has entered the screen
+  private float fireRate = 500;
+  private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   
   Boss(int newHitPoints)
   {
@@ -48,20 +50,32 @@ class Boss
   public void move()
   {
     xPos += xSpeed;
+    //If boss moves beyond right border, reverse its speed
     if(xPos + bossWidth > width)
     {
       xSpeed = -xSpeed;
     }
+    //If boss moves beyond the left screen border, reverse its speed
     if(xPos < 0)
     {
       xSpeed = -xSpeed;
     }
+    //When the boss moves it shoots every fireRate
+    if(millis() > lastProjectileFiredAt)
+    {
+      shoot();
+      lastProjectileFiredAt = millis() + fireRate;
+    }
   }
   
+  //Instantiates projectiles that can only collide with an instance of Player
   public void shoot()
   {
+    pewpews.add(new Projectile(xPos, yPos + bossHeight, 0, 6, "Enemy", color(0,0,255)));
+    pewpews.add(new Projectile(xPos + bossWidth, yPos + bossHeight, 0, 6, "Enemy", color(0,0,255)));
   }
   
+  //When the boss collides with a Projectile fired from the player it takes damage
   public void isHit()
   {
     hitPoints--;

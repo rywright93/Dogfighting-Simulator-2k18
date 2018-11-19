@@ -67,7 +67,7 @@ void keyReleased()
 void mousePressed()
 {
   //Instantiates a Projectile at mouse position when clicking. Used for testing.
-  pewpews.add(new Projectile(mouseX, mouseY, 0, -6, "Name", color(255,0,0)));
+  pewpews.add(new Projectile(mouseX, mouseY, 0, -6, "Player", color(255,0,0)));
 }
 
 void spawnPlayer()

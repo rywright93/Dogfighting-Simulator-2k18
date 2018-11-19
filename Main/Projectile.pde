@@ -46,7 +46,7 @@ class Projectile
     //A for each loop which checks collision for every instance of Boss in bosses list.
     for (Boss b : bosses) 
     {
-      if(drawColPoint(b.getXPos(), b.getYPos(), b.getBossHeight(), b.getBossWidth()) == true)
+      if(drawColPoint(b.getXPos(), b.getYPos(), b.getBossHeight(), b.getBossWidth()) == true && shotBy == "Player")
       {
         b.isHit();
         destroy();
@@ -111,7 +111,7 @@ class Projectile
     rect(400,300, 200, 200);
     noFill();
     */
-    fill(255, 0, 0);
+    fill(c);
     //This represents the projectile
     ellipse(xPos, yPos, diameter, diameter);
     noStroke();
