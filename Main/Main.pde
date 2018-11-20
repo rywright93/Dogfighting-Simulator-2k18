@@ -22,10 +22,10 @@ void setup()
 {
   size(700, 900);
   bosses = new ArrayList<Boss>(); //Used for testing
-  //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
+  bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   
   enemies = new ArrayList<Enemy>(); //Used for testing
-  //enemies.add(new Enemy(100, 0, 3, 1)); //Used for testing. Instantiates an Enemy
+  enemies.add(new Enemy(100, 0, 3, 1)); //Used for testing. Instantiates an Enemy
   
   pewpews = new ArrayList<Projectile>(); //Used for testing
   
@@ -60,6 +60,7 @@ void draw()
     }
   }
   
+  //Update every Enemy in the ArrayList enemies. Used for testing
   for(Enemy e : enemies)
   {
     e.update();
@@ -86,6 +87,8 @@ void keyReleased()
     saveHighscore();
     exit();
   }
+  
+  //Press the space bar to increase points by one
   if(key == 32)
   {
     points++;
@@ -175,4 +178,20 @@ void rearrangeHighscoreList(int i)
   }
   highscores[i] = points; //set the new highscore
   highscoreNames[i] = ""; //clear the corresponding spot for a new name
+}
+
+//Resets the highscore list back to default
+void resetHighscoreList()
+{
+  //reset the scores
+  for(int i = 0; i < highscores.length; i++)
+  {
+    highscores[i] = 0;
+  }
+  
+  //reset the names
+  for(int i = 0; i < highscoreNames.length; i++)
+  {
+    highscoreNames[i] = "N/A";
+  }
 }
