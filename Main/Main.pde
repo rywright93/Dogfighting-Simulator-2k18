@@ -137,8 +137,17 @@ void loadHighscore()
   }
 }
 
+//returns true if the current score (points) is greater than, or equals to, one of the scores in the highscorelist
 boolean checkHighscore()
 {
+  for(int i = 0; i < highscores.length; i++)
+  {
+    if(points >= highscores[i])
+    {
+      return true;
+    }
+  }
+  //If it went through the entire for-loop and didn't return true at any point, it means that the current score does not beat any of the existing ones
   return false;
 }
 
