@@ -108,6 +108,7 @@ void playScreen()
 
 void saveHighscore()
 {
+  saveStrings("highscoreNames.txt", highscoreNames);
 }
 
 //Loads the data in the .txt files into the two highscore arrays
