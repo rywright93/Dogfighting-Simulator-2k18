@@ -9,7 +9,7 @@ import java.util.*; //imports the Iterator class
 
 int points; //the players current score
 int gameState; //indicates the current game state
-String inputName;
+String inputName; //should be reset everytime one exits or enters the highscore screen
 int[] highscores;
 String[] highscoreNames;
 Player player;
@@ -193,5 +193,25 @@ void resetHighscoreList()
   for(int i = 0; i < highscoreNames.length; i++)
   {
     highscoreNames[i] = "N/A";
+  }
+}
+
+//is used to create inputName. Should only be called if inputName < 4 characters long, and if the key pressed was a letter.
+void createInputName()
+{
+  inputName += key; //add the character to the String
+}
+
+//The argument should be the variable inputName once it is completed. The name will then be placed on the highscore list
+void enterNewHighscoreName(String newName)
+{
+  //go through every entry in the array highscoreNames
+  for(int i = 0; i < highscoreNames.length; i++)
+  {
+    //locates the entry that is blank (this is done in rearrangeHighscoreList())
+    if(highscoreNames[i] == "")
+    {
+      highscoreNames[i] = newName; //replace the blank entry with the one from the parameter
+    }
   }
 }
