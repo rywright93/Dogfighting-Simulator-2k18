@@ -140,6 +140,7 @@ void loadHighscore()
 //returns true if the current score (points) is greater than, or equals to, one of the scores in the highscorelist
 boolean checkHighscore()
 {
+  //goes through the array highscores and compares the entries' values with current score (points)
   for(int i = 0; i < highscores.length; i++)
   {
     if(points >= highscores[i])
@@ -151,6 +152,18 @@ boolean checkHighscore()
   return false;
 }
 
-void rearrangeHighscoreList()
+void rearrangeHighscoreList(int i)
 {
+  //If the new highscore is not the bottom one on the list
+  if(i < 9) 
+  {
+    //Re-arrange the scoreboard by moving them down one - stops when it reaches the new highscore
+    for(int j = 9; j > i; j--)
+    {
+      highscores[j] = highscores[j-1];
+      highscoreNames[j] = highscoreNames[j-1];
+    }
+  }
+  highscores[i] = points; //set the new highscore
+  highscoreNames[i] = ""; //clear the corresponding spot for a new name
 }
