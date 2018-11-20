@@ -31,6 +31,7 @@ class Projectile
   public void update()
   {
     bossCollision();
+    enemyCollision();
     display();
     move();
   }
@@ -62,8 +63,18 @@ class Projectile
     destroyed = true;
   }
   
+  //Detects collision with instances of Enemy in the arraylist enemies
   public void enemyCollision()
   {
+    //A for each loop which checks collision for every instance of Enemy in enemies list.
+    for (Enemy e : enemies) 
+    {
+      if(drawColPoint(e.getXPos(), e.getYPos(), e.getEnemyHeight(), e.getEnemyWidth()) == true && shotBy == "Player")
+      {
+        e.isHit();
+        destroy();
+      }
+    } 
   }
   
   public void playerCollision()

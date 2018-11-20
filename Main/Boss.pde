@@ -43,7 +43,7 @@ class Boss
   {
     yPos += ySpeed;
   }
-  
+
   //Moves the boss from side to side
   public void move()
   {
