@@ -28,6 +28,7 @@ void setup()
   enemies.add(new Enemy(100, 0, 3, 1)); //Used for testing
   
   pewpews = new ArrayList<Projectile>(); //Used for testing
+  loadHighscore();
 }
 
 void draw()
@@ -56,7 +57,6 @@ void draw()
       itr.remove();
     }
   }
-  println(enemies.size());
   
   for(Enemy e : enemies)
   {
@@ -80,6 +80,7 @@ void keyReleased()
   //Press the "r" key to terminate the program
   if(key == 114)
   {
+    saveHighscore();
     exit();
   }
 }
@@ -118,9 +119,11 @@ void playScreen()
 {
 }
 
+//save the two highscores array to the .txt files on disc
 void saveHighscore()
 {
   saveStrings("highscoreNames.txt", highscoreNames);
+  saveStrings("highscoreScores.txt", str(highscores));
 }
 
 //Loads the data in the .txt files into the two highscore arrays
@@ -130,7 +133,7 @@ void loadHighscore()
   highscores = int(loadStrings("highscoreScores.txt"));
   for(int i = 0; i<highscores.length;i++)
   {
-    println(highscoreNames[i] + " - " + highscores[i]);
+    println(i +1 + " " + highscoreNames[i] + ": " + highscores[i]);
   }
 }
 
