@@ -10,7 +10,7 @@ import java.util.*; //imports the Iterator class
 int points; //the players current score
 int gameState; //indicates the current game state
 String inputName;
-int[] highscore;
+int[] highscores;
 String[] highscoreNames;
 Player player;
 ArrayList<Boss> bosses;
@@ -110,8 +110,15 @@ void saveHighscore()
 {
 }
 
+//Loads the data in the .txt files into the two highscore arrays
 void loadHighscore()
 {
+  highscoreNames = loadStrings("highscoreNames.txt");
+  highscores = int(loadStrings("highscoreScores.txt"));
+  for(int i = 0; i<highscores.length;i++)
+  {
+    println(highscoreNames[i] + " - " + highscores[i]);
+  }
 }
 
 boolean checkHighscore()
