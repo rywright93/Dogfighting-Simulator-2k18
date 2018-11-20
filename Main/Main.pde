@@ -22,19 +22,21 @@ void setup()
 {
   size(700, 900);
   bosses = new ArrayList<Boss>(); //Used for testing
-  bosses.add(new Boss(20)); //Used for testing
+  //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   
   enemies = new ArrayList<Enemy>(); //Used for testing
-  enemies.add(new Enemy(100, 0, 3, 1)); //Used for testing
+  //enemies.add(new Enemy(100, 0, 3, 1)); //Used for testing. Instantiates an Enemy
   
   pewpews = new ArrayList<Projectile>(); //Used for testing
-  loadHighscore();
+  
+  loadHighscore(); //loads the highscorelist from the .txt file into the arrays
 }
 
 void draw()
 {
   background(0);
-  
+  textSize(30);
+  text(points, 50, 50);
   //Used for testing. Updates every instance of Boss in the ArrayList
   for(Boss b : bosses)
   {
@@ -80,8 +82,13 @@ void keyReleased()
   //Press the "r" key to terminate the program
   if(key == 114)
   {
+    checkHighscore();
     saveHighscore();
     exit();
+  }
+  if(key == 32)
+  {
+    points++;
   }
 }
 
@@ -145,6 +152,7 @@ boolean checkHighscore()
   {
     if(points >= highscores[i])
     {
+      rearrangeHighscoreList(i);
       return true;
     }
   }
@@ -152,6 +160,7 @@ boolean checkHighscore()
   return false;
 }
 
+//Rearranges the highscore list if the current score beats any of them. The parameter it takes is the placement on the scoreboard of the new entry
 void rearrangeHighscoreList(int i)
 {
   //If the new highscore is not the bottom one on the list
