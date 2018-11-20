@@ -114,5 +114,10 @@ class Enemy
     return enemyWidth;
   }
   
+  public int getHitPoints()
+  {
+    return hitPoints;
+  }
+  
   
 }

@@ -56,10 +56,22 @@ void draw()
       itr.remove();
     }
   }
+  println(enemies.size());
   
   for(Enemy e : enemies)
   {
     e.update();
+  }
+  
+  //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
+  Iterator<Enemy> itrE = enemies.iterator();
+  while (itrE.hasNext()) 
+  { 
+    Enemy elementE = itrE.next(); 
+    if (elementE.getHitPoints() <= 0) 
+    { 
+      itrE.remove();
+    }
   }
 }
 
