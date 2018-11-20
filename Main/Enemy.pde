@@ -47,6 +47,7 @@ class Enemy
     //Destroy the enemy if it moves past the bottom of the screen
     if(yPos > height)
     {
+      hitPoints = 0;
       destroy();
     }
   }
