@@ -20,6 +20,7 @@ class Enemy
   private float spawnXPos; //the x-coodinate of the Enemy's spawn position
   private float fireRate = 800;
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
+  private PVector direction; //A directional vector that enemies of type 3 use to home in on the player
   
   Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
   {
@@ -66,6 +67,26 @@ class Enemy
       shoot();
       lastProjectileFiredAt = millis() + fireRate;
     }
+    }
+    
+    //Kamikaze pilot
+    if(enemyType == 3)
+    {
+      direction = new PVector (player.getXPos(), player.getYPos());
+      /*
+      //coordinates for the target location
+      targetLocation = new PVector (mouseX, mouseY);
+      */
+      //calculate the direction based on the starting point and end point
+      direction.sub(xPos, yPos);
+      //normalize the vector so that it has a length of 1
+      direction.normalize();
+      //scale it to make it move at greater length each update
+      direction.mult(4);
+      
+      xPos = xPos + direction.x;
+      yPos = yPos + direction.y;
+      //location.add(velocity);
     }
     //Destroy the enemy if it moves past the bottom of the screen
     if(yPos > height)
