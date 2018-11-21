@@ -47,7 +47,6 @@ class Enemy
     //Destroy the enemy if it moves past the bottom of the screen
     if(yPos > height)
     {
-      hitPoints = 0;
       destroy();
     }
   }
@@ -63,6 +62,7 @@ class Enemy
     
     if(hitPoints <= 0)
     {
+      givePoints();
       destroy();
     }
   }
@@ -73,8 +73,6 @@ class Enemy
     xPos = -1000;
     xSpeed = 0;
     ySpeed = 0;
-    
-    givePoints();
   }
   
   //yield points to the player when dying
