@@ -1,8 +1,8 @@
 /*
 Description: The player character
-Authors:
-Comments:
-*/
+ Authors:
+ Comments:
+ */
 
 class Player
 {
@@ -20,106 +20,130 @@ class Player
   private ArrayList<Enemy> enemies;
   private ArrayList<Boss> bosses;
   private ArrayList<Pickup> pickups;
-  
-  Player()// constructor, provides starting position to player objects toward bottom of screen
+
+  // Constructor, provides starting values for all player variables
+  Player()
   {
     xPos = width/2;
     yPos = height - 100;
+    playerHeight = 30;
+    playerWidth = 15;
+    xSpeed = 3.5;
+    ySpeed = 3.5;
+    shieldCharges = 3;
+    gunType = 1;
+    shieldActive = false;
+    hitPoints = 3;
+    //TO DO: PImage = something later but for now it's a square
   }
-  
-  public void display()// draws player on screen
+
+  // Draws player on screen
+  public void display()
   {
     strokeWeight(0);
-    fill(255, 14, 30);
-    rect(xPos, yPos, 15, 30);
+    fill(144, 11, 30);//Red
+    rect(xPos, yPos, playerWidth, playerHeight);
   }
-  
-  public void move()//method to run every frame, updates position of player
+
+  //Updates position of player
+  public void move()
   {
-    xPos = xPos + xSpeed;
-    yPos = yPos + ySpeed;
+    if (keyPressed == true)
+    {
+      if (key == 119)//Moves player up when 'w' is pressed
+      {
+        yPos = yPos - ySpeed;
+      } else if (key == 115)//Moves player down when 's' is pressed
+      {
+        yPos = yPos + ySpeed;
+      } else if (key == 100)//Moves player down when 'd' is pressed
+      {
+        xPos = xPos + xSpeed;
+      } else if (key == 97)//Moves player down when 'a' is pressed
+      {
+        xPos = xPos - xSpeed;
+      }
+    }
   }
-  
+  //Player collides with screen borders and stops moving
   public void borderCollision()
   {
-    if (yPos >= height)
+    if (yPos + playerHeight >= height)//Bottom border
     {
-      yPos = height;
+      yPos = height - playerHeight;
     }
-    if (yPos <= 0)
+    if (yPos <= 0)//Top border
     {
       yPos = 0;
     }
-    if (xPos >= width)
+    if (xPos + playerWidth >= width)//Right border
     {
-      xPos = width;
+      xPos = width - playerWidth;
     }
-    if (xPos <= 0)
+    if (xPos <= 0)//Left border
     {
       xPos = 0;
     }
   }
-  
+
   public void shoot()
   {
-    
   }
-  
+
   public void shield()
   {
   }
-  
+
   public void isHit()
   {
   }
-  
+
   public void pickupCollision()
   {
   }
-  
+
   public void enemyCollision()
   {
   }
-  
+
   public float getXPos()
   {
     return xPos;
   }
-  
+
   public float getYPos()
   {
     return yPos;
   }
-  
+
   public int getPlayerHeight()
   {
     return playerHeight;
   }
-  
+
   public int getPlayerWidth()
   {
     return playerWidth;
   }
-  
+
   public boolean getShieldActive()
   {
     return shieldActive;
   }
-  
+
   public void setShieldCharge()
   {
   }
-  
+
   public void bossCollision()
   {
   }
-  
+
   public void destroy()
   {
   }
-  
+
   public void setGunType(int gun)
   {
-    
   }
 }

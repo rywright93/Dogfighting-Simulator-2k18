@@ -20,7 +20,7 @@ ArrayList<Projectile> pewpews;
 void setup()
 {
   size(700, 900);
-  player = new Player();// instantiates player object
+  player = new Player();// Instantiates player object
   bosses = new ArrayList<Boss>(); //Used for testing
   bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   
@@ -38,8 +38,9 @@ void draw()
   textSize(30);
   text(points, 50, 50);
   
-  player.display();//displays player instance every frame
-  player.move(); //updates position of player every frame
+  player.display();//Displays player instance every frame
+  player.move(); //Updates position of player every frame
+  player.borderCollision();//Checks if player is on screen border every frame
   
   //Used for testing. Updates every instance of Boss in the ArrayList
   for(Boss b : bosses)
