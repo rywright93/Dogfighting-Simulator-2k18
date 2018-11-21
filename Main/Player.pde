@@ -20,8 +20,10 @@ class Player
   private ArrayList<Enemy> enemies;
   private ArrayList<Boss> bosses;
   private ArrayList<Pickup> pickups;
-  private float fireRate = 200;
+  private float fireRate = 200;//Delay between shots
+  private float shieldCooldown = 1000;//Delay between uses of sheild ability
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
+  private float lastShieldFiredAt;//indicates when last shield charge was used
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
 
   // Constructor, provides starting values for all player variables
@@ -97,15 +99,30 @@ class Player
       if (millis() > lastProjectileFiredAt)
       {
         lastProjectileFiredAt = millis() + fireRate;
-        {
-          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0, -400, "Player", color(255, 0, 0), 10));
-        }
+        projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
       }
     }
   }
+
+  //Sets conditions to activate shield, and keeps player from taking damage when shield is active
   public void shield()
   {
+    //TODO: have condition for setting sheild to active, sheildCharges--, time passes, sheild set to inactive again
+    if ((shieldActive == false) && (shieldCharges < 0) && (keyPressed == true) && (key == 101)) //if the player has shield charges && presses 'e' key
+    {
+      if (millis() > lastShieldFiredAt)
+      {
+        shieldActive = true;
+        shieldCharges--;
+        lastShieldFiredAt = millis() + shieldCooldown;
+      }
+    }
+    if (shieldActive == true)
+    {
+      
+    }
   }
+    //TODO: when sheild is active => no damage, reset shieldActive to false
 
   public void isHit()
   {
