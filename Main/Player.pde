@@ -20,6 +20,8 @@ class Player
   private ArrayList<Enemy> enemies;
   private ArrayList<Boss> bosses;
   private ArrayList<Pickup> pickups;
+  private float fireRate = 200;
+  private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
 
   // Constructor, provides starting values for all player variables
@@ -38,7 +40,7 @@ class Player
     //TO DO: PImage = something later but for now it's a square
   }
 
-  // Draws player on screen
+  //Draws player on screen
   public void display()
   {
     strokeWeight(0);
@@ -92,10 +94,15 @@ class Player
   {
     if (key == 32)//if space bar is pressed
     {
-      pewpews.add(new Projectile(xPos + playerWidth/2, yPos, 0, -400, "Player", color(255, 0, 0)));
+      if (millis() > lastProjectileFiredAt)
+      {
+        lastProjectileFiredAt = millis() + fireRate;
+        {
+          pewpews.add(new Projectile(xPos + playerWidth/2, yPos, 0, -400, "Player", color(255, 0, 0)));
+        }
+      }
     }
   }
-
   public void shield()
   {
   }
