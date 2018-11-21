@@ -1,6 +1,6 @@
 /*
 Description: The player character
- Authors:
+ Authors: Ryan and Casper
  Comments:
  */
 
@@ -20,6 +20,7 @@ class Player
   private ArrayList<Enemy> enemies;
   private ArrayList<Boss> bosses;
   private ArrayList<Pickup> pickups;
+  private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
 
   // Constructor, provides starting values for all player variables
   Player()
@@ -31,7 +32,7 @@ class Player
     xSpeed = 3.5;
     ySpeed = 3.5;
     shieldCharges = 3;
-    gunType = 1;
+    gunType = 2;
     shieldActive = false;
     hitPoints = 3;
     //TO DO: PImage = something later but for now it's a square
@@ -86,8 +87,13 @@ class Player
     }
   }
 
+  //Player shoots by pressing space bar
   public void shoot()
   {
+    if (key == 32)//if space bar is pressed
+    {
+      pewpews.add(new Projectile(xPos + playerWidth/2, yPos, 0, -400, "Player", color(255, 0, 0)));
+    }
   }
 
   public void shield()

@@ -83,6 +83,15 @@ void draw()
   }
 }
 
+//Checks on each key pressed event if the player needs to fire a projectile
+void keyPressed()
+{
+  if (keyPressed == true)
+  {
+    player.shoot();
+  }
+}
+
 void keyReleased()
 {
   //Press the "r" key to terminate the program
