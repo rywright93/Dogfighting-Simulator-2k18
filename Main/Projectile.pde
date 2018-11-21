@@ -14,6 +14,7 @@ class Projectile
   private String shotBy; //indicates if projectile was fired by Enemy or Player
   private boolean destroyed;
   color c; //Color of projectile
+  private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   
   //Constructor
   Projectile(float newXPos, float newYPos, float newXSpeed, float newYSpeed, String newShotBy, color newColor)
@@ -84,8 +85,13 @@ class Projectile
   //moves the location of the Projectile based on its speed along the x and y axes
   public void move()
   {
+    xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
+    yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+    ticksLastUpdate = millis(); 
+    /*
     xPos += xSpeed;
     yPos += ySpeed;
+    */
     
     //If the Projectile is above the screen, destroy it
     if(yPos + diameter/2 < 0)

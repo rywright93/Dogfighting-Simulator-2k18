@@ -69,8 +69,8 @@ class Boss
   //Instantiates projectiles that can only collide with an instance of Player
   public void shoot()
   {
-    pewpews.add(new Projectile(xPos, yPos + bossHeight, 0, 6, "Enemy", color(0,0,255)));
-    pewpews.add(new Projectile(xPos + bossWidth, yPos + bossHeight, 0, 6, "Enemy", color(0,0,255)));
+    pewpews.add(new Projectile(xPos, yPos + bossHeight, 0, 400, "Enemy", color(0,0,255)));
+    pewpews.add(new Projectile(xPos + bossWidth, yPos + bossHeight, 0, 400, "Enemy", color(0,0,255)));
   }
   
   //When the boss collides with a Projectile fired from the player it takes damage

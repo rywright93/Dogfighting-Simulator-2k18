@@ -40,7 +40,7 @@ class Enemy
     move();
   }
   
-  //Moves the position of the enemy based on its speed
+  //Moves the position of the enemy based on its speed and time fix
   public void move()
   {
     xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
