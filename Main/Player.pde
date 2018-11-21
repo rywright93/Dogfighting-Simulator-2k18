@@ -98,7 +98,7 @@ class Player
       {
         lastProjectileFiredAt = millis() + fireRate;
         {
-          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0, -400, "Player", color(255, 0, 0)));
+          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0, -400, "Player", color(255, 0, 0), 10));
         }
       }
     }

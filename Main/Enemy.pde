@@ -17,7 +17,9 @@ class Enemy
   private float ySpeed; //Enemy's speed along thet y-axis
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   private int enemyType; //EnemyType 1: fly straight, don't shoot. Type 2: sin wave, and shoot. Type 3: kamikaze
-  private float spawnXPos;
+  private float spawnXPos; //the x-coodinate of the Enemy's spawn position
+  private float fireRate = 800;
+  private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   
   Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
   {
@@ -31,7 +33,7 @@ class Enemy
     enemyWidth = 50;
     enemyHeight = 100;
     xSpeed = 0;
-    ySpeed = 300;
+    ySpeed = 200;
     enemyType = newEnemyType;
     spawnXPos = newXPos;
   }
@@ -58,7 +60,12 @@ class Enemy
     {
       yPos = yPos + ySpeed/100;
       //sin(yPos * frequency) * wave length) + xPos spawnPosition
-      xPos = (sin(yPos * 0.02) * 150) + spawnXPos + enemyWidth; 
+      xPos = (sin(yPos * 0.02) * 150) + spawnXPos + enemyWidth;
+      if(millis() > lastProjectileFiredAt)
+    {
+      shoot();
+      lastProjectileFiredAt = millis() + fireRate;
+    }
     }
     //Destroy the enemy if it moves past the bottom of the screen
     if(yPos > height)
@@ -69,7 +76,7 @@ class Enemy
   
   public void shoot()
   {
-    
+    projectiles.add(new Projectile(xPos + enemyWidth/2, yPos + enemyHeight, 0, 400, "Enemy", color(255, 0, 0), 20));
   }
   
   //When the enemy collides with a Projectile fired from the player it takes damage

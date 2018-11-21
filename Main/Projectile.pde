@@ -17,13 +17,13 @@ class Projectile
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   
   //Constructor
-  Projectile(float newXPos, float newYPos, float newXSpeed, float newYSpeed, String newShotBy, color newColor)
+  Projectile(float newXPos, float newYPos, float newXSpeed, float newYSpeed, String newShotBy, color newColor, int newDiameter)
   {
     xPos = newXPos;
     yPos = newYPos;
     xSpeed = newXSpeed;
     ySpeed = newYSpeed;
-    diameter = 20;
+    diameter = newDiameter;
     shotBy = newShotBy;
     c = newColor;
     destroyed = false;
