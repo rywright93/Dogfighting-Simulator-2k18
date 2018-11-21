@@ -25,7 +25,7 @@ void setup()
   //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   
   enemies = new ArrayList<Enemy>(); //Used for testing
-  enemies.add(new Enemy(100, 0, 3, 3)); //Used for testing. Instantiates an Enemy
+  //enemies.add(new Enemy(100, 0, 3, 3)); //Used for testing. Instantiates an Enemy
   
   projectiles = new ArrayList<Projectile>(); //Used for testing
   
