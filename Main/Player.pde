@@ -10,8 +10,8 @@ class Player
   private float ySpeed;
   private float xPos;
   private float yPos;
-  private int playerHeight;
-  private int playerWidth;
+  private float playerHeight;
+  private float playerWidth;
   private int shieldCharges;
   private int gunType;
   private boolean shieldActive;
@@ -131,10 +131,6 @@ class Player
     {
       shieldCharges = 0;
     }
-    if (shieldActive == true)
-    {
-      //TODO: when shield is active => no damage
-    }
     if (millis() > lastShieldFiredAt + shieldEffectLength)//turns shield effect off after set number of seconds
     {
       shieldActive = false;
@@ -170,12 +166,12 @@ class Player
     return yPos;
   }
 
-  public int getPlayerHeight()
+  public float getPlayerHeight()
   {
     return playerHeight;
   }
 
-  public int getPlayerWidth()
+  public float getPlayerWidth()
   {
     return playerWidth;
   }

@@ -1,8 +1,8 @@
 /*
 Description: Projectiles that the Player and enemies fire.
-Authors:
-Comments:
-*/
+ Authors:
+ Comments:
+ */
 
 class Projectile
 {
@@ -15,7 +15,7 @@ class Projectile
   private boolean destroyed;
   color c; //Color of projectile
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
-  
+
   //Constructor
   Projectile(float newXPos, float newYPos, float newXSpeed, float newYSpeed, String newShotBy, color newColor, int newDiameter)
   {
@@ -28,7 +28,7 @@ class Projectile
     c = newColor;
     destroyed = false;
   }
-  
+
   public void update()
   {
     bossCollision();
@@ -36,21 +36,21 @@ class Projectile
     display();
     move();
   }
-  
+
   //Detects collision with instances of Boss in the arraylist bosses
   public void bossCollision()
   {
     //A for each loop which checks collision for every instance of Boss in bosses list.
     for (Boss b : bosses) 
     {
-      if(drawColPoint(b.getXPos(), b.getYPos(), b.getBossHeight(), b.getBossWidth()) == true && shotBy == "Player")
+      if (drawColPoint(b.getXPos(), b.getYPos(), b.getBossHeight(), b.getBossWidth()) == true && shotBy == "Player")
       {
         b.isHit();
         destroy();
       }
-    } 
+    }
   }
-  
+
   //Used to move the projectile off-screen and stop it when it hits something (or misses entirely)
   public void destroy()
   {
@@ -60,28 +60,37 @@ class Projectile
     //Stops its velocity
     xSpeed = 0;
     ySpeed = 0;
-    
+
     destroyed = true;
   }
-  
+
   //Detects collision with instances of Enemy in the arraylist enemies
   public void enemyCollision()
   {
     //A for each loop which checks collision for every instance of Enemy in enemies list.
     for (Enemy e : enemies) 
     {
-      if(drawColPoint(e.getXPos(), e.getYPos(), e.getEnemyHeight(), e.getEnemyWidth()) == true && shotBy == "Player")
+      if (drawColPoint(e.getXPos(), e.getYPos(), e.getEnemyHeight(), e.getEnemyWidth()) == true && shotBy == "Player")
       {
         e.isHit();
         destroy();
       }
-    } 
+    }
   }
-  
+
   public void playerCollision()
   {
+    if (drawColPoint(player.getXPos(), player.getYPos(), player.getPlayerHeight(), player.getPlayerWidth()) == true && shotBy == "Enemy" || shotBy == "Boss" && player.getShieldActive() == false)
+    {
+      player.isHit();
+      destroy();
+    } else if (player.shieldActive == true)
+    {
+      destroy();
+    }
   }
-  
+
+
   //moves the location of the Projectile based on its speed along the x and y axes
   public void move()
   {
@@ -90,54 +99,54 @@ class Projectile
     ticksLastUpdate = millis(); 
     /*
     xPos += xSpeed;
-    yPos += ySpeed;
-    */
-    
+     yPos += ySpeed;
+     */
+
     //If the Projectile is above the screen, destroy it
-    if(yPos + diameter/2 < 0)
+    if (yPos + diameter/2 < 0)
     {
       destroy();
     }
-    
+
     //If the Projectile is above the screen, destroy it
-    if(yPos + diameter/2 > height)
+    if (yPos + diameter/2 > height)
     {
       destroy();
     }
   }
-  
+
   //Displays the projectile in the window
   public void display()
   {
-   /* 
-    //If the rectangle and projectile the fill changes
-    if(drawColPoint(400,300,200,200) == true)
-    {
-      fill(0, 255, 0);
-    }
-    else
-    {
-      fill(0,0,255);
-    }
-    //this represents is a boss
-    rect(400,300, 200, 200);
-    noFill();
-    */
+    /* 
+     //If the rectangle and projectile the fill changes
+     if(drawColPoint(400,300,200,200) == true)
+     {
+     fill(0, 255, 0);
+     }
+     else
+     {
+     fill(0,0,255);
+     }
+     //this represents is a boss
+     rect(400,300, 200, 200);
+     noFill();
+     */
     fill(c);
     //This represents the projectile
     ellipse(xPos, yPos, diameter, diameter);
     noStroke();
   }
-  
+
   //Checks collision between a projectile and a rectangle. The parameters it takes are that of the Enemy/Player picture. Returns true if they collide
   public boolean drawColPoint(float picX, float picY, float picHeight, float picWidth)
   {
-    fill(255,0,0);
+    fill(255, 0, 0);
     float closestX = 0; //the x coordinate of the closest point to the projectile on the target rect
     float closestY = 0;//the y coordinate of the closest point to the projectile on the target rect
-    
+
     //Checks top side of target rect
-    if(yPos < picY && xPos >= picX && xPos <= picX + picWidth)
+    if (yPos < picY && xPos >= picX && xPos <= picX + picWidth)
     {
       closestX = xPos;
       closestY = picY;
@@ -152,7 +161,7 @@ class Projectile
     else if (xPos <= picX)
     {
       //If projectile's y-position is less than the target the collision point is on the top corner
-      if(yPos < picY)
+      if (yPos < picY)
       {
         closestX = picX;
         closestY = picY;
@@ -174,7 +183,7 @@ class Projectile
     else if (xPos >= picX + picWidth)
     {
       //If projectile's y-position is less than the target the collision point is on the top corner
-      if(yPos < picY)
+      if (yPos < picY)
       {
         closestX = picX + picWidth;
         closestY = picY;
@@ -197,13 +206,13 @@ class Projectile
     {
       return true;
     }
-    
+
     //Display the closest point to the Projectile on the rectangle
     ellipse(closestX, closestY, 10, 10);
     noFill();
-    
+
     //If the distance between the closest point on the rectangle and the projectile is less than the projectile's radius, they have collided
-    if(dist(xPos, yPos, closestX, closestY) < diameter/2)
+    if (dist(xPos, yPos, closestX, closestY) < diameter/2)
     {
       return true;
     }
@@ -213,15 +222,14 @@ class Projectile
       return false;
     }
   }
-  
+
   public boolean getDestroyed()
   {
     return destroyed;
   }
-  
+
   public String getShotBy()
   {
     return shotBy;
   }
-  
 }
