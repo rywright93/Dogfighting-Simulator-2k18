@@ -12,10 +12,11 @@ class Boss
   private float bossHeight; //height of the boss image
   private PImage bossPic; //Image of the boss
   private int hitPoints; //Boss' health
-  private int xSpeed = 6; //Speed by which it moves along the x-axis
-  private int ySpeed = 3; //speed by which it moves along the y-axis
+  private int xSpeed = 300; //Speed by which it moves along the x-axis
+  private int ySpeed = 180; //speed by which it moves along the y-axis
   private float fireRate = 500;
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
+  private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   
   Boss(int newHitPoints)
   {
@@ -41,13 +42,18 @@ class Boss
   //Slowly ascends into the screen from the top
   public void enterLevel()
   {
-    yPos += ySpeed;
+    yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+    ticksLastUpdate = millis();
+    //yPos += ySpeed;
   }
 
   //Moves the boss from side to side
   public void move()
   {
-    xPos += xSpeed;
+    
+    xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
+    ticksLastUpdate = millis();
+    //xPos += xSpeed;
     //If boss moves beyond right border, reverse its speed
     if(xPos + bossWidth > width)
     {
