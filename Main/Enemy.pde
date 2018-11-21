@@ -15,6 +15,7 @@ class Enemy
   private float enemyHeight; //height of enemy image
   private float xSpeed; //Enemy's speed along the x-axis
   private float ySpeed; //Enemy's speed along thet y-axis
+  private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   
   Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
   {
@@ -29,7 +30,7 @@ class Enemy
     enemyWidth = 50;
     enemyHeight = 100;
     xSpeed = 0;
-    ySpeed = 5;
+    ySpeed = 300;
   }
   
   //Is called in Main. It updates everything that needs updating.
@@ -42,8 +43,13 @@ class Enemy
   //Moves the position of the enemy based on its speed
   public void move()
   {
+    xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
+    yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+    ticksLastUpdate = millis(); 
+    /*
     xPos += xSpeed;
     yPos += ySpeed;
+    */
     //Destroy the enemy if it moves past the bottom of the screen
     if(yPos > height)
     {
