@@ -22,10 +22,10 @@ void setup()
   size(700, 900);
   player = new Player();// Instantiates player object
   bosses = new ArrayList<Boss>(); //Used for testing
-  //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
+  bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   
   enemies = new ArrayList<Enemy>(); //Used for testing
-  //enemies.add(new Enemy(100, 0, 3, 1)); //Used for testing. Instantiates an Enemy
+  enemies.add(new Enemy(100, 0, 3, 2)); //Used for testing. Instantiates an Enemy
   
   pewpews = new ArrayList<Projectile>(); //Used for testing
   

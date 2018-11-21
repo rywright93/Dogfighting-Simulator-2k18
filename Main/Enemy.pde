@@ -16,21 +16,22 @@ class Enemy
   private float xSpeed; //Enemy's speed along the x-axis
   private float ySpeed; //Enemy's speed along thet y-axis
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
+  private int enemyType; //EnemyType 1: fly straight, don't shoot. Type 2: sin wave, and shoot. Type 3: kamikaze
   
   Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
   {
   }
   //Test constructor
-  Enemy(float newXPos, float newYPos, int newHitPoints, int newTypeOfGun)
+  Enemy(float newXPos, float newYPos, int newHitPoints, int newEnemyType)
   {
     xPos = newXPos;
     yPos = newYPos;
     hitPoints = newHitPoints;
-    typeOfGun = newTypeOfGun;
     enemyWidth = 50;
     enemyHeight = 100;
     xSpeed = 0;
     ySpeed = 300;
+    enemyType = newEnemyType;
   }
   
   //Is called in Main. It updates everything that needs updating.
@@ -43,13 +44,20 @@ class Enemy
   //Moves the position of the enemy based on its speed and time fix
   public void move()
   {
-    xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
-    yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
-    ticksLastUpdate = millis(); 
-    /*
-    xPos += xSpeed;
-    yPos += ySpeed;
-    */
+    if(enemyType == 1)
+    {
+      xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
+      yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+      ticksLastUpdate = millis(); 
+    }
+    
+    //move in sine wave
+    if(enemyType == 2)
+    {
+      yPos = yPos + ySpeed/100;
+      //sin(yPos * frequency) * wave length) + xPos spawnPosition
+      xPos = (sin(yPos * 0.02) * 150) + 100; 
+    }
     //Destroy the enemy if it moves past the bottom of the screen
     if(yPos > height)
     {
