@@ -15,19 +15,19 @@ Player player;
 ArrayList<Boss> bosses;
 ArrayList<Enemy> enemies;
 
-ArrayList<Projectile> pewpews;
+ArrayList<Projectile> projectiles;
 
 void setup()
 {
   size(700, 900);
   player = new Player();// Instantiates player object
   bosses = new ArrayList<Boss>(); //Used for testing
-  bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
+  //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   
   enemies = new ArrayList<Enemy>(); //Used for testing
   enemies.add(new Enemy(100, 0, 3, 2)); //Used for testing. Instantiates an Enemy
   
-  pewpews = new ArrayList<Projectile>(); //Used for testing
+  projectiles = new ArrayList<Projectile>(); //Used for testing
   
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
 }
@@ -49,13 +49,13 @@ void draw()
   }
   
   //update every Projectile in the ArrayList. Used for testing
-  for(Projectile p : pewpews)
+  for(Projectile p : projectiles)
   {
     p.update();
   }
   
   //Iterator used to remove Projectiles from the ArrayList if they are dead.
-  Iterator<Projectile> itr = pewpews.iterator();
+  Iterator<Projectile> itr = projectiles.iterator();
   while (itr.hasNext()) 
   { 
     Projectile element = itr.next(); 
@@ -101,18 +101,10 @@ void keyReleased()
     saveHighscore();
     exit();
   }
-  
-  //Press the space bar to increase points by one
-  if(key == 32)
-  {
-    points++;
-  }
 }
 
 void mousePressed()
 {
-  //Instantiates a Projectile at mouse position when clicking. Used for testing.
-  pewpews.add(new Projectile(mouseX, mouseY, 0, -400, "Player", color(255,0,0)));
 }
 
 void spawnPlayer()

@@ -17,6 +17,7 @@ class Enemy
   private float ySpeed; //Enemy's speed along thet y-axis
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   private int enemyType; //EnemyType 1: fly straight, don't shoot. Type 2: sin wave, and shoot. Type 3: kamikaze
+  private float spawnXPos;
   
   Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
   {
@@ -32,6 +33,7 @@ class Enemy
     xSpeed = 0;
     ySpeed = 300;
     enemyType = newEnemyType;
+    spawnXPos = newXPos;
   }
   
   //Is called in Main. It updates everything that needs updating.
@@ -56,7 +58,7 @@ class Enemy
     {
       yPos = yPos + ySpeed/100;
       //sin(yPos * frequency) * wave length) + xPos spawnPosition
-      xPos = (sin(yPos * 0.02) * 150) + 100; 
+      xPos = (sin(yPos * 0.02) * 150) + spawnXPos + enemyWidth; 
     }
     //Destroy the enemy if it moves past the bottom of the screen
     if(yPos > height)
@@ -67,6 +69,7 @@ class Enemy
   
   public void shoot()
   {
+    
   }
   
   //When the enemy collides with a Projectile fired from the player it takes damage
