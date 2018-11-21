@@ -2,8 +2,7 @@
 Program Title: Dogfighting Simulator 2k18
 Program Description: 
 Authors: 
-Comments: Testing if stuff works
-Ryan's also testing if stuff works
+Comments:
 */
 import java.util.*; //imports the Iterator class
 
@@ -21,6 +20,7 @@ ArrayList<Projectile> pewpews;
 void setup()
 {
   size(700, 900);
+  player = new Player();// instantiates player object
   bosses = new ArrayList<Boss>(); //Used for testing
   bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   
@@ -37,6 +37,10 @@ void draw()
   background(0);
   textSize(30);
   text(points, 50, 50);
+  
+  player.display();//displays player instance every frame
+  player.move(); //updates position of player every frame
+  
   //Used for testing. Updates every instance of Boss in the ArrayList
   for(Boss b : bosses)
   {

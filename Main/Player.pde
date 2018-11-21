@@ -1,5 +1,5 @@
 /*
-Description:
+Description: The player character
 Authors:
 Comments:
 */
@@ -21,20 +21,48 @@ class Player
   private ArrayList<Boss> bosses;
   private ArrayList<Pickup> pickups;
   
-  Player()
+  Player()// constructor, provides starting position to player objects toward bottom of screen
   {
+    xPos = width/2;
+    yPos = height - 100;
   }
   
-  public void move()
+  public void display()// draws player on screen
   {
+    strokeWeight(0);
+    fill(255, 14, 30);
+    rect(xPos, yPos, 15, 30);
+  }
+  
+  public void move()//method to run every frame, updates position of player
+  {
+    xPos = xPos + xSpeed;
+    yPos = yPos + ySpeed;
   }
   
   public void borderCollision()
   {
+    if (yPos >= height)
+    {
+      yPos = height;
+    }
+    if (yPos <= 0)
+    {
+      yPos = 0;
+    }
+    if (xPos >= width)
+    {
+      xPos = width;
+    }
+    if (xPos <= 0)
+    {
+      xPos = 0;
+    }
   }
   
   public void shoot()
   {
+    
   }
   
   public void shield()
@@ -71,10 +99,6 @@ class Player
   public int getPlayerWidth()
   {
     return playerWidth;
-  }
-  
-  public void display()
-  {
   }
   
   public boolean getShieldActive()
