@@ -20,10 +20,11 @@ class Player
   private ArrayList<Enemy> enemies;
   private ArrayList<Boss> bosses;
   private ArrayList<Pickup> pickups;
-  private float fireRate = 200;//Delay between shots
-  private float shieldCooldown = 1000;//Delay between uses of sheild ability
+  private float fireRate;//Delay between shots in milliseconds
+  private float shieldCooldown;//Delay between uses of sheild ability
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   private float lastShieldFiredAt;//indicates when last shield charge was used
+  private float shieldEffectLength;//number of milliseconds shield effect lasts when triggered
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
 
   // Constructor, provides starting values for all player variables
@@ -40,6 +41,16 @@ class Player
     shieldActive = false;
     hitPoints = 3;
     //TO DO: PImage = something later but for now it's a square
+    shieldEffectLength = 3000;//Value in milliseconds
+    shieldCooldown = 1000;//Value in milliseconds
+    fireRate = 200;//Value in milliseconds
+  }
+
+  public void update()
+  {
+    display();//Displays player instance every frame
+    move(); //Updates position of player every frame
+    borderCollision();//Checks if player is on screen border every frame
   }
 
   //Draws player on screen
@@ -107,7 +118,6 @@ class Player
   //Sets conditions to activate shield, and keeps player from taking damage when shield is active
   public void shield()
   {
-    //TODO: have condition for setting sheild to active, sheildCharges--, time passes, sheild set to inactive again
     if ((shieldActive == false) && (shieldCharges < 0) && (keyPressed == true) && (key == 101)) //if the player has shield charges && presses 'e' key
     {
       if (millis() > lastShieldFiredAt)
@@ -117,15 +127,29 @@ class Player
         lastShieldFiredAt = millis() + shieldCooldown;
       }
     }
+    if (shieldCharges <= 0)
+    {
+      shieldCharges = 0;
+    }
     if (shieldActive == true)
     {
-      
+      //TODO: when shield is active => no damage
+    }
+    if (millis() > lastShieldFiredAt + shieldEffectLength)//turns shield effect off after set number of seconds
+    {
+      shieldActive = false;
     }
   }
-    //TODO: when sheild is active => no damage, reset shieldActive to false
 
   public void isHit()
   {
+    hitPoints--;
+
+    if (hitPoints <= 0)
+    {
+      hitPoints = 0;
+      destroy();
+    }
   }
 
   public void pickupCollision()
@@ -171,6 +195,7 @@ class Player
 
   public void destroy()
   {
+    gameOver();
   }
 
   public void setGunType(int gun)

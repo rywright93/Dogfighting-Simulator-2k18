@@ -38,9 +38,8 @@ void draw()
   textSize(30);
   text(points, 50, 50);
   
-  player.display();//Displays player instance every frame
-  player.move(); //Updates position of player every frame
-  player.borderCollision();//Checks if player is on screen border every frame
+  //Updates player position and collisions every frame
+  player.update();
   
   //Used for testing. Updates every instance of Boss in the ArrayList
   for(Boss b : bosses)
