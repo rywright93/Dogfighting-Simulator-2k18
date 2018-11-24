@@ -111,6 +111,17 @@ class Player
         projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
       }
     }
+    
+    //Sets projectile patterns for different gun types
+    if (gunType == 0)
+    {
+    }
+    else if (gunType == 1)
+    {
+    }
+    else if (gunType == 2)
+    {
+    }
   }
 
   //Sets conditions to activate shield, and keeps player from taking damage when shield is active
@@ -212,6 +223,7 @@ class Player
 
   public void setShieldCharge()
   {
+    shieldCharges++;
   }
 
   public void bossCollision()
@@ -232,7 +244,7 @@ class Player
         isHit();
         b.isHit();
       }
-      
+
       //Player left border collision check
       if (xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBossWidth() && yPos + playerHeight >= b.getYPos() && yPos <= b.getYPos() + b.getBossHeight())
       {
@@ -256,5 +268,6 @@ class Player
 
   public void setGunType(int gun)
   {
+    gunType = gun;
   }
 }
