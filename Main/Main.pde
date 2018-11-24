@@ -35,7 +35,6 @@ void setup()
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
   
   explosionSpriteSheet = loadImage("explosion animation b.png");
-  Explosion boom = new Explosion(100, 100);
 }
 
 void draw()
