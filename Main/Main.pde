@@ -85,6 +85,10 @@ void draw()
       itrE.remove();
     }
   }
+  if(boom.getAnimationEnded() == false)
+  {
+    boom.display();
+  }
 }
 
 //Checks on each key pressed event if the player needs to fire a projectile
