@@ -210,7 +210,7 @@ class Projectile
     }
 
     //Display the closest point to the Projectile on the rectangle
-    ellipse(closestX, closestY, 10, 10);
+    //ellipse(closestX, closestY, 10, 10);
     noFill();
 
     //If the distance between the closest point on the rectangle and the projectile is less than the projectile's radius, they have collided
