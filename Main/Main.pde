@@ -29,7 +29,7 @@ void setup()
   player = new Player();// Instantiates player object
   bosses = new ArrayList<Boss>(); //Used for testing
   //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
-  enemySprite = loadImage("enemy b.png");
+  enemySprite = loadImage("enemy c.png");
   enemies = new ArrayList<Enemy>(); //Used for testing
   enemies.add(new Enemy(100, 0, 3, 3)); //Used for testing. Instantiates an Enemy
 
@@ -44,7 +44,7 @@ void setup()
 
 void draw()
 {
-  background(0);
+  background(255);
   textSize(30);
   text(points, 50, 50);
   

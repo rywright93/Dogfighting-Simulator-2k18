@@ -131,8 +131,8 @@ class Enemy
   {
     //A rectangle is used as placeholder
     fill(0, 255, 0);
-    //image(enemyPic, xPos, yPos);
-    rect(xPos, yPos, enemyWidth, enemyHeight);
+    image(enemyPic, xPos, yPos);
+    //rect(xPos, yPos, enemyWidth, enemyHeight);
     noFill();
     //Display the health of the enemy
     textSize(20);
