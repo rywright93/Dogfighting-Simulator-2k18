@@ -30,7 +30,7 @@ void setup()
   
   enemies = new ArrayList<Enemy>(); //Used for testing
   enemies.add(new Enemy(100, 0, 3, 3)); //Used for testing. Instantiates an Enemy
-  
+
   projectiles = new ArrayList<Projectile>(); //Used for testing
   
   explosions = new ArrayList<Explosion>();
