@@ -221,6 +221,11 @@ void playScreen()
 {
 }
 
+void reset()
+{
+  /* start movement, change gamestate, draw playing screen, 
+}
+
 //save the two highscores array to the .txt files on disc
 void saveHighscore()
 {
