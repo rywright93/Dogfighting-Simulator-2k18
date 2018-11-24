@@ -31,8 +31,8 @@ class Player
     yPos = height - 100;
     playerHeight = 30;
     playerWidth = 15;
-    xSpeed = 3.5;
-    ySpeed = 3.5;
+    xSpeed = 180;
+    ySpeed = 180;
     shieldCharges = 3;
     gunType = 2;
     shieldActive = false;
@@ -45,10 +45,12 @@ class Player
 
   public void update()
   {
-    display();//Displays player instance every frame
-    move(); //Updates position of player every frame
-    borderCollision();//Checks if player is on screen border every frame
-    enemyCollision();//Checks if player has collided with enemy every frame
+    display();//Displays player instance every frame in Main
+    move(); //Updates position of player every frame in Main
+    borderCollision();//Checks if player is on screen border every frame in Main
+    enemyCollision();//Checks if player has collided with enemy every frame in Main
+    bossCollision();//Checks if player has collided with boss every frame in Main
+    pickupCollision();//Checks if player has collided with pickup every frame in Main
   }
 
   //Draws player on screen
@@ -66,19 +68,24 @@ class Player
     {
       if (key == 119)//Moves player up when 'w' is pressed
       {
-        yPos = yPos - ySpeed;
+        yPos -= ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+        ticksLastUpdate = millis();
       } else if (key == 115)//Moves player down when 's' is pressed
       {
-        yPos = yPos + ySpeed;
+        yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+        ticksLastUpdate = millis();
       } else if (key == 100)//Moves player down when 'd' is pressed
       {
-        xPos = xPos + xSpeed;
+        xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
+        ticksLastUpdate = millis();
       } else if (key == 97)//Moves player down when 'a' is pressed
       {
-        xPos = xPos - xSpeed;
+        xPos -= xSpeed * float(millis() - ticksLastUpdate) * 0.001;
+        ticksLastUpdate = millis();
       }
     }
   }
+  
   //Player collides with screen borders and stops moving
   public void borderCollision()
   {
@@ -105,6 +112,7 @@ class Player
   {
     if (key == 32)//if space bar is pressed
     {
+      //Sets projectile patterns for different gun types
       if (gunType == 0)
       {
         if (millis() > lastProjectileFiredAt)
@@ -130,9 +138,6 @@ class Player
       }
     }
   }
-
-  //Sets projectile patterns for different gun types
-
 
   //Sets conditions to activate shield, and keeps player from taking damage when shield is active
   public void shield()
