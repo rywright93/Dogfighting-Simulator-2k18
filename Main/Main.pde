@@ -17,6 +17,9 @@ ArrayList<Enemy> enemies;
 
 ArrayList<Projectile> projectiles;
 
+PImage explosionSpriteSheet;
+Explosion boom;
+
 void setup()
 {
   size(700, 900);
@@ -30,6 +33,9 @@ void setup()
   projectiles = new ArrayList<Projectile>(); //Used for testing
   
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
+  
+  explosionSpriteSheet = loadImage("explosion animation b.png");
+  Explosion boom = new Explosion(100, 100);
 }
 
 void draw()
