@@ -17,6 +17,7 @@ ArrayList<Enemy> enemies;
 
 ArrayList<Projectile> projectiles;
 
+ArrayList<Explosion> explosions;
 PImage explosionSpriteSheet;
 Explosion boom;
 

@@ -12,13 +12,12 @@ class Explosion
   private int frameMax = 8;
   private int ticksLast = millis();
   private PImage spriteSheet = explosionSpriteSheet;
-  private boolean animationEnded;
+  private boolean animationEnded = false;
   
   Explosion(float x, float y)
   {
     xPos = x;
     yPos = y;
-    animationEnded = false;
   }
   
   public void display()

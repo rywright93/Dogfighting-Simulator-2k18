@@ -60,7 +60,7 @@ class Projectile
     //Stops its velocity
     xSpeed = 0;
     ySpeed = 0;
-    boom = new Explosion(xPos, yPos);
+    explosions.add(new Explosion(xPos, yPos));
     destroyed = true;
   }
 
