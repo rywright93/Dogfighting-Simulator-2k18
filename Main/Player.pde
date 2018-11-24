@@ -105,24 +105,33 @@ class Player
   {
     if (key == 32)//if space bar is pressed
     {
-      if (millis() > lastProjectileFiredAt)
+      if (gunType == 0)
       {
-        lastProjectileFiredAt = millis() + fireRate;
-        projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
+        if (millis() > lastProjectileFiredAt)
+        {
+          lastProjectileFiredAt = millis() + fireRate;
+          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
+        }
+      } else if (gunType == 1)
+      {
+        if (millis() > lastProjectileFiredAt)
+        {
+          lastProjectileFiredAt = millis() + fireRate;
+          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
+        }
+      } else if (gunType == 2)
+      {
+        if (millis() > lastProjectileFiredAt)
+        {
+          lastProjectileFiredAt = millis() + fireRate;
+          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
+        }
       }
     }
-    
-    //Sets projectile patterns for different gun types
-    if (gunType == 0)
-    {
-    }
-    else if (gunType == 1)
-    {
-    }
-    else if (gunType == 2)
-    {
-    }
   }
+
+  //Sets projectile patterns for different gun types
+
 
   //Sets conditions to activate shield, and keeps player from taking damage when shield is active
   public void shield()
