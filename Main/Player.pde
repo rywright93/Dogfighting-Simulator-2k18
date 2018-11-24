@@ -173,6 +173,7 @@ class Player
        e.isHit();
        e.destroy();//TODO delete later, used for testing
        }
+       
     }
   }
 
