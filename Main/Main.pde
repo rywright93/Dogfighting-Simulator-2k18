@@ -33,6 +33,8 @@ void setup()
   
   projectiles = new ArrayList<Projectile>(); //Used for testing
   
+  explosions = new ArrayList<Explosion>();
+  
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
   
   explosionSpriteSheet = loadImage("explosion animation b.png");
