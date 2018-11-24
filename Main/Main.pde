@@ -11,6 +11,8 @@ int gameState; //indicates the current game state
 String inputName; //should be reset everytime one exits or enters the highscore screen
 int[] highscores;
 String[] highscoreNames;
+boolean[] keys; //Boolean array for checking if keys are being pressed, enables multiple concurrent button presses
+
 Player player;
 ArrayList<Boss> bosses;
 ArrayList<Enemy> enemies;
@@ -28,8 +30,20 @@ void setup()
 {
   size(700, 900);
   player = new Player();// Instantiates player object
+  
+  keys = new boolean [6];
+  keys[0] = false;// 'w' key for upward movement defined in Player class
+  keys[1] = false;// 'a' key for leftward movement defined in Player class
+  keys[2] = false;// 's' key for downward movement defined in Player class
+  keys[3] = false;// 'd' key for rightward movement defined in Player class
+  keys[4] = false;// 'e' key for shield toggling defined in Player class
+  keys[5] = false;// space bar for shooting defined in Player class
+  
   bossSprite = loadImage("boss.png");
   bosses = new ArrayList<Boss>(); //Used for testing
+  //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
+  
+  enemySprite = loadImage("enemy b.png");
   bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   enemySprite = loadImage("enemy c.png");
   enemies = new ArrayList<Enemy>(); //Used for testing
@@ -114,21 +128,65 @@ void draw()
 //Checks on each key pressed event if the player needs to fire a projectile
 void keyPressed()
 {
-  if (keyPressed == true)
+  if (key == 119)//'w' key
   {
-    player.shoot();
+    keys[0] = true;
+  }
+  if (key == 97)//'a' key
+  {
+    keys[1] = true;
+  }
+  if (key == 115)//'s' key
+  {
+    keys[2] = true;
+  }
+  if (key == 100)//'d' key
+  {
+    keys[3] = true;
+  }
+  if (key == 101)//'e' key
+  {
+    keys[4] = true;
+  }
+  if (key == 32)//space bar
+  {
+    keys[5] = true;
   }
 }
 
 void keyReleased()
 {
-  //Press the "r" key to terminate the program
-  if(key == 114)
+  if (key == 119)//'w' key
+  {
+    keys[0] = false;
+  }
+  if (key == 97)//'a' key
+  {
+    keys[1] = false;
+  }
+  if (key == 115)//'s' key
+  {
+    keys[2] = false;
+  }
+  if (key == 100)//'d' key
+  {
+    keys[3] = false;
+  }
+  if (key == 101)//'e' key
+  {
+    keys[4] = false;
+  }
+  if (key == 32)//space bar
+  {
+    keys[5] = false;
+  }
+ /* if(key == 114) //used for testing, Press the "r" key to terminate the program
   {
     checkHighscore();
     saveHighscore();
     exit();
   }
+  */
 }
 
 void mousePressed()

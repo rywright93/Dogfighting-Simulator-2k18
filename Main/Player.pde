@@ -31,10 +31,10 @@ class Player
     yPos = height - 100;
     playerHeight = 30;
     playerWidth = 15;
-    xSpeed = 180;
-    ySpeed = 180;
+    xSpeed = 300;
+    ySpeed = 300;
     shieldCharges = 3;
-    gunType = 2;
+    gunType = 1;
     shieldActive = false;
     hitPoints = 1;
     //TO DO: PImage = something later but for now it's a square
@@ -51,6 +51,11 @@ class Player
     enemyCollision();//Checks if player has collided with enemy every frame in Main
     bossCollision();//Checks if player has collided with boss every frame in Main
     pickupCollision();//Checks if player has collided with pickup every frame in Main
+    
+     if (keys[5] == true)//if space bar is pressed
+    {
+      shoot();
+    }
   }
 
   //Draws player on screen
@@ -64,28 +69,25 @@ class Player
   //Updates position of player
   public void move()
   {
-    if (keyPressed == true)
+    if (keys[0] == true)//Moves player up when 'w' is pressed
     {
-      if (key == 119)//Moves player up when 'w' is pressed
-      {
-        yPos -= ySpeed * float(millis() - ticksLastUpdate) * 0.001;
-        ticksLastUpdate = millis();
-      } else if (key == 115)//Moves player down when 's' is pressed
-      {
-        yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
-        ticksLastUpdate = millis();
-      } else if (key == 100)//Moves player down when 'd' is pressed
-      {
-        xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
-        ticksLastUpdate = millis();
-      } else if (key == 97)//Moves player down when 'a' is pressed
-      {
-        xPos -= xSpeed * float(millis() - ticksLastUpdate) * 0.001;
-        ticksLastUpdate = millis();
-      }
+      yPos -= ySpeed * float(millis() - ticksLastUpdate) * 0.001;
     }
+    if (keys[1] == true)//Moves player down when 'a' is pressed
+    {
+      xPos -= xSpeed * float(millis() - ticksLastUpdate) * 0.001;
+    }
+    if (keys[2] == true)//Moves player down when 's' is pressed
+    {
+      yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+    }
+    if (keys[3] == true)//Moves player down when 'd' is pressed
+    {
+      xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
+    }
+    ticksLastUpdate = millis();
   }
-  
+
   //Player collides with screen borders and stops moving
   public void borderCollision()
   {
@@ -110,31 +112,28 @@ class Player
   //Player shoots by pressing space bar
   public void shoot()
   {
-    if (key == 32)//if space bar is pressed
+    //Sets projectile patterns for different gun types
+    if (gunType == 0)
     {
-      //Sets projectile patterns for different gun types
-      if (gunType == 0)
+      if (millis() > lastProjectileFiredAt)
       {
-        if (millis() > lastProjectileFiredAt)
-        {
-          lastProjectileFiredAt = millis() + fireRate;
-          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
-        }
-      } else if (gunType == 1)
+        lastProjectileFiredAt = millis() + fireRate;
+        projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
+      }
+    } else if (gunType == 1)
+    {
+      if (millis() > lastProjectileFiredAt)
       {
-        if (millis() > lastProjectileFiredAt)
-        {
-          lastProjectileFiredAt = millis() + fireRate/2;
-          projectiles.add(new Projectile(xPos + playerWidth/4, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
-          projectiles.add(new Projectile(xPos + (playerWidth/4 * 3), yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
-        }
-      } else if (gunType == 2)
+        lastProjectileFiredAt = millis() + fireRate/2;
+        projectiles.add(new Projectile(xPos + playerWidth/4, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
+        projectiles.add(new Projectile(xPos + (playerWidth/4 * 3), yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
+      }
+    } else if (gunType == 2)
+    {
+      if (millis() > lastProjectileFiredAt)
       {
-        if (millis() > lastProjectileFiredAt)
-        {
-          lastProjectileFiredAt = millis() + fireRate*1.5;
-          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 20));
-        }
+        lastProjectileFiredAt = millis() + fireRate*1.5;
+        projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 20));
       }
     }
   }
@@ -142,7 +141,7 @@ class Player
   //Sets conditions to activate shield, and keeps player from taking damage when shield is active
   public void shield()
   {
-    if ((shieldActive == false) && (shieldCharges < 0) && (keyPressed == true) && (key == 101)) //if the player has shield charges && presses 'e' key
+    if (shieldActive == false && shieldCharges < 0 && keys[4] == true) //if the player has shield charges && presses 'e' key
     {
       if (millis() > lastShieldFiredAt)
       {
