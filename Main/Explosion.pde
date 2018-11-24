@@ -26,6 +26,7 @@ class Explosion
     //display frame from sprite sheet with Magic Numbers (frame 0 starts at (10, 168) with a size of 16x36 pixels):
     PImage f = spriteSheet.get(0 + (frame * 66), 0, 66, 66); //6
     image(f, xPos, yPos);
+    imageMode(CORNER);
     int delta = millis() - ticksLast;
     if (delta >= durationOneFrame)
     {

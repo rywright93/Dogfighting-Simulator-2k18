@@ -22,13 +22,15 @@ PImage explosionSpriteSheet;
 Explosion boom;
 
 PImage enemySprite;
+PImage bossSprite;
 
 void setup()
 {
   size(700, 900);
   player = new Player();// Instantiates player object
+  bossSprite = loadImage("boss.png");
   bosses = new ArrayList<Boss>(); //Used for testing
-  //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
+  bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   enemySprite = loadImage("enemy c.png");
   enemies = new ArrayList<Enemy>(); //Used for testing
   enemies.add(new Enemy(100, 0, 3, 3)); //Used for testing. Instantiates an Enemy

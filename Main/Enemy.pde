@@ -31,8 +31,8 @@ class Enemy
     xPos = newXPos;
     yPos = newYPos;
     hitPoints = newHitPoints;
-    enemyWidth = 50;
-    enemyHeight = 100;
+    enemyWidth = enemyPic.width;
+    enemyHeight = enemyPic.height;
     xSpeed = 0;
     ySpeed = 200;
     enemyType = newEnemyType;

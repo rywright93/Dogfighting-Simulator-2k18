@@ -10,7 +10,7 @@ class Boss
   private float yPos; //current y position of the boss
   private float bossWidth; //width of the boss image
   private float bossHeight; //height of the boss image
-  private PImage bossPic; //Image of the boss
+  private PImage bossPic = bossSprite; //Image of the boss
   private int hitPoints; //Boss' health
   private int xSpeed = 300; //Speed by which it moves along the x-axis
   private int ySpeed = 180; //speed by which it moves along the y-axis
@@ -21,8 +21,8 @@ class Boss
   Boss(int newHitPoints)
   {
     hitPoints = newHitPoints;
-    bossWidth = 200;
-    bossHeight = 200;
+    bossWidth = bossPic.width;
+    bossHeight = bossPic.height;
     xPos = width/2 - bossWidth/2;
     yPos = -200;
   }
@@ -105,8 +105,9 @@ class Boss
     if(hitPoints > 0)
     {
       fill(0, 0, 255);
-      rect(xPos, yPos, bossWidth, bossHeight);
+      //rect(xPos, yPos, bossWidth, bossHeight);
       noFill();
+      image(bossPic, xPos, yPos);
       textSize(25);
       text(hitPoints + " HP", xPos, yPos);
     }
