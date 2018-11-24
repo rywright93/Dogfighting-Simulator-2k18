@@ -33,6 +33,8 @@ void setup()
   
   projectiles = new ArrayList<Projectile>(); //Used for testing
   
+  explosions = new ArrayList<Explosion>();
+  
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
   
   explosionSpriteSheet = loadImage("explosion animation b.png");
@@ -86,9 +88,22 @@ void draw()
       itrE.remove();
     }
   }
-  if(boom.getAnimationEnded() == false)
+  
+  //Update every Explosion in the ArrayList explosions
+  for(Explosion ex : explosions)
   {
-    boom.display();
+    ex.display();
+  }
+  
+  //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
+  Iterator<Explosion> itrEx = explosions.iterator();
+  while (itrEx.hasNext()) 
+  { 
+    Explosion elementEx = itrEx.next(); 
+    if (elementEx.getAnimationEnded() == true) 
+    { 
+      itrEx.remove();
+    }
   }
 }
 
