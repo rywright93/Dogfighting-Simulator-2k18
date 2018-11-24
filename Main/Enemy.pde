@@ -8,7 +8,7 @@ class Enemy
 {
   private float xPos; //Current x-position
   private float yPos; //current y-position
-  private PImage enemyPic; //Image used to display Enemy
+  private PImage enemyPic = enemySprite; //Image used to display Enemy
   private int hitPoints; //The health of the enemy
   private int typeOfGun; //Different shooting patterns are mapped to different values in this variable
   private float enemyWidth; //Width of enemy image
@@ -131,6 +131,7 @@ class Enemy
   {
     //A rectangle is used as placeholder
     fill(0, 255, 0);
+    //image(enemyPic, xPos, yPos);
     rect(xPos, yPos, enemyWidth, enemyHeight);
     noFill();
     //Display the health of the enemy
