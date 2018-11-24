@@ -116,15 +116,16 @@ class Player
       {
         if (millis() > lastProjectileFiredAt)
         {
-          lastProjectileFiredAt = millis() + fireRate;
-          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
+          lastProjectileFiredAt = millis() + fireRate/2;
+          projectiles.add(new Projectile(xPos + playerWidth/4, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
+          projectiles.add(new Projectile(xPos + (playerWidth/4 * 3), yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
         }
       } else if (gunType == 2)
       {
         if (millis() > lastProjectileFiredAt)
         {
-          lastProjectileFiredAt = millis() + fireRate;
-          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
+          lastProjectileFiredAt = millis() + fireRate*1.5;
+          projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 20));
         }
       }
     }
