@@ -67,16 +67,13 @@ class Player
       if (key == 119)//Moves player up when 'w' is pressed
       {
         yPos = yPos - ySpeed;
-      } 
-      else if (key == 115)//Moves player down when 's' is pressed
+      } else if (key == 115)//Moves player down when 's' is pressed
       {
         yPos = yPos + ySpeed;
-      } 
-      else if (key == 100)//Moves player down when 'd' is pressed
+      } else if (key == 100)//Moves player down when 'd' is pressed
       {
         xPos = xPos + xSpeed;
-      } 
-      else if (key == 97)//Moves player down when 'a' is pressed
+      } else if (key == 97)//Moves player down when 'a' is pressed
       {
         xPos = xPos - xSpeed;
       }
@@ -161,19 +158,30 @@ class Player
     {
       //Player top border collision check
       if (yPos >= e.getYPos() && yPos <= e.getYPos() + e.getEnemyHeight() && xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth())
-       {
-       isHit();
-       e.isHit();
-       e.destroy();//TODO delete later, used for testing
-       }
+      {
+        isHit();
+        e.isHit();
+      }
+
       //Player bottom border collision check
-     if (yPos + playerHeight >= e.getYPos() && yPos + playerHeight <= e.getYPos() + e.getEnemyHeight() && xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth())
-       {
-       isHit();
-       e.isHit();
-       e.destroy();//TODO delete later, used for testing
-       }
-       
+      if (yPos + playerHeight >= e.getYPos() && yPos + playerHeight <= e.getYPos() + e.getEnemyHeight() && xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth())
+      {
+        isHit();
+        e.isHit();
+      }
+      //Player left border collision check
+      if (xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth() && yPos + playerHeight >= e.getYPos() && yPos <= e.getYPos() + e.getEnemyHeight())
+      {
+        isHit();
+        e.isHit();
+      }
+
+      //Player right border collision check
+      if (xPos + playerWidth >= e.getXPos() && xPos + playerWidth <= e.getXPos() + e.getEnemyWidth() && yPos >= e.getYPos() && yPos <= e.getYPos() + e.getEnemyHeight())
+      {
+        isHit();
+        e.isHit();
+      }
     }
   }
 
