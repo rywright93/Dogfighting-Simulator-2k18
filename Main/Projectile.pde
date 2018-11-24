@@ -54,13 +54,14 @@ class Projectile
   //Used to move the projectile off-screen and stop it when it hits something (or misses entirely)
   public void destroy()
   {
+    explosions.add(new Explosion(xPos, yPos));
     //Moves the Projectile to the corner of the screen
     xPos = 0;
     yPos = 0;
     //Stops its velocity
     xSpeed = 0;
     ySpeed = 0;
-    explosions.add(new Explosion(xPos, yPos));
+
     destroyed = true;
   }
 
