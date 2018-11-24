@@ -43,7 +43,7 @@ class Enemy
   public void update()
   {
     display();
-    move();
+   // move();
   }
   
   //Moves the position of the enemy based on its speed and time fix
@@ -162,6 +162,4 @@ class Enemy
   {
     return hitPoints;
   }
-  
-  
 }

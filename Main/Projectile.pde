@@ -84,7 +84,8 @@ class Projectile
     {
       player.isHit();
       destroy();
-    } else if (player.shieldActive == true)
+    }
+    if (player.shieldActive == true)
     {
       destroy();
     }

@@ -17,9 +17,6 @@ class Player
   private boolean shieldActive;
   private int hitPoints;
   private PImage playerPic;
-  private ArrayList<Enemy> enemies;
-  private ArrayList<Boss> bosses;
-  private ArrayList<Pickup> pickups;
   private float fireRate;//Delay between shots in milliseconds
   private float shieldCooldown;//Delay between uses of sheild ability
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
@@ -39,7 +36,7 @@ class Player
     shieldCharges = 3;
     gunType = 2;
     shieldActive = false;
-    hitPoints = 3;
+    hitPoints = 1;
     //TO DO: PImage = something later but for now it's a square
     shieldEffectLength = 3000;//Value in milliseconds
     shieldCooldown = 1000;//Value in milliseconds
@@ -51,6 +48,7 @@ class Player
     display();//Displays player instance every frame
     move(); //Updates position of player every frame
     borderCollision();//Checks if player is on screen border every frame
+    enemyCollision();//Checks if player has collided with enemy every frame
   }
 
   //Draws player on screen
@@ -69,13 +67,16 @@ class Player
       if (key == 119)//Moves player up when 'w' is pressed
       {
         yPos = yPos - ySpeed;
-      } else if (key == 115)//Moves player down when 's' is pressed
+      } 
+      else if (key == 115)//Moves player down when 's' is pressed
       {
         yPos = yPos + ySpeed;
-      } else if (key == 100)//Moves player down when 'd' is pressed
+      } 
+      else if (key == 100)//Moves player down when 'd' is pressed
       {
         xPos = xPos + xSpeed;
-      } else if (key == 97)//Moves player down when 'a' is pressed
+      } 
+      else if (key == 97)//Moves player down when 'a' is pressed
       {
         xPos = xPos - xSpeed;
       }
@@ -152,8 +153,27 @@ class Player
   {
   }
 
+  //Player checks itself for colliding with Enemies, takes damage
   public void enemyCollision()
   {
+    //A for each loop which checks collision for every instance of Enemy in enemies list.
+    for (Enemy e : enemies)
+    {
+      //Player top border collision check
+      if (yPos >= e.getYPos() && yPos <= e.getYPos() + e.getEnemyHeight() && xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth())
+       {
+       isHit();
+       e.isHit();
+       e.destroy();//TODO delete later, used for testing
+       }
+      //Player bottom border collision check
+     if (yPos + playerHeight >= e.getYPos() && yPos + playerHeight <= e.getYPos() + e.getEnemyHeight() && xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth())
+       {
+       isHit();
+       e.isHit();
+       e.destroy();//TODO delete later, used for testing
+       }
+    }
   }
 
   public float getXPos()

@@ -1,9 +1,9 @@
 /*
 Program Title: Dogfighting Simulator 2k18
-Program Description: 
-Authors: 
-Comments:
-*/
+ Program Description: 
+ Authors: 
+ Comments:
+ */
 import java.util.*; //imports the Iterator class
 
 int points; //the players current score
@@ -20,16 +20,17 @@ ArrayList<Projectile> projectiles;
 void setup()
 {
   size(700, 900);
-  player = new Player();// Instantiates player object
   bosses = new ArrayList<Boss>(); //Used for testing
   //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
-  
+
   enemies = new ArrayList<Enemy>(); //Used for testing
-  //enemies.add(new Enemy(100, 0, 3, 3)); //Used for testing. Instantiates an Enemy
-  
+  enemies.add(new Enemy(100, 100, 3, 1)); //Used for testing. Instantiates an Enemy
+
   projectiles = new ArrayList<Projectile>(); //Used for testing
-  
+
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
+
+  player = new Player();// Instantiates player object
 }
 
 void draw()
@@ -37,22 +38,22 @@ void draw()
   background(0);
   textSize(30);
   text(points, 50, 50);
-  
+
   //Updates player position and collisions every frame
   player.update();
   
   //Used for testing. Updates every instance of Boss in the ArrayList
-  for(Boss b : bosses)
+  for (Boss b : bosses)
   {
     b.update();
   }
-  
+
   //update every Projectile in the ArrayList. Used for testing
-  for(Projectile p : projectiles)
+  for (Projectile p : projectiles)
   {
     p.update();
   }
-  
+
   //Iterator used to remove Projectiles from the ArrayList if they are dead.
   Iterator<Projectile> itr = projectiles.iterator();
   while (itr.hasNext()) 
@@ -63,13 +64,13 @@ void draw()
       itr.remove();
     }
   }
-  
+
   //Update every Enemy in the ArrayList enemies. Used for testing
-  for(Enemy e : enemies)
+  for (Enemy e : enemies)
   {
     e.update();
   }
-  
+
   //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
   Iterator<Enemy> itrE = enemies.iterator();
   while (itrE.hasNext()) 
@@ -94,7 +95,7 @@ void keyPressed()
 void keyReleased()
 {
   //Press the "r" key to terminate the program
-  if(key == 114)
+  if (key == 114)
   {
     checkHighscore();
     saveHighscore();
@@ -146,7 +147,7 @@ void loadHighscore()
 {
   highscoreNames = loadStrings("highscoreNames.txt");
   highscores = int(loadStrings("highscoreScores.txt"));
-  for(int i = 0; i<highscores.length;i++)
+  for (int i = 0; i<highscores.length; i++)
   {
     println(i +1 + " " + highscoreNames[i] + ": " + highscores[i]);
   }
@@ -156,9 +157,9 @@ void loadHighscore()
 boolean checkHighscore()
 {
   //goes through the array highscores and compares the entries' values with current score (points)
-  for(int i = 0; i < highscores.length; i++)
+  for (int i = 0; i < highscores.length; i++)
   {
-    if(points >= highscores[i])
+    if (points >= highscores[i])
     {
       rearrangeHighscoreList(i);
       return true;
@@ -172,10 +173,10 @@ boolean checkHighscore()
 void rearrangeHighscoreList(int i)
 {
   //If the new highscore is not the bottom one on the list
-  if(i < 9) 
+  if (i < 9) 
   {
     //Re-arrange the scoreboard by moving them down one - stops when it reaches the new highscore
-    for(int j = 9; j > i; j--)
+    for (int j = 9; j > i; j--)
     {
       highscores[j] = highscores[j-1];
       highscoreNames[j] = highscoreNames[j-1];
@@ -189,13 +190,13 @@ void rearrangeHighscoreList(int i)
 void resetHighscoreList()
 {
   //reset the scores
-  for(int i = 0; i < highscores.length; i++)
+  for (int i = 0; i < highscores.length; i++)
   {
     highscores[i] = 0;
   }
-  
+
   //reset the names
-  for(int i = 0; i < highscoreNames.length; i++)
+  for (int i = 0; i < highscoreNames.length; i++)
   {
     highscoreNames[i] = "N/A";
   }
@@ -211,10 +212,10 @@ void createInputName()
 void enterNewHighscoreName(String newName)
 {
   //go through every entry in the array highscoreNames
-  for(int i = 0; i < highscoreNames.length; i++)
+  for (int i = 0; i < highscoreNames.length; i++)
   {
     //locates the entry that is blank (this is done in rearrangeHighscoreList())
-    if(highscoreNames[i] == "")
+    if (highscoreNames[i] == "")
     {
       highscoreNames[i] = newName; //replace the blank entry with the one from the parameter
     }
