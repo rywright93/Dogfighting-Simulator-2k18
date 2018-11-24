@@ -45,6 +45,7 @@ class Projectile
     {
       if (drawColPoint(b.getXPos(), b.getYPos(), b.getBossHeight(), b.getBossWidth()) == true && shotBy == "Player")
       {
+        explosions.add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
         b.isHit();
         destroy();
       }
@@ -54,7 +55,6 @@ class Projectile
   //Used to move the projectile off-screen and stop it when it hits something (or misses entirely)
   public void destroy()
   {
-    explosions.add(new Explosion(xPos, yPos));
     //Moves the Projectile to the corner of the screen
     xPos = 0;
     yPos = 0;
