@@ -153,7 +153,7 @@ class Player
   //Player checks itself for colliding with Enemies, takes damage
   public void enemyCollision()
   {
-    //A for each loop which checks collision for every instance of Enemy in enemies list.
+    //A for each loop which checks collision for every instance of Enemy in enemies array list.
     for (Enemy e : enemies)
     {
       //Player top border collision check
@@ -216,6 +216,37 @@ class Player
 
   public void bossCollision()
   {
+    //A for each loop which checks collision for every instance of Boss in bosses array list.
+    for (Boss b : bosses)
+    {
+      //Player top border collision check
+      if (yPos >= b.getYPos() && yPos <= b.getYPos() + b.getBossHeight() && xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBossWidth())
+      {
+        isHit();
+        b.isHit();
+      }
+
+      //Player bottom border collision check
+      if (yPos + playerHeight >= b.getYPos() && yPos + playerHeight <= b.getYPos() + b.getBossHeight() && xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBossWidth())
+      {
+        isHit();
+        b.isHit();
+      }
+      
+      //Player left border collision check
+      if (xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBossWidth() && yPos + playerHeight >= b.getYPos() && yPos <= b.getYPos() + b.getBossHeight())
+      {
+        isHit();
+        b.isHit();
+      }
+
+      //Player right border collision check
+      if (xPos + playerWidth >= b.getXPos() && xPos + playerWidth <= b.getXPos() + b.getBossWidth() && yPos >= b.getYPos() && yPos <= b.getYPos() + b.getBossHeight())
+      {
+        isHit();
+        b.isHit();
+      }
+    }
   }
 
   public void destroy()
