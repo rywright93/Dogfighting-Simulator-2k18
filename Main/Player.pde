@@ -16,7 +16,7 @@ class Player
   private int gunType;
   private boolean shieldActive;
   private int hitPoints;
-  private PImage playerPic;
+  private PImage playerPic = playerSprite;
   private float fireRate;//Delay between shots in milliseconds
   private float shieldCooldown;//Delay between uses of sheild ability
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
@@ -62,8 +62,9 @@ class Player
   public void display()
   {
     strokeWeight(0);
-    fill(144, 11, 30);//Red
-    rect(xPos, yPos, playerWidth, playerHeight);
+    //fill(144, 11, 30);//Red
+    //rect(xPos, yPos, playerWidth, playerHeight);
+    image(playerPic, xPos, yPos);
   }
 
   //Updates position of player

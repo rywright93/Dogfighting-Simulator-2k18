@@ -25,10 +25,12 @@ Explosion boom;
 
 PImage enemySprite;
 PImage bossSprite;
+PImage playerSprite;
 
 void setup()
 {
   size(700, 900);
+  playerSprite = loadImage("player.png");
   player = new Player();// Instantiates player object
   
   keys = new boolean [6];
@@ -43,7 +45,6 @@ void setup()
   bosses = new ArrayList<Boss>(); //Used for testing
   //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   
-  enemySprite = loadImage("enemy b.png");
   bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   enemySprite = loadImage("enemy c.png");
   enemies = new ArrayList<Enemy>(); //Used for testing
@@ -60,7 +61,7 @@ void setup()
 
 void draw()
 {
-  background(255);
+  background(161, 161, 161);
   textSize(30);
   text(points, 50, 50);
   
@@ -223,7 +224,7 @@ void playScreen()
 
 void reset()
 {
-  /* start movement, change gamestate, draw playing screen, 
+  // start movement, change gamestate, draw playing screen, 
 }
 
 //save the two highscores array to the .txt files on disc
