@@ -73,6 +73,7 @@ class Projectile
     {
       if (drawColPoint(e.getXPos(), e.getYPos(), e.getEnemyHeight(), e.getEnemyWidth()) == true && shotBy == "Player")
       {
+        explosions.add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
         e.isHit();
         destroy();
       }

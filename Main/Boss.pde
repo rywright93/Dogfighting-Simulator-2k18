@@ -106,10 +106,13 @@ class Boss
     {
       fill(0, 0, 255);
       //rect(xPos, yPos, bossWidth, bossHeight);
+      rect(xPos, yPos - 20, map(hitPoints, 0, 80, 0, bossWidth), 10); //displays a healthbar
       noFill();
       image(bossPic, xPos, yPos);
+      /*
       textSize(25);
       text(hitPoints + " HP", xPos, yPos);
+      */
     }
   }
   

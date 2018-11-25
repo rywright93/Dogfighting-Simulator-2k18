@@ -45,10 +45,10 @@ void setup()
   bosses = new ArrayList<Boss>(); //Used for testing
   //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
   
-  bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
+  bosses.add(new Boss(80)); //Used for testing. Instantiates a Boss
   enemySprite = loadImage("enemy c.png");
   enemies = new ArrayList<Enemy>(); //Used for testing
-  enemies.add(new Enemy(100, 0, 3, 3)); //Used for testing. Instantiates an Enemy
+  enemies.add(new Enemy(100, 0, 20, 3)); //Used for testing. Instantiates an Enemy
 
   projectiles = new ArrayList<Projectile>(); //Used for testing
   

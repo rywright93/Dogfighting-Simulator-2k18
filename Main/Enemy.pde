@@ -131,12 +131,15 @@ class Enemy
   {
     //A rectangle is used as placeholder
     fill(0, 255, 0);
+    rect(xPos, yPos - 20, map(hitPoints, 0, 20, 0, enemyWidth), 10); //displays a healthbar
     image(enemyPic, xPos, yPos);
     //rect(xPos, yPos, enemyWidth, enemyHeight);
     noFill();
+    /*
     //Display the health of the enemy
     textSize(20);
     text(hitPoints + " HP", xPos, yPos);
+    */
   }
   
   public float getXPos()
