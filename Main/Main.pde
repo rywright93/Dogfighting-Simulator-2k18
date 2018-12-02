@@ -1,9 +1,9 @@
 /*
 Program Title: Dogfighting Simulator 2k18
-Program Description: 
-Authors: 
-Comments:
-*/
+ Program Description: 
+ Authors: 
+ Comments:
+ */
 import java.util.*; //imports the Iterator class
 
 int points; //the players current score
@@ -40,7 +40,9 @@ void setup()
   keys[3] = false;// 'd' key for rightward movement defined in Player class
   keys[4] = false;// 'e' key for shield toggling defined in Player class
   keys[5] = false;// space bar for shooting defined in Player class
-  
+
+  spawnPlayer();
+
   bossSprite = loadImage("boss.png");
   bosses = new ArrayList<Boss>(); //Used for testing
   //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
@@ -51,11 +53,11 @@ void setup()
   enemies.add(new Enemy(100, 0, 20, 3)); //Used for testing. Instantiates an Enemy
 
   projectiles = new ArrayList<Projectile>(); //Used for testing
-  
+
   explosions = new ArrayList<Explosion>();
-  
+
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
-  
+
   explosionSpriteSheet = loadImage("explosion animation b.png");
 }
 
@@ -64,22 +66,22 @@ void draw()
   background(161, 161, 161);
   textSize(30);
   text(points, 50, 50);
-  
+
   //Updates player position and collisions every frame
   player.update();
-  
+
   //Used for testing. Updates every instance of Boss in the ArrayList
-  for(Boss b : bosses)
+  for (Boss b : bosses)
   {
     b.update();
   }
-  
+
   //update every Projectile in the ArrayList. Used for testing
-  for(Projectile p : projectiles)
+  for (Projectile p : projectiles)
   {
     p.update();
   }
-  
+
   //Iterator used to remove Projectiles from the ArrayList if they are dead.
   Iterator<Projectile> itr = projectiles.iterator();
   while (itr.hasNext()) 
@@ -90,13 +92,13 @@ void draw()
       itr.remove();
     }
   }
-  
+
   //Update every Enemy in the ArrayList enemies. Used for testing
-  for(Enemy e : enemies)
+  for (Enemy e : enemies)
   {
     e.update();
   }
-  
+
   //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
   Iterator<Enemy> itrE = enemies.iterator();
   while (itrE.hasNext()) 
@@ -107,13 +109,13 @@ void draw()
       itrE.remove();
     }
   }
-  
+
   //Update every Explosion in the ArrayList explosions
-  for(Explosion ex : explosions)
+  for (Explosion ex : explosions)
   {
     ex.display();
   }
-  
+
   //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
   Iterator<Explosion> itrEx = explosions.iterator();
   while (itrEx.hasNext()) 
@@ -153,6 +155,11 @@ void keyPressed()
   {
     keys[5] = true;
   }
+  if (key == 114)//'r' key
+  {
+    keys[6] = true;
+    exitGame();
+  }
 }
 
 void keyReleased()
@@ -181,13 +188,20 @@ void keyReleased()
   {
     keys[5] = false;
   }
- /* if(key == 114) //used for testing, Press the "r" key to terminate the program
+  if (key == 114) //used for testing, Press the "r" key to terminate the program
+  {
+    keys[6] = false;
+  }
+}
+
+void exitGame()
+{
+  if (keys[6] == true)
   {
     checkHighscore();
     saveHighscore();
     exit();
   }
-  */
 }
 
 void mousePressed()
@@ -196,6 +210,7 @@ void mousePressed()
 
 void spawnPlayer()
 {
+  player = new Player(width/2, height - 100);
 }
 
 void spawnEnemy()
@@ -239,7 +254,7 @@ void loadHighscore()
 {
   highscoreNames = loadStrings("highscoreNames.txt");
   highscores = int(loadStrings("highscoreScores.txt"));
-  for(int i = 0; i<highscores.length;i++)
+  for (int i = 0; i<highscores.length; i++)
   {
     println(i +1 + " " + highscoreNames[i] + ": " + highscores[i]);
   }
@@ -249,9 +264,9 @@ void loadHighscore()
 boolean checkHighscore()
 {
   //goes through the array highscores and compares the entries' values with current score (points)
-  for(int i = 0; i < highscores.length; i++)
+  for (int i = 0; i < highscores.length; i++)
   {
-    if(points >= highscores[i])
+    if (points >= highscores[i])
     {
       rearrangeHighscoreList(i);
       return true;
@@ -265,10 +280,10 @@ boolean checkHighscore()
 void rearrangeHighscoreList(int i)
 {
   //If the new highscore is not the bottom one on the list
-  if(i < 9) 
+  if (i < 9) 
   {
     //Re-arrange the scoreboard by moving them down one - stops when it reaches the new highscore
-    for(int j = 9; j > i; j--)
+    for (int j = 9; j > i; j--)
     {
       highscores[j] = highscores[j-1];
       highscoreNames[j] = highscoreNames[j-1];
@@ -282,13 +297,13 @@ void rearrangeHighscoreList(int i)
 void resetHighscoreList()
 {
   //reset the scores
-  for(int i = 0; i < highscores.length; i++)
+  for (int i = 0; i < highscores.length; i++)
   {
     highscores[i] = 0;
   }
-  
+
   //reset the names
-  for(int i = 0; i < highscoreNames.length; i++)
+  for (int i = 0; i < highscoreNames.length; i++)
   {
     highscoreNames[i] = "N/A";
   }
@@ -304,10 +319,10 @@ void createInputName()
 void enterNewHighscoreName(String newName)
 {
   //go through every entry in the array highscoreNames
-  for(int i = 0; i < highscoreNames.length; i++)
+  for (int i = 0; i < highscoreNames.length; i++)
   {
     //locates the entry that is blank (this is done in rearrangeHighscoreList())
-    if(highscoreNames[i] == "")
+    if (highscoreNames[i] == "")
     {
       highscoreNames[i] = newName; //replace the blank entry with the one from the parameter
     }

@@ -25,10 +25,10 @@ class Player
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
 
   // Constructor, provides starting values for all player variables
-  Player()
+  Player(float newXPos, float newYPos)
   {
-    xPos = width/2;
-    yPos = height - 100;
+    xPos = newXPos;
+    yPos = newYPos;
     playerHeight = 30;
     playerWidth = 15;
     xSpeed = 300;
