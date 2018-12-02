@@ -30,6 +30,7 @@ PImage playerSprite;
 void setup()
 {
   size(700, 900);
+  gameState = 1;
 
   keys = new boolean [7];
   keys[0] = false;// 'w' key for upward movement defined in Player class
@@ -38,18 +39,7 @@ void setup()
   keys[3] = false;// 'd' key for rightward movement defined in Player class
   keys[4] = false;// 'e' key for shield toggling defined in Player class
   keys[5] = false;// space bar for shooting defined in Player class
-  keys[6] = false;//'r' key resets and exits program
-
-  spawnPlayer();
-  spawnBoss(); //testing function call
-  spawnEnemy();//testing function call
-  
- 
-  
-  
-  projectiles = new ArrayList<Projectile>(); //Used for testing
-
-  explosions = new ArrayList<Explosion>();
+  keys[6] = false;//'r' key resets and exits program  
 
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
 
@@ -227,10 +217,15 @@ void spawnBoss()
 
 void gameOver()
 {
+  gameState = 3;
 }
 
 void gameOverScreen()
 {
+  if (gameState == 3)
+  {
+    //draw a game over screen
+  }
 }
 
 void mainMenuScreen()
@@ -239,6 +234,16 @@ void mainMenuScreen()
 
 void playScreen()
 {
+  if (gameState == 2)
+  {
+    spawnPlayer();
+    spawnBoss(); //testing function call
+    spawnEnemy();//testing function call
+
+    projectiles = new ArrayList<Projectile>(); //Used for testing
+
+    explosions = new ArrayList<Explosion>();
+  }
 }
 
 void reset()
