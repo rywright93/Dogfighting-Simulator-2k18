@@ -30,28 +30,23 @@ PImage playerSprite;
 void setup()
 {
   size(700, 900);
-  playerSprite = loadImage("player.png");
-  player = new Player();// Instantiates player object
-  
-  keys = new boolean [6];
+
+  keys = new boolean [7];
   keys[0] = false;// 'w' key for upward movement defined in Player class
   keys[1] = false;// 'a' key for leftward movement defined in Player class
   keys[2] = false;// 's' key for downward movement defined in Player class
   keys[3] = false;// 'd' key for rightward movement defined in Player class
   keys[4] = false;// 'e' key for shield toggling defined in Player class
   keys[5] = false;// space bar for shooting defined in Player class
+  keys[6] = false;//'r' key resets and exits program
 
   spawnPlayer();
-
-  bossSprite = loadImage("boss.png");
-  bosses = new ArrayList<Boss>(); //Used for testing
-  //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
+  spawnBoss(); //testing function call
+  spawnEnemy();//testing function call
   
-  bosses.add(new Boss(80)); //Used for testing. Instantiates a Boss
-  enemySprite = loadImage("enemy c.png");
-  enemies = new ArrayList<Enemy>(); //Used for testing
-  enemies.add(new Enemy(100, 0, 20, 3)); //Used for testing. Instantiates an Enemy
-
+ 
+  
+  
   projectiles = new ArrayList<Projectile>(); //Used for testing
 
   explosions = new ArrayList<Explosion>();
@@ -210,15 +205,24 @@ void mousePressed()
 
 void spawnPlayer()
 {
+  playerSprite = loadImage("player.png");
   player = new Player(width/2, height - 100);
 }
 
 void spawnEnemy()
 {
+  enemySprite = loadImage("enemy c.png");
+  enemies = new ArrayList<Enemy>(); //Used for testing
+  enemies.add(new Enemy(100, 0, 20, 3)); //Used for testing. Instantiates an Enemy
 }
 
 void spawnBoss()
 {
+  bossSprite = loadImage("boss.png");
+  bosses = new ArrayList<Boss>();
+  //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
+
+  bosses.add(new Boss(80)); //Used for testing. Instantiates a Boss
 }
 
 void gameOver()
@@ -239,7 +243,7 @@ void playScreen()
 
 void reset()
 {
-  // start movement, change gamestate, draw playing screen, 
+  // start movement, change gamestate, draw playing screen,
 }
 
 //save the two highscores array to the .txt files on disc
