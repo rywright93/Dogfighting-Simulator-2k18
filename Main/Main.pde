@@ -21,7 +21,6 @@ ArrayList<Projectile> projectiles;
 
 ArrayList<Explosion> explosions;
 PImage explosionSpriteSheet;
-Explosion boom;
 
 PImage enemySprite;
 PImage bossSprite;
