@@ -1,5 +1,5 @@
 /*
-Description: The player character
+Description: A boulder on the road which the player can collide with
 Authors: Ryan and Casper
 Comments:
 */
@@ -17,8 +17,8 @@ class Boulder
     xPos = newXPos;
     yPos = newYPos;
     ySpeed = 5;
-    boulderWidth = 150;
-    boulderHeight = 150;
+    boulderWidth = 140;
+    boulderHeight = 140;
   }
   
   void update()
@@ -37,5 +37,10 @@ class Boulder
     fill(210, 210, 210);
     rect(xPos, yPos, boulderWidth, boulderHeight);
     noFill();
+  }
+  
+  public float getYPos()
+  {
+    return yPos;
   }
 }
