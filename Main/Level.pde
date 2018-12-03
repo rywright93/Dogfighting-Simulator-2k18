@@ -44,6 +44,7 @@ class Level
     bosses = new ArrayList<Boss>();
     projectiles = new ArrayList<Projectile>(); //Used for testing
     explosions = new ArrayList<Explosion>();
+    boulders = new ArrayList<Boulder>();
   }
   
   public void update()
