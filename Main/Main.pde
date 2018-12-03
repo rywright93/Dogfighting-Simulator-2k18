@@ -33,12 +33,14 @@ Level curLevel;
 void setup()
 {
   size(700, 900);
-  
-  gameState = 6;//for testing game screens
-  
+
+  gameState = 1;//for testing game screens
+
   enemySprite = loadImage("enemy c.png");
   bossSprite = loadImage("boss.png");
   playerSprite = loadImage("player.png");
+
+  spawnPlayer();
 
   keys = new boolean [7];
   keys[0] = false;// 'w' key for upward movement defined in Player class
@@ -54,7 +56,6 @@ void setup()
   explosionSpriteSheet = loadImage("explosion animation b.png");
 
   curLevel = new Level(3);
-  spawnPlayer();
 }
 
 void draw()
@@ -75,10 +76,12 @@ void draw()
     youWinScreen();
   }
 
-  //curLevel.update();
+  curLevel.update();
   //Updates player position and collisions every frame
-  //player.update();
-
+  if (player != null)
+  {
+    player.update();
+  }
   //Used for testing. Updates every instance of Boss in the ArrayList
   /* for (Boss b : bosses)
    {
@@ -243,6 +246,7 @@ void mousePressed()
       if (mouseY >= 200 && mouseY <= 300)
       {
         gameState = 1;//re-starts game
+        curLevel = new Level(gameState);
       }
     }
     //Checks for clicks on "Exit Game?" button on Game Over screen
@@ -261,25 +265,12 @@ void spawnPlayer()
   player = new Player(width/2, height - 100);
 }
 
-void spawnEnemy()
-{
-
-  //enemies = new ArrayList<Enemy>(); //Used for testing
-  //enemies.add(new Enemy(100, 0, 20, 3)); //Used for testing. Instantiates an Enemy
-}
-
-void spawnBoss()
-{
-
-  // bosses = new ArrayList<Boss>();
-  //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
-
-  //bosses.add(new Boss(80)); //Used for testing. Instantiates a Boss
-}
-
 void gameOver()
 {
+  player = null;
+  inputName = "";
   gameState = 7;
+  checkHighscore();
 }
 
 void gameOverScreen()//draw Game Over screen
@@ -296,7 +287,7 @@ void gameOverScreen()//draw Game Over screen
     textSize(25);
     text("Play Again?", width/2 - 265, 255);
     text("Exit Game?", width/2 + 135, 255);
-    
+
     textSize(30);
     fill(255, 200, 200);
     text("High Scores:", width/2 - 90, 350);
@@ -321,6 +312,8 @@ void gameOverScreen()//draw Game Over screen
     text(highscores[8], width/2+100, 800);
     text(highscoreNames[9], width/2-200, 850);
     text(highscores[9], width/2+100, 850);
+    
+    enterNewHighscoreName();
   }
 }
 
@@ -339,7 +332,7 @@ void youWinScreen()//draw You Win screen
     textSize(25);
     text("Play Again?", width/2 - 265, 255);
     text("Exit Game?", width/2 + 135, 255);
-    
+
     textSize(30);
     fill(255, 200, 200);
     text("High Scores:", width/2 - 90, 350);
@@ -364,6 +357,8 @@ void youWinScreen()//draw You Win screen
     text(highscores[8], width/2+100, 800);
     text(highscoreNames[9], width/2-200, 850);
     text(highscores[9], width/2+100, 850);
+    
+    enterNewHighscoreName();
   }
 }
 
@@ -385,20 +380,20 @@ void mainMenuScreen()//draw Main Menu
   }
 }
 
-void playScreen()
-{
-  if (gameState == 2)
-  {
-    draw();
-    spawnPlayer();
-    spawnBoss(); //testing function call
-    spawnEnemy();//testing function call
-
-    //projectiles = new ArrayList<Projectile>(); //Used for testing
-
-    //explosions = new ArrayList<Explosion>();
-  }
-}
+/*void playScreen()
+ {
+ if (gameState == 2)
+ {
+ draw();
+ spawnPlayer();
+ spawnBoss(); //testing function call
+ spawnEnemy();//testing function call
+ 
+ //projectiles = new ArrayList<Projectile>(); //Used for testing
+ 
+ //explosions = new ArrayList<Explosion>();
+ }
+ }*/
 
 void reset()
 {
@@ -479,15 +474,16 @@ void createInputName()
 }
 
 //The argument should be the variable inputName once it is completed. The name will then be placed on the highscore list
-void enterNewHighscoreName(String newName)
+void enterNewHighscoreName()
 {
   //go through every entry in the array highscoreNames
   for (int i = 0; i < highscoreNames.length; i++)
   {
     //locates the entry that is blank (this is done in rearrangeHighscoreList())
-    if (highscoreNames[i] == "")
+    if (highscoreNames[i] == inputName)
     {
-      highscoreNames[i] = newName; //replace the blank entry with the one from the parameter
+      highscoreNames[i] += key; //replace the blank entry with the one from the parameter
+      inputName += key; //TODO: need to make this code add a new name to highscore list when a highscore is broken
     }
   }
 }
