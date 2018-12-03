@@ -100,10 +100,10 @@ class Level
         }
         
         //2=EnemyType2
-        else if(levelTiling[i].charAt(j) == '2')
+        else if(levelTiling[i].charAt(j) == '3')
         {
           //boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 0));
-          spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 2));
+          spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 3));
         }
 
       }
@@ -123,7 +123,7 @@ class Level
     while (itrE.hasNext()) 
     { 
       Enemy elementE = itrE.next(); 
-      if (elementE.getHitPoints() <= 0) 
+      if (elementE.getDestroyed() == true) 
       { 
         itrE.remove();
       }

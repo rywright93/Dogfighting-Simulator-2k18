@@ -21,6 +21,7 @@ class Enemy
   private float fireRate = 800;
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   private PVector direction; //A directional vector that enemies of type 3 use to home in on the player
+  private boolean destroyed = false;
   
   Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
   {
@@ -74,7 +75,6 @@ class Enemy
         shoot();
         lastProjectileFiredAt = millis() + fireRate;
       }
-      println("xpos is " + xPos);
     }
     
     //Kamikaze pilot
@@ -90,10 +90,11 @@ class Enemy
       //normalize the vector so that it has a length of 1
       direction.normalize();
       //scale it to make it move at greater length each update
-      direction.mult(4);
+      direction.mult(400);
       
-      xPos = xPos + direction.x;
-      yPos = yPos + direction.y;
+      xPos += direction.x * float(millis() - ticksLastUpdate) * 0.001;
+      yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+      ticksLastUpdate = millis(); 
       //location.add(velocity);
     }
     //Destroy the enemy if it moves past the bottom of the screen
@@ -126,6 +127,7 @@ class Enemy
     xPos = -1000;
     xSpeed = 0;
     ySpeed = 0;
+    destroyed = true;
   }
   
   //yield points to the player when dying
@@ -173,5 +175,10 @@ class Enemy
   public int getHitPoints()
   {
     return hitPoints;
+  }
+  
+  public boolean getDestroyed()
+  {
+    return destroyed;
   }
 }
