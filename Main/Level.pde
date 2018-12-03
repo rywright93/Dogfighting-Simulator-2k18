@@ -79,9 +79,15 @@ class Level
         if(levelTiling[i].charAt(j) == '1')
         {
           //constructor(starting/default x + Wall width * column number + 1 to avoid multiplication by zero, starting/default y + wall height * row number + 1 to avoid multiplication by zero, xspeed, yspeed)
-          boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i));
-          println(i);
+          boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 140));
         }
+        
+        //2=Boulder
+        else if(levelTiling[i].charAt(j) == '2')
+        {
+          
+        }
+
       }
     }
   }
