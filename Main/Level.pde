@@ -11,6 +11,7 @@ class Level
   ArrayList<Enemy> enemies; //ArrayList containing all active enemy
   ArrayList<Projectile> projectiles; //ArrayList containing all active projectiles
   ArrayList<Explosion> explosions; //ArrayList containing all active explosions
+  ArrayList<Spawner> spawners;
   String[] levelTiling; //array of string containing the level structure from a .txt file
   
   //Constructor
@@ -52,6 +53,7 @@ class Level
     projectiles = new ArrayList<Projectile>(); //Used for testing
     explosions = new ArrayList<Explosion>();
     boulders = new ArrayList<Boulder>();
+    spawners = new ArrayList<Spawner>();
     
     readTextFile();
   }
@@ -64,6 +66,7 @@ class Level
     updateProjectiles();
     updateExplosions();
     updateBoulders();
+    updateSpawner();
   }
   
   public void readTextFile()
@@ -76,16 +79,16 @@ class Level
       for(int j = 0; j < levelTiling[i].length(); j++)
       {
         //1=Boulder
-        if(levelTiling[i].charAt(j) == '1')
+        if(levelTiling[i].charAt(j) == '0')
         {
           //constructor(starting/default x + Wall width * column number + 1 to avoid multiplication by zero, starting/default y + wall height * row number + 1 to avoid multiplication by zero, xspeed, yspeed)
-          boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 140));
+          boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i));
         }
         
         //2=Boulder
-        else if(levelTiling[i].charAt(j) == '2')
+        else if(levelTiling[i].charAt(j) == '1')
         {
-          
+          spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 1));
         }
 
       }
@@ -180,6 +183,27 @@ class Level
         itrBo.remove();
       }
     }
+  }
+  
+  public void updateSpawner()
+  {
+    //Update every Enemy in the ArrayList enemies. Used for testing
+    for (Spawner s : spawners)
+    {
+      s.move();
+    }
+/*
+    //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
+    Iterator<Enemy> itrE = enemies.iterator();
+    while (itrE.hasNext()) 
+    { 
+      Enemy elementE = itrE.next(); 
+      if (elementE.getHitPoints() <= 0) 
+      { 
+        itrE.remove();
+      }
+    }
+    */
   }
   
   public ArrayList<Projectile> getProjectiles()

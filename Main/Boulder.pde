@@ -12,12 +12,12 @@ class Boulder
   float boulderWidth;
   float boulderHeight;
   
-  Boulder(float newXPos, float newYPos, float bwidth)
+  Boulder(float newXPos, float newYPos)
   {
     xPos = newXPos;
     yPos = newYPos;
     ySpeed = 5;
-    boulderWidth = bwidth;
+    boulderWidth = 140;
     boulderHeight = 140;
   }
   
