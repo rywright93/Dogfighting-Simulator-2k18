@@ -16,12 +16,12 @@ boolean[] keys; //Boolean array for checking if keys are being pressed, enables 
 Player player;
 /*
 ArrayList<Boss> bosses;
-ArrayList<Enemy> enemies;
-
-ArrayList<Projectile> projectiles;
-
-ArrayList<Explosion> explosions;
-*/
+ ArrayList<Enemy> enemies;
+ 
+ ArrayList<Projectile> projectiles;
+ 
+ ArrayList<Explosion> explosions;
+ */
 PImage explosionSpriteSheet;
 
 PImage enemySprite;
@@ -33,7 +33,9 @@ Level curLevel;
 void setup()
 {
   size(700, 900);
-  gameState = 0;//for testing game screens
+  
+  gameState = 6;//for testing game screens
+  
   enemySprite = loadImage("enemy c.png");
   bossSprite = loadImage("boss.png");
   playerSprite = loadImage("player.png");
@@ -50,20 +52,28 @@ void setup()
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
 
   explosionSpriteSheet = loadImage("explosion animation b.png");
-  
+
   curLevel = new Level(3);
 }
 
 void draw()
 {
   background(161, 161, 161);
-  textSize(30);
-  text(points, 50, 50);
+  textSize(20);
+  text("My Score: "+points, 50, 50);
   if (gameState == 0)
   {
     mainMenuScreen();
   }
-  
+  if (gameState == 7)
+  {
+    gameOverScreen();
+  }
+  if (gameState == 6)
+  {
+    youWinScreen();
+  }
+
   //curLevel.update();
   //Updates player position and collisions every frame
   //player.update();
@@ -204,24 +214,62 @@ void exitGame()
 
 void mousePressed()
 {
+  //Looks for whether the mouse is hovering over a button
+  if (gameState == 0)
+  {
+    //Checks for clicks on "Wanna Play?" button on Main Menu
+    if (mouseX >= width/2-100 && mouseX <= width/2+100)
+    {
+      if (mouseY >= 400 && mouseY <= 500)
+      {
+        gameState = 1;//starts game
+      }
+    }
+    //Checks for clicks on "Exit Game?" button on Main Menu
+    if (mouseX >= width/2-100 && mouseX <= width/2+100)
+    {
+      if (mouseY >= 600 && mouseY <= 700)
+      {
+        exit();//exits game
+      }
+    }
+  }
+  if (gameState == 7 || gameState == 6)
+  {
+    //Checks for clicks on "Play Again?" button on Game Over screen OR You Win screen
+    if (mouseX >= width/2-300 && mouseX <= width/2-100)
+    {
+      if (mouseY >= 200 && mouseY <= 300)
+      {
+        gameState = 1;//re-starts game
+      }
+    }
+    //Checks for clicks on "Exit Game?" button on Game Over screen
+    if (mouseX >= width/2+100 && mouseX <= width/2+300)
+    {
+      if (mouseY >= 200 && mouseY <= 300)
+      {
+        exit();//exits game
+      }
+    }
+  }
 }
 
 void spawnPlayer()
 {
-  
   player = new Player(width/2, height - 100);
 }
 
 void spawnEnemy()
 {
-  
+
   //enemies = new ArrayList<Enemy>(); //Used for testing
   //enemies.add(new Enemy(100, 0, 20, 3)); //Used for testing. Instantiates an Enemy
 }
 
 void spawnBoss()
 {
-  
+
   // bosses = new ArrayList<Boss>();
   //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
 
@@ -230,33 +278,109 @@ void spawnBoss()
 
 void gameOver()
 {
-  gameState = 3;
+  gameState = 7;
 }
 
-void gameOverScreen()
+void gameOverScreen()//draw Game Over screen
 {
-  if (gameState == 3)
+  if (gameState == 7)
   {
-    background(161, 161, 161);
+    fill(255, 0, 0);
+    textSize(70);
+    text("GAME OVER", width/2-200, 150);
+    fill(255);
+    rect(width/2-300, 200, 200, 100);
+    rect (width/2+100, 200, 200, 100);
+    fill(0);
+    textSize(25);
+    text("Play Again?", width/2 - 265, 255);
+    text("Exit Game?", width/2 + 135, 255);
+    
+    textSize(30);
+    fill(255, 200, 200);
+    text("High Scores:", width/2 - 90, 350);
+    textSize(25);
+    text(highscoreNames[0], width/2-200, 400);
+    text(highscores[0], width/2+100, 400);
+    text(highscoreNames[1], width/2-200, 450);
+    text(highscores[1], width/2+100, 450);
+    text(highscoreNames[2], width/2-200, 500);
+    text(highscores[2], width/2+100, 500);
+    text(highscoreNames[3], width/2-200, 550);
+    text(highscores[3], width/2+100, 550);
+    text(highscoreNames[4], width/2-200, 600);
+    text(highscores[4], width/2+100, 600);
+    text(highscoreNames[5], width/2-200, 650);
+    text(highscores[5], width/2+100, 650);
+    text(highscoreNames[6], width/2-200, 700);
+    text(highscores[6], width/2+100, 700);
+    text(highscoreNames[7], width/2-200, 750);
+    text(highscores[7], width/2+100, 750);
+    text(highscoreNames[8], width/2-200, 800);
+    text(highscores[8], width/2+100, 800);
+    text(highscoreNames[9], width/2-200, 850);
+    text(highscores[9], width/2+100, 850);
   }
 }
 
-void mainMenuScreen()
+void youWinScreen()//draw You Win screen
 {
-  if (gameState == 1)
+  if (gameState == 6)
   {
-    //draw Main Menu
-    background(161, 161, 161);
-    stroke(240, 50, 50);
-    textSize(30);
-    text("Combat Racing Simulator 2k18", width/2-40, 40);
-    textSize(20);
-    text("Wanna Play?", width/2, 400);
-    text("Exit Game?", width/2, 600);
+    fill(255, 0, 0);
+    textSize(70);
+    fill(255, 255, 0);
+    text("YOU WIN!", width/2-150, 150);
     fill(255);
-    rect(width/2, 400, 100, 200);
-    rect(width/2, 600, 100, 200);
-    //write if statements that check if mouse is in each rectangle
+    rect(width/2-300, 200, 200, 100);
+    rect (width/2+100, 200, 200, 100);
+    fill(0);
+    textSize(25);
+    text("Play Again?", width/2 - 265, 255);
+    text("Exit Game?", width/2 + 135, 255);
+    
+    textSize(30);
+    fill(255, 200, 200);
+    text("High Scores:", width/2 - 90, 350);
+    textSize(25);
+    text(highscoreNames[0], width/2-200, 400);
+    text(highscores[0], width/2+100, 400);
+    text(highscoreNames[1], width/2-200, 450);
+    text(highscores[1], width/2+100, 450);
+    text(highscoreNames[2], width/2-200, 500);
+    text(highscores[2], width/2+100, 500);
+    text(highscoreNames[3], width/2-200, 550);
+    text(highscores[3], width/2+100, 550);
+    text(highscoreNames[4], width/2-200, 600);
+    text(highscores[4], width/2+100, 600);
+    text(highscoreNames[5], width/2-200, 650);
+    text(highscores[5], width/2+100, 650);
+    text(highscoreNames[6], width/2-200, 700);
+    text(highscores[6], width/2+100, 700);
+    text(highscoreNames[7], width/2-200, 750);
+    text(highscores[7], width/2+100, 750);
+    text(highscoreNames[8], width/2-200, 800);
+    text(highscores[8], width/2+100, 800);
+    text(highscoreNames[9], width/2-200, 850);
+    text(highscores[9], width/2+100, 850);
+  }
+}
+
+void mainMenuScreen()//draw Main Menu
+{
+  if (gameState == 0)
+  {
+    background(161, 161, 161);
+    fill(240, 50, 50);
+    textSize(30);
+    text("Combat Racing Simulator 2k18", 140, 120);
+    fill(255);
+    rect(width/2-100, 400, 200, 100);
+    rect(width/2-100, 600, 200, 100);
+    fill(0);
+    textSize(25);
+    text("Wanna Play?", width/2-75, 455);
+    text("Exit Game?", width/2-70, 655);
   }
 }
 
