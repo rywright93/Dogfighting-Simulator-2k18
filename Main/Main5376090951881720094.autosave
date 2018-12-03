@@ -21,6 +21,7 @@ ArrayList<Projectile> projectiles;
 
 ArrayList<Explosion> explosions;
 PImage explosionSpriteSheet;
+Explosion boom;
 
 PImage enemySprite;
 PImage bossSprite;
@@ -54,65 +55,66 @@ void draw()
   {
     mainMenuScreen();
   }
+
   //Updates player position and collisions every frame
-  //player.update();
+ // player.update();
 
   //Used for testing. Updates every instance of Boss in the ArrayList
-  /* for (Boss b : bosses)
-   {
-   b.update();
-   }
-   
-   //update every Projectile in the ArrayList. Used for testing
-   for (Projectile p : projectiles)
-   {
-   p.update();
-   }
-   
-   //Iterator used to remove Projectiles from the ArrayList if they are dead.
-   Iterator<Projectile> itr = projectiles.iterator();
-   while (itr.hasNext()) 
-   { 
-   Projectile element = itr.next(); 
-   if (element.getDestroyed() == true) 
-   { 
-   itr.remove();
-   }
-   }
-   
-   //Update every Enemy in the ArrayList enemies. Used for testing
-   for (Enemy e : enemies)
-   {
-   e.update();
-   }
-   
-   //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
-   Iterator<Enemy> itrE = enemies.iterator();
-   while (itrE.hasNext()) 
-   { 
-   Enemy elementE = itrE.next(); 
-   if (elementE.getHitPoints() <= 0) 
-   { 
-   itrE.remove();
-   }
-   }
-   
-   //Update every Explosion in the ArrayList explosions
-   for (Explosion ex : explosions)
-   {
-   ex.display();
-   }
-   
-   //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
-   Iterator<Explosion> itrEx = explosions.iterator();
-   while (itrEx.hasNext()) 
-   { 
-   Explosion elementEx = itrEx.next(); 
-   if (elementEx.getAnimationEnded() == true) 
-   { 
-   itrEx.remove();
-   }
-   }*/
+ /* for (Boss b : bosses)
+  {
+    b.update();
+  }
+
+  //update every Projectile in the ArrayList. Used for testing
+  for (Projectile p : projectiles)
+  {
+    p.update();
+  }
+
+  //Iterator used to remove Projectiles from the ArrayList if they are dead.
+  Iterator<Projectile> itr = projectiles.iterator();
+  while (itr.hasNext()) 
+  { 
+    Projectile element = itr.next(); 
+    if (element.getDestroyed() == true) 
+    { 
+      itr.remove();
+    }
+  }
+
+  //Update every Enemy in the ArrayList enemies. Used for testing
+  for (Enemy e : enemies)
+  {
+    e.update();
+  }
+
+  //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
+  Iterator<Enemy> itrE = enemies.iterator();
+  while (itrE.hasNext()) 
+  { 
+    Enemy elementE = itrE.next(); 
+    if (elementE.getHitPoints() <= 0) 
+    { 
+      itrE.remove();
+    }
+  }
+
+  //Update every Explosion in the ArrayList explosions
+  for (Explosion ex : explosions)
+  {
+    ex.display();
+  }
+
+  //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
+  Iterator<Explosion> itrEx = explosions.iterator();
+  while (itrEx.hasNext()) 
+  { 
+    Explosion elementEx = itrEx.next(); 
+    if (elementEx.getAnimationEnded() == true) 
+    { 
+      itrEx.remove();
+    }
+  }*/
 }
 
 //Checks on each key pressed event if the player needs to fire a projectile
@@ -208,10 +210,10 @@ void spawnEnemy()
   enemies.add(new Enemy(100, 0, 20, 3)); //Used for testing. Instantiates an Enemy
 }
 
-void spawnBoss()
+void spawnBoss()//TODO: finish writing logic for what parameters spawn gives to Boss
 {
   bossSprite = loadImage("boss.png");
-  // bosses = new ArrayList<Boss>();
+  
   //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
 
   bosses.add(new Boss(80)); //Used for testing. Instantiates a Boss
@@ -232,8 +234,6 @@ void gameOverScreen()
 
 void mainMenuScreen()
 {
-  if (gameState == 1)
-  {
     //draw Main Menu
     background(161, 161, 161);
     stroke(240, 50, 50);
@@ -244,9 +244,8 @@ void mainMenuScreen()
     text("Exit Game?", width/2, 600);
     fill(255);
     rect(width/2, 400, 100, 200);
-    rect(width/2, 600, 100, 200);
-    //write if statements that check if mouse is in each rectangle
-  }
+    rect(width/2, 600, 100,200);
+    //write if statements that check if mouse is in each rectangle 
 }
 
 void playScreen()

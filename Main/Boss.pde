@@ -97,6 +97,7 @@ class Boss
     xSpeed = 0;
     ySpeed = 0;
     
+    
     givePoints();
   }
   
@@ -134,6 +135,11 @@ class Boss
   public float getBossWidth()
   {
     return bossWidth;
+  }
+  
+  public int getHitPoints()
+  {
+    return hitPoints;
   }
   
   //Yields points to the player upon death
