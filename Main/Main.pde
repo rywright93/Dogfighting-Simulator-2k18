@@ -54,6 +54,7 @@ void setup()
   explosionSpriteSheet = loadImage("explosion animation b.png");
 
   curLevel = new Level(3);
+  spawnPlayer();
 }
 
 void draw()

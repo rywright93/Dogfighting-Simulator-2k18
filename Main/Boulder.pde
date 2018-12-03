@@ -6,11 +6,11 @@ Comments:
 
 class Boulder
 {
-  private float xPos;
-  private float yPos;
-  private float ySpeed;
-  private float boulderWidth;
-  private float boulderHeight;
+  private float xPos; //current x-position of the Boulder
+  private float yPos; //current y-position of the Boulder
+  private float ySpeed; //speed by which it moves along the y-axis
+  private float boulderWidth; //width of the boulder
+  private float boulderHeight; //height of the boulder
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   
   Boulder(float newXPos, float newYPos)

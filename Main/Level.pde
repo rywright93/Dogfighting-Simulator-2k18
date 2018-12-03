@@ -85,25 +85,28 @@ class Level
           boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i));
         }
         
-        //2=EnemyType1
+        //Instantiates EnemyType1
         else if(levelTiling[i].charAt(j) == '1')
         {
-          //boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 0));
           spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 1));
         }
         
-        //2=EnemyType2
+        //Instantiates EnemyType2
         else if(levelTiling[i].charAt(j) == '2')
         {
-          //boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 0));
           spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 2));
         }
         
-        //2=EnemyType2
+        //Instantiates EnemyType3
         else if(levelTiling[i].charAt(j) == '3')
         {
-          //boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 0));
           spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 3));
+        }
+        
+        //Instantiates Boss
+        else if(levelTiling[i].charAt(j) == '4')
+        {
+          spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 4));
         }
 
       }
