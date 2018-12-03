@@ -6,17 +6,18 @@ Comments:
 
 class Boulder
 {
-  float xPos;
-  float yPos;
-  float ySpeed;
-  float boulderWidth;
-  float boulderHeight;
+  private float xPos;
+  private float yPos;
+  private float ySpeed;
+  private float boulderWidth;
+  private float boulderHeight;
+  private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   
   Boulder(float newXPos, float newYPos)
   {
     xPos = newXPos;
     yPos = newYPos;
-    ySpeed = 5;
+    ySpeed = 200;
     boulderWidth = 140;
     boulderHeight = 140;
   }
@@ -29,7 +30,8 @@ class Boulder
   
   void move()
   {
-    yPos += ySpeed;
+    yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+    ticksLastUpdate = millis(); 
   }
   
   void display()

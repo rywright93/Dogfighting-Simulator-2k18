@@ -59,14 +59,22 @@ class Enemy
     //move in sine wave
     if(enemyType == 2)
     {
+      yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+      //sin(yPos * frequency) * wave length) + xPos spawnPosition
+      xPos = (sin(yPos * 0.015) * 140) + spawnXPos + enemyWidth * float(millis() - ticksLastUpdate) * 0.001;
+      ticksLastUpdate = millis(); 
+
+      /*
       yPos = yPos + ySpeed/100;
       //sin(yPos * frequency) * wave length) + xPos spawnPosition
       xPos = (sin(yPos * 0.02) * 150) + spawnXPos + enemyWidth;
+      */
       if(millis() > lastProjectileFiredAt)
-    {
-      shoot();
-      lastProjectileFiredAt = millis() + fireRate;
-    }
+      {
+        shoot();
+        lastProjectileFiredAt = millis() + fireRate;
+      }
+      println("xpos is " + xPos);
     }
     
     //Kamikaze pilot
