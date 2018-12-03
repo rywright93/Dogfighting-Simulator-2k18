@@ -119,22 +119,22 @@ class Player
       if (millis() > lastProjectileFiredAt)
       {
         lastProjectileFiredAt = millis() + fireRate;
-        projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
+        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
       }
     } else if (gunType == 1)
     {
       if (millis() > lastProjectileFiredAt)
       {
         lastProjectileFiredAt = millis() + fireRate/2;
-        projectiles.add(new Projectile(xPos + playerWidth/4, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
-        projectiles.add(new Projectile(xPos + (playerWidth/4 * 3), yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
+        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/4, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
+        curLevel.getProjectiles().add(new Projectile(xPos + (playerWidth/4 * 3), yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
       }
     } else if (gunType == 2)
     {
       if (millis() > lastProjectileFiredAt)
       {
         lastProjectileFiredAt = millis() + fireRate*1.5;
-        projectiles.add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 20));
+        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 20));
       }
     }
   }
@@ -180,7 +180,7 @@ class Player
   public void enemyCollision()
   {
     //A for each loop which checks collision for every instance of Enemy in enemies array list.
-    for (Enemy e : enemies)
+    for (Enemy e : curLevel.getEnemies())
     {
       //Player top border collision check
       if (yPos >= e.getYPos() && yPos <= e.getYPos() + e.getEnemyHeight() && xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth())
@@ -244,7 +244,7 @@ class Player
   public void bossCollision()
   {
     //A for each loop which checks collision for every instance of Boss in bosses array list.
-    for (Boss b : bosses)
+    for (Boss b : curLevel.getBosses())
     {
       //Player top border collision check
       if (yPos >= b.getYPos() && yPos <= b.getYPos() + b.getBossHeight() && xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBossWidth())

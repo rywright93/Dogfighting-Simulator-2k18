@@ -41,11 +41,11 @@ class Projectile
   public void bossCollision()
   {
     //A for each loop which checks collision for every instance of Boss in bosses list.
-    for (Boss b : bosses) 
+    for (Boss b : curLevel.getBosses()) 
     {
       if (drawColPoint(b.getXPos(), b.getYPos(), b.getBossHeight(), b.getBossWidth()) == true && shotBy == "Player")
       {
-        explosions.add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
+        curLevel.getExplosions().add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
         b.isHit();
         destroy();
       }
@@ -69,11 +69,11 @@ class Projectile
   public void enemyCollision()
   {
     //A for each loop which checks collision for every instance of Enemy in enemies list.
-    for (Enemy e : enemies) 
+    for (Enemy e : curLevel.getEnemies()) 
     {
       if (drawColPoint(e.getXPos(), e.getYPos(), e.getEnemyHeight(), e.getEnemyWidth()) == true && shotBy == "Player")
       {
-        explosions.add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
+        curLevel.getExplosions().add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
         e.isHit();
         destroy();
       }

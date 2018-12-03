@@ -97,7 +97,7 @@ class Enemy
   
   public void shoot()
   {
-    projectiles.add(new Projectile(xPos + enemyWidth/2, yPos + enemyHeight, 0, 400, "Enemy", color(255, 0, 0), 20));
+    curLevel.getProjectiles().add(new Projectile(xPos + enemyWidth/2, yPos + enemyHeight, 0, 400, "Enemy", color(255, 0, 0), 20));
   }
   
   //When the enemy collides with a Projectile fired from the player it takes damage

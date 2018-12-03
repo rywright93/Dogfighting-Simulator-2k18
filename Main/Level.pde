@@ -125,4 +125,24 @@ class Level
       }
     }
   }
+  
+  public ArrayList<Projectile> getProjectiles()
+  {
+    return projectiles;
+  }
+  
+  public ArrayList<Boss> getBosses()
+  {
+    return bosses;
+  }
+  
+  public ArrayList<Enemy> getEnemies()
+  {
+    return enemies;
+  }
+  
+  public ArrayList<Explosion> getExplosions()
+  {
+    return explosions;
+  }
 }

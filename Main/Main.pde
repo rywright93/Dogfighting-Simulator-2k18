@@ -14,22 +14,29 @@ String[] highscoreNames;
 boolean[] keys; //Boolean array for checking if keys are being pressed, enables multiple concurrent button presses
 
 Player player;
+/*
 ArrayList<Boss> bosses;
 ArrayList<Enemy> enemies;
 
 ArrayList<Projectile> projectiles;
 
 ArrayList<Explosion> explosions;
+*/
 PImage explosionSpriteSheet;
 
 PImage enemySprite;
 PImage bossSprite;
 PImage playerSprite;
 
+Level curLevel;
+
 void setup()
 {
   size(700, 900);
   gameState = 0;//for testing game screens
+  enemySprite = loadImage("enemy c.png");
+  bossSprite = loadImage("boss.png");
+  playerSprite = loadImage("player.png");
 
   keys = new boolean [7];
   keys[0] = false;// 'w' key for upward movement defined in Player class
@@ -43,6 +50,8 @@ void setup()
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
 
   explosionSpriteSheet = loadImage("explosion animation b.png");
+  
+  curLevel = new Level(3);
 }
 
 void draw()
@@ -54,6 +63,8 @@ void draw()
   {
     mainMenuScreen();
   }
+  
+  //curLevel.update();
   //Updates player position and collisions every frame
   //player.update();
 
@@ -197,24 +208,24 @@ void mousePressed()
 
 void spawnPlayer()
 {
-  playerSprite = loadImage("player.png");
+  
   player = new Player(width/2, height - 100);
 }
 
 void spawnEnemy()
 {
-  enemySprite = loadImage("enemy c.png");
-  enemies = new ArrayList<Enemy>(); //Used for testing
-  enemies.add(new Enemy(100, 0, 20, 3)); //Used for testing. Instantiates an Enemy
+  
+  //enemies = new ArrayList<Enemy>(); //Used for testing
+  //enemies.add(new Enemy(100, 0, 20, 3)); //Used for testing. Instantiates an Enemy
 }
 
 void spawnBoss()
 {
-  bossSprite = loadImage("boss.png");
+  
   // bosses = new ArrayList<Boss>();
   //bosses.add(new Boss(20)); //Used for testing. Instantiates a Boss
 
-  bosses.add(new Boss(80)); //Used for testing. Instantiates a Boss
+  //bosses.add(new Boss(80)); //Used for testing. Instantiates a Boss
 }
 
 void gameOver()
@@ -258,9 +269,9 @@ void playScreen()
     spawnBoss(); //testing function call
     spawnEnemy();//testing function call
 
-    projectiles = new ArrayList<Projectile>(); //Used for testing
+    //projectiles = new ArrayList<Projectile>(); //Used for testing
 
-    explosions = new ArrayList<Explosion>();
+    //explosions = new ArrayList<Explosion>();
   }
 }
 
