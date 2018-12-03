@@ -22,6 +22,7 @@ class Enemy
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   private PVector direction; //A directional vector that enemies of type 3 use to home in on the player
   private boolean destroyed = false;
+  private int maxHitPoints;
   
   Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
   {
@@ -38,6 +39,7 @@ class Enemy
     ySpeed = 200;
     enemyType = newEnemyType;
     spawnXPos = newXPos;
+    maxHitPoints = hitPoints;
   }
   
   //Is called in Main. It updates everything that needs updating.
@@ -141,7 +143,7 @@ class Enemy
   {
     //A rectangle is used as placeholder
     fill(0, 255, 0);
-    rect(xPos, yPos - 20, map(hitPoints, 0, 20, 0, enemyWidth), 10); //displays a healthbar
+    rect(xPos, yPos - 20, map(hitPoints, 0, maxHitPoints, 0, enemyWidth), 10); //displays a healthbar
     image(enemyPic, xPos, yPos);
     //rect(xPos, yPos, enemyWidth, enemyHeight);
     noFill();

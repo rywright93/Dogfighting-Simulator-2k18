@@ -17,6 +17,7 @@ class Boss
   private float fireRate = 500;
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
+  private int maxHitPoints;
   
   Boss(int newHitPoints)
   {
@@ -25,6 +26,7 @@ class Boss
     bossHeight = bossPic.height;
     xPos = width/2 - bossWidth/2;
     yPos = -200;
+    maxHitPoints = hitPoints;
   }
   
   public void update()
@@ -107,7 +109,7 @@ class Boss
     {
       fill(0, 0, 255);
       //rect(xPos, yPos, bossWidth, bossHeight);
-      rect(xPos, yPos - 20, map(hitPoints, 0, 80, 0, bossWidth), 10); //displays a healthbar
+      rect(xPos, yPos - 20, map(hitPoints, 0, maxHitPoints, 0, bossWidth), 10); //displays a healthbar
       noFill();
       image(bossPic, xPos, yPos);
       /*
