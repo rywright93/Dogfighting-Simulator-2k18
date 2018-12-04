@@ -12,6 +12,7 @@ class Level
   ArrayList<Projectile> projectiles; //ArrayList containing all active projectiles
   ArrayList<Explosion> explosions; //ArrayList containing all active explosions
   ArrayList<Spawner> spawners;
+  Roadstripe[] roadstripes;
   String[] levelTiling; //array of string containing the level structure from a .txt file
   
   //Constructor
@@ -54,6 +55,11 @@ class Level
     explosions = new ArrayList<Explosion>();
     boulders = new ArrayList<Boulder>();
     spawners = new ArrayList<Spawner>();
+    roadstripes = new Roadstripe[4];
+    for(int i = 0; i < roadstripes.length; i++)
+    {
+      roadstripes[i] = new Roadstripe(height - 250*i);
+    }
     
     readTextFile();
   }
@@ -67,6 +73,7 @@ class Level
     updateExplosions();
     updateBoulders();
     updateSpawner();
+    updateRoadstripes();
   }
   
   public void readTextFile()
@@ -222,6 +229,14 @@ class Level
       }
     }
     */
+  }
+  
+  public void updateRoadstripes()
+  {
+    for(int i = 0; i < roadstripes.length; i++)
+    {
+      roadstripes[i].update();
+    }
   }
   
   public ArrayList<Projectile> getProjectiles()

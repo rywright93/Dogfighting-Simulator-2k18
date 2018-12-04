@@ -55,12 +55,12 @@ void setup()
 
   explosionSpriteSheet = loadImage("explosion animation b.png");
 
-  curLevel = new Level(3);
+  curLevel = new Level(1);
 }
 
 void draw()
 {
-  background(161, 161, 161);
+  background(120, 120, 120);
   textSize(20);
   text("My Score: "+points, 50, 50);
   if (gameState == 0)
