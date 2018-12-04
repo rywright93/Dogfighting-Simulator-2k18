@@ -29,8 +29,8 @@ class Player
   {
     xPos = newXPos;
     yPos = newYPos;
-    playerHeight = 30;
-    playerWidth = 15;
+    playerHeight = playerPic.height;
+    playerWidth = playerPic.width;
     xSpeed = 300;
     ySpeed = 300;
     shieldCharges = 3;
@@ -51,6 +51,7 @@ class Player
     enemyCollision();//Checks if player has collided with enemy every frame in Main
     bossCollision();//Checks if player has collided with boss every frame in Main
     pickupCollision();//Checks if player has collided with pickup every frame in Main
+    boulderCollision();
     
      if (keys[5] == true)//if space bar is pressed
     {
@@ -272,6 +273,37 @@ class Player
       {
         isHit();
         b.isHit();
+      }
+    }
+  }
+  
+  //Player checks itself for colliding with Boulders, takes damage
+  public void boulderCollision()
+  {
+    //A for each loop which checks collision for every instance of Boulder in boulders array list.
+    for (Boulder b : curLevel.getBoulders())
+    {
+      //Player top border collision check
+      if (yPos >= b.getYPos() && yPos <= b.getYPos() + b.getBoulderHeight() && xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBoulderWidth())
+      {
+        isHit();
+      }
+
+      //Player bottom border collision check
+      if (yPos + playerHeight >= b.getYPos() && yPos + playerHeight <= b.getYPos() + b.getBoulderHeight() && xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBoulderWidth())
+      {
+        isHit();
+      }
+      //Player left border collision check
+      if (xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBoulderWidth() && yPos + playerHeight >= b.getYPos() && yPos <= b.getYPos() + b.getBoulderHeight())
+      {
+        isHit();
+      }
+
+      //Player right border collision check
+      if (xPos + playerWidth >= b.getXPos() && xPos + playerWidth <= b.getXPos() + b.getBoulderWidth() && yPos >= b.getYPos() && yPos <= b.getYPos() + b.getBoulderHeight())
+      {
+        isHit();
       }
     }
   }

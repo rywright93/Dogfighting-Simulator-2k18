@@ -67,13 +67,13 @@ class Level
   //updates every instance of enemy, boss, projectile, explosion, and obstacles in the level
   public void update()
   {
+    updateRoadstripes();
     updateEnemies();
     updateBosses();
     updateProjectiles();
     updateExplosions();
     updateBoulders();
     updateSpawner();
-    updateRoadstripes();
   }
   
   public void readTextFile()
@@ -257,5 +257,10 @@ class Level
   public ArrayList<Explosion> getExplosions()
   {
     return explosions;
+  }
+  
+  public ArrayList<Boulder> getBoulders()
+  {
+    return boulders;
   }
 }

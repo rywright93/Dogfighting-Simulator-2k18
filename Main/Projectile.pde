@@ -33,6 +33,7 @@ class Projectile
   {
     bossCollision();
     enemyCollision();
+    playerCollision();
     display();
     move();
   }
@@ -82,15 +83,18 @@ class Projectile
 
   public void playerCollision()
   {
+    
     if (drawColPoint(player.getXPos(), player.getYPos(), player.getPlayerHeight(), player.getPlayerWidth()) == true && shotBy == "Enemy" || shotBy == "Boss" && player.getShieldActive() == false)
     {
       player.isHit();
       destroy();
     }
-    if (player.shieldActive == true)
+
+    if (player.getShieldActive() == true)
     {
       destroy();
     }
+    
   }
 
 
@@ -211,7 +215,7 @@ class Projectile
     }
 
     //Display the closest point to the Projectile on the rectangle
-    //ellipse(closestX, closestY, 10, 10);
+    ellipse(closestX, closestY, 10, 10);
     noFill();
 
     //If the distance between the closest point on the rectangle and the projectile is less than the projectile's radius, they have collided

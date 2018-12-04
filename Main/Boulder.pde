@@ -45,4 +45,19 @@ class Boulder
   {
     return yPos;
   }
+  
+  public float getXPos()
+  {
+    return xPos;
+  }
+  
+  public float getBoulderHeight()
+  {
+    return boulderHeight;
+  }
+  
+  public float getBoulderWidth()
+  {
+    return boulderWidth;
+  }
 }

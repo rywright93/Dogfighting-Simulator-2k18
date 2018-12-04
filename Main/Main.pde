@@ -55,7 +55,7 @@ void setup()
 
   explosionSpriteSheet = loadImage("explosion animation b.png");
 
-  curLevel = new Level(1);
+  curLevel = new Level(3);
 }
 
 void draw()
@@ -63,24 +63,25 @@ void draw()
   background(120, 120, 120);
   textSize(20);
   text("My Score: "+points, 50, 50);
+  
+  //Updates player position and collisions every frame
   if (gameState == 0)
   {
     mainMenuScreen();
   }
-  if (gameState == 7)
+  if(gameState >= 1 && gameState <= 5)
   {
-    gameOverScreen();
+    curLevel.update();
+    player.update();
   }
+  
   if (gameState == 6)
   {
     youWinScreen();
   }
-
-  curLevel.update();
-  //Updates player position and collisions every frame
-  if (player != null)
+  if (gameState == 7)
   {
-    player.update();
+    gameOverScreen();
   }
   //Used for testing. Updates every instance of Boss in the ArrayList
   /* for (Boss b : bosses)
@@ -267,7 +268,6 @@ void spawnPlayer()
 
 void gameOver()
 {
-  player = null;
   inputName = "";
   gameState = 7;
   checkHighscore();
