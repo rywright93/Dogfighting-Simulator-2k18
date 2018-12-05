@@ -34,7 +34,7 @@ void setup()
 {
   size(700, 900);
 
-  gameState = 1;//for testing game screens
+  gameState = 3;//for testing game screens
 
   enemySprite = loadImage("enemy c.png");
   bossSprite = loadImage("boss.png");
@@ -55,7 +55,7 @@ void setup()
 
   explosionSpriteSheet = loadImage("explosion animation b.png");
 
-  curLevel = new Level(3);
+  curLevel = new Level(gameState);
 }
 
 void draw()

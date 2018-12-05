@@ -6,14 +6,14 @@ Comments:
 
 class Level
 {
-  ArrayList<Boulder> boulders; //ArrayList containing all the boulder obstacles
-  ArrayList<Boss> bosses; //ArrayList containing all living bosses
-  ArrayList<Enemy> enemies; //ArrayList containing all active enemy
-  ArrayList<Projectile> projectiles; //ArrayList containing all active projectiles
-  ArrayList<Explosion> explosions; //ArrayList containing all active explosions
-  ArrayList<Spawner> spawners;
-  Roadstripe[] roadstripes;
-  String[] levelTiling; //array of string containing the level structure from a .txt file
+  private ArrayList<Boulder> boulders; //ArrayList containing all the boulder obstacles
+  private ArrayList<Boss> bosses; //ArrayList containing all living bosses
+  private ArrayList<Enemy> enemies; //ArrayList containing all active enemy
+  private ArrayList<Projectile> projectiles; //ArrayList containing all active projectiles
+  private ArrayList<Explosion> explosions; //ArrayList containing all active explosions
+  private ArrayList<Spawner> spawners;
+  private Roadstripe[] roadstripes;
+  private String[] levelTiling; //array of string containing the level structure from a .txt file
   
   //Constructor
   Level(int curGameState)
@@ -68,11 +68,11 @@ class Level
   public void update()
   {
     updateRoadstripes();
+    updateBoulders();
     updateEnemies();
     updateBosses();
     updateProjectiles();
     updateExplosions();
-    updateBoulders();
     updateSpawner();
   }
   
@@ -263,4 +263,5 @@ class Level
   {
     return boulders;
   }
+  
 }

@@ -36,7 +36,7 @@ class Enemy
     enemyWidth = enemyPic.width;
     enemyHeight = enemyPic.height;
     xSpeed = 0;
-    ySpeed = 200;
+    ySpeed = 250;
     enemyType = newEnemyType;
     spawnXPos = newXPos;
     maxHitPoints = hitPoints;

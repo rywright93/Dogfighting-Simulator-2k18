@@ -34,6 +34,7 @@ class Projectile
     bossCollision();
     enemyCollision();
     playerCollision();
+    boulderCollision();
     display();
     move();
   }
@@ -95,6 +96,20 @@ class Projectile
       destroy();
     }
     
+  }
+  
+  //Detects collision with instances of Enemy in the arraylist enemies
+  public void boulderCollision()
+  {
+    //A for each loop which checks collision for every instance of Enemy in enemies list.
+    for (Boulder b : curLevel.getBoulders()) 
+    {
+      if (drawColPoint(b.getXPos(), b.getYPos(), b.getBoulderHeight(), b.getBoulderWidth()) == true)
+      {
+        curLevel.getExplosions().add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
+        destroy();
+      }
+    }
   }
 
 
@@ -215,7 +230,7 @@ class Projectile
     }
 
     //Display the closest point to the Projectile on the rectangle
-    ellipse(closestX, closestY, 10, 10);
+    //ellipse(closestX, closestY, 10, 10);
     noFill();
 
     //If the distance between the closest point on the rectangle and the projectile is less than the projectile's radius, they have collided
