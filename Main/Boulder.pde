@@ -12,14 +12,16 @@ class Boulder
   private float boulderWidth; //width of the boulder
   private float boulderHeight; //height of the boulder
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
+  private int obstacleType; //type 0 is a boulder. type 1 is a pool of mud
   
-  Boulder(float newXPos, float newYPos)
+  Boulder(float newXPos, float newYPos, int newObstacleType)
   {
     xPos = newXPos;
     yPos = newYPos;
     ySpeed = 200;
     boulderWidth = 140;
     boulderHeight = 140;
+    obstacleType = newObstacleType;
   }
   
   void update()
@@ -36,9 +38,18 @@ class Boulder
   
   void display()
   {
-    fill(210, 210, 210);
-    rect(xPos, yPos, boulderWidth, boulderHeight);
-    noFill();
+    if(obstacleType == 0)
+    {
+      fill(210, 210, 210);
+      rect(xPos, yPos, boulderWidth, boulderHeight);
+      noFill();
+    }
+    else if(obstacleType == 1)
+    {
+      fill(115, 71, 45);
+      rect(xPos, yPos, boulderWidth, boulderHeight);
+      noFill();
+    }
   }
   
   public float getYPos()
@@ -59,5 +70,10 @@ class Boulder
   public float getBoulderWidth()
   {
     return boulderWidth;
+  }
+  
+  public int getObstacleType()
+  {
+    return obstacleType;
   }
 }

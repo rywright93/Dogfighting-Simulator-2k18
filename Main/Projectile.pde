@@ -104,7 +104,7 @@ class Projectile
     //A for each loop which checks collision for every instance of Enemy in enemies list.
     for (Boulder b : curLevel.getBoulders()) 
     {
-      if (drawColPoint(b.getXPos(), b.getYPos(), b.getBoulderHeight(), b.getBoulderWidth()) == true)
+      if (drawColPoint(b.getXPos(), b.getYPos(), b.getBoulderHeight(), b.getBoulderWidth()) == true && b.getObstacleType() == 0)
       {
         curLevel.getExplosions().add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
         destroy();

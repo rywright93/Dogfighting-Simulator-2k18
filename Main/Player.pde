@@ -280,37 +280,74 @@ class Player
   //Player checks itself for colliding with Boulders, takes damage
   public void boulderCollision()
   {
+    setSpeed(300, 300);
     //A for each loop which checks collision for every instance of Boulder in boulders array list.
     for (Boulder b : curLevel.getBoulders())
     {
       //Player top border collision check
       if (yPos >= b.getYPos() && yPos <= b.getYPos() + b.getBoulderHeight() && xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBoulderWidth())
       {
-        isHit();
+        if(b.getObstacleType() == 0)
+        {
+          isHit();
+        }
+
+        setSpeed(50,50);
       }
 
       //Player bottom border collision check
       if (yPos + playerHeight >= b.getYPos() && yPos + playerHeight <= b.getYPos() + b.getBoulderHeight() && xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBoulderWidth())
       {
-        isHit();
+        if(b.getObstacleType() == 0)
+        {
+          isHit();
+        }
+        
+        else if (b.getObstacleType() == 1)
+        {
+          setSpeed(50,50);
+        }
       }
       //Player left border collision check
       if (xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBoulderWidth() && yPos + playerHeight >= b.getYPos() && yPos <= b.getYPos() + b.getBoulderHeight())
       {
-        isHit();
+        if(b.getObstacleType() == 0)
+        {
+          isHit();
+        }
+        
+        else if (b.getObstacleType() == 1)
+        {
+          setSpeed(50,50);
+        }
       }
 
       //Player right border collision check
       if (xPos + playerWidth >= b.getXPos() && xPos + playerWidth <= b.getXPos() + b.getBoulderWidth() && yPos >= b.getYPos() && yPos <= b.getYPos() + b.getBoulderHeight())
       {
-        isHit();
+        if(b.getObstacleType() == 0)
+        {
+          isHit();
+        }
+        
+        else if (b.getObstacleType() == 1)
+        {
+          setSpeed(50,50);
+        }
       }
+      println(xSpeed + " " + ySpeed);
     }
   }
 
   public void destroy()
   {
     gameOver();
+  }
+  
+  public void setSpeed(float newXSpeed, float newYSpeed)
+  {
+    xSpeed = newXSpeed;
+    ySpeed = newYSpeed;
   }
 
   public void setGunType(int gun)

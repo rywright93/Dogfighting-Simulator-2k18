@@ -85,11 +85,18 @@ class Level
       //Every nested loop goes through each char in the String
       for(int j = 0; j < levelTiling[i].length(); j++)
       {
-        //1=Boulder
+        //0=Boulder
         if(levelTiling[i].charAt(j) == '0')
         {
           //constructor(starting/default x + Wall width * column number + 1 to avoid multiplication by zero, starting/default y + wall height * row number + 1 to avoid multiplication by zero, xspeed, yspeed)
-          boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i));
+          boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 0));
+        }
+        
+        //"/"= Pool of mud
+        if(levelTiling[i].charAt(j) == '/')
+        {
+          //constructor(starting/default x + Wall width * column number + 1 to avoid multiplication by zero, starting/default y + wall height * row number + 1 to avoid multiplication by zero, xspeed, yspeed)
+          boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 1));
         }
         
         //Instantiates EnemyType1
