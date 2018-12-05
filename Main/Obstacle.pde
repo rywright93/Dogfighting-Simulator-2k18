@@ -1,26 +1,26 @@
 /*
-Description: A boulder on the road which the player can collide with
+Description: An obstacle on the road which the player can collide with.
 Authors: Ryan and Casper
 Comments:
 */
 
-class Boulder
+class Obstacle
 {
-  private float xPos; //current x-position of the Boulder
-  private float yPos; //current y-position of the Boulder
+  private float xPos; //current x-position of the Obstacle
+  private float yPos; //current y-position of the Obstacle
   private float ySpeed; //speed by which it moves along the y-axis
-  private float boulderWidth; //width of the boulder
-  private float boulderHeight; //height of the boulder
+  private float obstacleWidth; //width of the obstacle
+  private float obstacleHeight; //height of the obstacle
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   private int obstacleType; //type 0 is a boulder. type 1 is a pool of mud
   
-  Boulder(float newXPos, float newYPos, int newObstacleType)
+  Obstacle(float newXPos, float newYPos, int newObstacleType)
   {
     xPos = newXPos;
     yPos = newYPos;
     ySpeed = 200;
-    boulderWidth = 140;
-    boulderHeight = 140;
+    obstacleWidth = 140;
+    obstacleHeight = 140;
     obstacleType = newObstacleType;
   }
   
@@ -41,13 +41,13 @@ class Boulder
     if(obstacleType == 0)
     {
       fill(210, 210, 210);
-      rect(xPos, yPos, boulderWidth, boulderHeight);
+      rect(xPos, yPos, obstacleWidth, obstacleHeight);
       noFill();
     }
     else if(obstacleType == 1)
     {
       fill(115, 71, 45);
-      rect(xPos, yPos, boulderWidth, boulderHeight);
+      rect(xPos, yPos, obstacleWidth, obstacleHeight);
       noFill();
     }
   }
@@ -62,14 +62,14 @@ class Boulder
     return xPos;
   }
   
-  public float getBoulderHeight()
+  public float getObstacleHeight()
   {
-    return boulderHeight;
+    return obstacleHeight;
   }
   
-  public float getBoulderWidth()
+  public float getObstacleWidth()
   {
-    return boulderWidth;
+    return obstacleWidth;
   }
   
   public int getObstacleType()

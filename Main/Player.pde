@@ -51,7 +51,7 @@ class Player
     enemyCollision();//Checks if player has collided with enemy every frame in Main
     bossCollision();//Checks if player has collided with boss every frame in Main
     pickupCollision();//Checks if player has collided with pickup every frame in Main
-    boulderCollision();
+    obstacleCollision();
     
      if (keys[5] == true)//if space bar is pressed
     {
@@ -277,17 +277,17 @@ class Player
     }
   }
   
-  //Player checks itself for colliding with Boulders, takes damage
-  public void boulderCollision()
+  //Player checks itself for colliding with Obstacles
+  public void obstacleCollision()
   {
     setSpeed(300, 300);
-    //A for each loop which checks collision for every instance of Boulder in boulders array list.
-    for (Boulder b : curLevel.getBoulders())
+    //A for each loop which checks collision for every instance of Obstacle in obstacles array list.
+    for (Obstacle o : curLevel.getObstacles())
     {
       //Player top border collision check
-      if (yPos >= b.getYPos() && yPos <= b.getYPos() + b.getBoulderHeight() && xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBoulderWidth())
+      if (yPos >= o.getYPos() && yPos <= o.getYPos() + o.getObstacleHeight() && xPos >= o.getXPos() && xPos <= o.getXPos() + o.getObstacleWidth())
       {
-        if(b.getObstacleType() == 0)
+        if(o.getObstacleType() == 0)
         {
           isHit();
         }
@@ -296,41 +296,41 @@ class Player
       }
 
       //Player bottom border collision check
-      if (yPos + playerHeight >= b.getYPos() && yPos + playerHeight <= b.getYPos() + b.getBoulderHeight() && xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBoulderWidth())
+      if (yPos + playerHeight >= o.getYPos() && yPos + playerHeight <= o.getYPos() + o.getObstacleHeight() && xPos >= o.getXPos() && xPos <= o.getXPos() + o.getObstacleWidth())
       {
-        if(b.getObstacleType() == 0)
+        if(o.getObstacleType() == 0)
         {
           isHit();
         }
         
-        else if (b.getObstacleType() == 1)
+        else if (o.getObstacleType() == 1)
         {
           setSpeed(50,50);
         }
       }
       //Player left border collision check
-      if (xPos >= b.getXPos() && xPos <= b.getXPos() + b.getBoulderWidth() && yPos + playerHeight >= b.getYPos() && yPos <= b.getYPos() + b.getBoulderHeight())
+      if (xPos >= o.getXPos() && xPos <= o.getXPos() + o.getObstacleWidth() && yPos + playerHeight >= o.getYPos() && yPos <= o.getYPos() + o.getObstacleHeight())
       {
-        if(b.getObstacleType() == 0)
+        if(o.getObstacleType() == 0)
         {
           isHit();
         }
         
-        else if (b.getObstacleType() == 1)
+        else if (o.getObstacleType() == 1)
         {
           setSpeed(50,50);
         }
       }
 
       //Player right border collision check
-      if (xPos + playerWidth >= b.getXPos() && xPos + playerWidth <= b.getXPos() + b.getBoulderWidth() && yPos >= b.getYPos() && yPos <= b.getYPos() + b.getBoulderHeight())
+      if (xPos + playerWidth >= o.getXPos() && xPos + playerWidth <= o.getXPos() + o.getObstacleWidth() && yPos >= o.getYPos() && yPos <= o.getYPos() + o.getObstacleHeight())
       {
-        if(b.getObstacleType() == 0)
+        if(o.getObstacleType() == 0)
         {
           isHit();
         }
         
-        else if (b.getObstacleType() == 1)
+        else if (o.getObstacleType() == 1)
         {
           setSpeed(50,50);
         }

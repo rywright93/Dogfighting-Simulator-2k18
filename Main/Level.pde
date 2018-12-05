@@ -6,7 +6,7 @@ Comments:
 
 class Level
 {
-  private ArrayList<Boulder> boulders; //ArrayList containing all the boulder obstacles
+  private ArrayList<Obstacle> obstacles; //ArrayList containing all the obstacles
   private ArrayList<Boss> bosses; //ArrayList containing all living bosses
   private ArrayList<Enemy> enemies; //ArrayList containing all active enemy
   private ArrayList<Projectile> projectiles; //ArrayList containing all active projectiles
@@ -53,7 +53,7 @@ class Level
     bosses = new ArrayList<Boss>();
     projectiles = new ArrayList<Projectile>(); //Used for testing
     explosions = new ArrayList<Explosion>();
-    boulders = new ArrayList<Boulder>();
+    obstacles = new ArrayList<Obstacle>();
     spawners = new ArrayList<Spawner>();
     roadstripes = new Roadstripe[4];
     for(int i = 0; i < roadstripes.length; i++)
@@ -68,7 +68,7 @@ class Level
   public void update()
   {
     updateRoadstripes();
-    updateBoulders();
+    updateObstacles();
     updateEnemies();
     updateBosses();
     updateProjectiles();
@@ -89,14 +89,14 @@ class Level
         if(levelTiling[i].charAt(j) == '0')
         {
           //constructor(starting/default x + Wall width * column number + 1 to avoid multiplication by zero, starting/default y + wall height * row number + 1 to avoid multiplication by zero, xspeed, yspeed)
-          boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 0));
+          obstacles.add(new Obstacle(0+140*j, -140*levelTiling.length+140*i, 0));
         }
         
         //"/"= Pool of mud
         if(levelTiling[i].charAt(j) == '/')
         {
           //constructor(starting/default x + Wall width * column number + 1 to avoid multiplication by zero, starting/default y + wall height * row number + 1 to avoid multiplication by zero, xspeed, yspeed)
-          boulders.add(new Boulder(0+140*j, -140*levelTiling.length+140*i, 1));
+          obstacles.add(new Obstacle(0+140*j, -140*levelTiling.length+140*i, 1));
         }
         
         //Instantiates EnemyType1
@@ -197,22 +197,22 @@ class Level
     }
   }
   
-  public void updateBoulders()
+  public void updateObstacles()
   {
     //Update every Explosion in the ArrayList explosions
-    for (Boulder bo : boulders)
+    for (Obstacle o : obstacles)
     {
-      bo.update();
+      o.update();
     }
   
     //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
-    Iterator<Boulder> itrBo = boulders.iterator();
-    while (itrBo.hasNext()) 
+    Iterator<Obstacle> itrO = obstacles.iterator();
+    while (itrO.hasNext()) 
     { 
-      Boulder elementBo = itrBo.next(); 
+      Obstacle elementBo = itrO.next(); 
       if (elementBo.getYPos() > height) 
       { 
-        itrBo.remove();
+        itrO.remove();
       }
     }
   }
@@ -266,9 +266,9 @@ class Level
     return explosions;
   }
   
-  public ArrayList<Boulder> getBoulders()
+  public ArrayList<Obstacle> getObstacles()
   {
-    return boulders;
+    return obstacles;
   }
   
 }

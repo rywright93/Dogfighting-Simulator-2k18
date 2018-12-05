@@ -34,7 +34,7 @@ class Projectile
     bossCollision();
     enemyCollision();
     playerCollision();
-    boulderCollision();
+    obstacleCollision();
     display();
     move();
   }
@@ -98,13 +98,13 @@ class Projectile
     
   }
   
-  //Detects collision with instances of Enemy in the arraylist enemies
-  public void boulderCollision()
+  //Detects collision with instances of Obstacle in the arraylist obstacles
+  public void obstacleCollision()
   {
     //A for each loop which checks collision for every instance of Enemy in enemies list.
-    for (Boulder b : curLevel.getBoulders()) 
+    for (Obstacle o : curLevel.getObstacles()) 
     {
-      if (drawColPoint(b.getXPos(), b.getYPos(), b.getBoulderHeight(), b.getBoulderWidth()) == true && b.getObstacleType() == 0)
+      if (drawColPoint(o.getXPos(), o.getYPos(), o.getObstacleHeight(), o.getObstacleWidth()) == true && o.getObstacleType() == 0)
       {
         curLevel.getExplosions().add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
         destroy();
