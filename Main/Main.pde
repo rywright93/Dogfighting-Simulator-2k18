@@ -61,8 +61,6 @@ void setup()
 void draw()
 {
   background(120, 120, 120);
-  textSize(20);
-  text("My Score: "+points, 50, 50);
   
   //Updates player position and collisions every frame
   if (gameState == 0)
@@ -83,6 +81,10 @@ void draw()
   {
     gameOverScreen();
   }
+  textSize(20);
+  fill(0,0,0);
+  text("My Score: "+points, 50, 50);
+  noFill();
   //Used for testing. Updates every instance of Boss in the ArrayList
   /* for (Boss b : bosses)
    {
