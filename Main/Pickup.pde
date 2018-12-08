@@ -8,6 +8,7 @@ class Pickup
 {
   private int pickupType;// 4 possibilities: 0 = give shield, 1 = give gunType 1, 2 = give gunType 2, 3 = give gunType 3
   private int ticksLastUpdate;
+  private int colorTimer;
   private float xPos;
   private float yPos;
   private float ySpeed;
@@ -28,6 +29,12 @@ class Pickup
     isPickedUp = false;
     destroyed = false;
   }
+  
+  public void update()
+  {
+    move();
+    display();
+  }
 
   public void move()
   {
@@ -36,6 +43,20 @@ class Pickup
     {
       destroy();
     }
+  }
+  
+  public void display()
+  {
+    noStroke();
+    fill(255);
+    colorTimer = millis() - ticksLastUpdate;
+    
+    if (colorTimer >= 215) // flashes pickup color white and blue
+    {
+      ticksLastUpdate = millis();
+      fill(0, 0, 255);
+    }
+    ellipse(xPos, yPos, pickupHeight, pickupWidth);
   }
 
   public void giveShield()

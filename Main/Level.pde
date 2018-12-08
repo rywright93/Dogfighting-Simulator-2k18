@@ -10,6 +10,7 @@ class Level
   private ArrayList<Boss> bosses; //ArrayList containing all living bosses
   private ArrayList<Enemy> enemies; //ArrayList containing all active enemy
   private ArrayList<Projectile> projectiles; //ArrayList containing all active projectiles
+  private ArrayList<Pickup> pickups;//ArrayList containing all active pickups
   private ArrayList<Explosion> explosions; //ArrayList containing all active explosions
   private ArrayList<Spawner> spawners;
   private Roadstripe[] roadstripes;
@@ -55,7 +56,9 @@ class Level
     explosions = new ArrayList<Explosion>();
     obstacles = new ArrayList<Obstacle>();
     spawners = new ArrayList<Spawner>();
+    pickups = new ArrayList<Pickup>();
     roadstripes = new Roadstripe[4];
+    
     for(int i = 0; i < roadstripes.length; i++)
     {
       roadstripes[i] = new Roadstripe(height - 250*i);
@@ -170,6 +173,26 @@ class Level
     while (itr.hasNext()) 
     { 
       Projectile element = itr.next(); 
+      if (element.getDestroyed() == true) 
+      { 
+        itr.remove();
+      }
+    }
+  }
+  
+  public void updatePickups()
+  {
+    //update every Pickup in the ArrayList. Used for testing
+    for (Pickup pu : pickups)
+    {
+      pu.update();
+    }
+  
+    //Iterator used to remove Pickups from the ArrayList if they are destroyed/picked up.
+    Iterator<Pickup> itr = pickups.iterator();
+    while (itr.hasNext()) 
+    { 
+      Pickup element = itr.next(); 
       if (element.getDestroyed() == true) 
       { 
         itr.remove();
