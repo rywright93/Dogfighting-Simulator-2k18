@@ -36,7 +36,7 @@ void setup()
 {
   size(700, 900);
 
-  gameState = 3;//for testing game screens
+  gameState = 5;//for testing game screens
 
   enemySprite = loadImage("enemy c.png");
   bossSprite = loadImage("boss.png");
@@ -63,7 +63,7 @@ void setup()
 
 void draw()
 {
-  background(120, 120, 120);
+  background(160, 160, 160);
   
   //Updates player position and collisions every frame
   if (gameState == 0)
