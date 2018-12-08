@@ -69,7 +69,10 @@ class Pickup
 
   public void giveGun()
   {
-    player.setGunType(pickupType);
+    if(pickupType > 0)
+    {
+      player.setGunType(pickupType);
+    }
   }
 
   public void triggerPickup()
@@ -77,11 +80,11 @@ class Pickup
     if (pickupType == 0)
     {
       giveShield();
-    } else if (pickupType > 0);
+    } 
+    if (pickupType >= 1);
     {
       giveGun();
     }
-    println(pickupType);
     destroy();
     isPickedUp = true;
   }
