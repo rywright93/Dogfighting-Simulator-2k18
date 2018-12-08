@@ -15,7 +15,7 @@ boolean[] keys; //Boolean array for checking if keys are being pressed, enables 
 
 Player player;
 /*
-ArrayList<Boss> bosses;
+ ArrayList<Boss> bosses;
  ArrayList<Enemy> enemies;
  
  ArrayList<Projectile> projectiles;

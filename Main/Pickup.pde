@@ -26,8 +26,8 @@ class Pickup
     ticksLastUpdate = millis();
     colorUpdate = millis();
     pickupType = newPickupType;
-    pickupHeight = 10;
-    pickupWidth = 10;
+    pickupHeight = 30;
+    pickupWidth = 30;
     isPickedUp = false;
     destroyed = false;
   }
@@ -71,27 +71,25 @@ class Pickup
   {
     player.setGunType(pickupType);
   }
-  
+
   public void triggerPickup()
   {
     if (pickupType == 0)
     {
       giveShield();
-    }else if (pickupType > 0);
+    } else if (pickupType > 0);
     {
       giveGun();
     }
-    
+
+    destroy();
     isPickedUp = true;
   }
 
   public void destroy()
   {
-    if (isPickedUp == true)
-    {
-      xPos = -1000;
-      destroyed = true;
-    }
+    xPos = -1000;
+    destroyed = true;
   }
 
   public int getPickupType()
