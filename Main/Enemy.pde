@@ -147,7 +147,7 @@ class Enemy
   public void display()
   {
     //A rectangle is used as placeholder
-    fill(0, 255, 0);
+    fill(255, 0, 0);
     rect(xPos, yPos - 20, map(hitPoints, 0, maxHitPoints, 0, enemyWidth), 10); //displays a healthbar
     image(enemyPic, xPos, yPos);
     //rect(xPos, yPos, enemyWidth, enemyHeight);

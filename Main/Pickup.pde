@@ -51,15 +51,9 @@ class Pickup
   public void display()
   {
     noStroke();
-    fill(255);
-    colorTimer = millis() - colorUpdate;
-
-    if (colorTimer >= 215) // flashes pickup color white and blue
-    {
-      colorUpdate = millis();
-      fill(0, 0, 255);
-    }
+    fill(random(0,255), random(0,255), random(0, 255));
     rect(xPos, yPos, pickupHeight, pickupWidth);
+    
   }
 
   public void giveShield()
