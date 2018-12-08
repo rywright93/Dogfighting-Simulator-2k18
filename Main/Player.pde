@@ -136,24 +136,24 @@ class Player
       if (millis() > lastProjectileFiredAt)
       {
         lastProjectileFiredAt = millis() + fireRate;
-        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 15));
+        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(0, 255, 0), 15));
       }
     } else if (gunType == 2)
     {
       if (millis() > lastProjectileFiredAt)
       {
         lastProjectileFiredAt = millis() + fireRate/2;
-        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/4, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
-        curLevel.getProjectiles().add(new Projectile(xPos + (playerWidth/4 * 3), yPos, 0.0, -400.0, "Player", color(255, 0, 0), 7));
+        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/4, yPos, 0.0, -400.0, "Player", color(0, 255, 0), 7));
+        curLevel.getProjectiles().add(new Projectile(xPos + (playerWidth/4 * 3), yPos, 0.0, -400.0, "Player", color(0, 255, 0), 7));
       }
     } else if (gunType == 3)
     {
       if (millis() > lastProjectileFiredAt)
       {
         lastProjectileFiredAt = millis() + fireRate*1.5;
-        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, -50.0, -400.0, "Player", color(255, 0, 0), 18));
-        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(255, 0, 0), 18));
-        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, 50, -400.0, "Player", color(255, 0, 0), 18));
+        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, -50.0, -400.0, "Player", color(0, 255, 0), 18));
+        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(0, 255, 0), 18));
+        curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, 50, -400.0, "Player", color(0, 255, 0), 18));
       }
     }
   }
