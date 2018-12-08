@@ -100,7 +100,8 @@ class Boss
     ySpeed = 0;
 
     givePoints();
-    changeLevel(gameState++);
+    gameState++;
+    changeLevel(gameState);
   }
   
   public void display()
