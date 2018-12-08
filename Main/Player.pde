@@ -37,10 +37,10 @@ class Player
     shieldCharges = 3;
     gunType = 1;
     shieldActive = false;
-    hitPoints = 1000;
+    hitPoints = 1;
     //TO DO: PImage = something later but for now it's a square
     shieldEffectLength = 3000;//Value in milliseconds
-    shieldCooldown = 1000;//Value in milliseconds
+    shieldCooldown = 8000;//Value in milliseconds
     fireRate = 200;//Value in milliseconds
     shieldActive = false;
     isDead = false;
@@ -55,14 +55,11 @@ class Player
     bossCollision();//Checks if player has collided with boss every frame in Main
     pickupCollision();//Checks if player has collided with pickup every frame in Main
     obstacleCollision();
+    shield();
     
      if (keys[5] == true)//if space bar is pressed
     {
       shoot();
-    }
-    if (keys[4] == true)//if 'e' is pressed
-    {
-      shield();
     }
   }
 
@@ -152,7 +149,7 @@ class Player
   {
     if (shieldActive == false && shieldCharges > 0 && keys[4] == true) //if the player has shield charges && presses 'e' key
     {
-      if (millis() > lastShieldFiredAt)
+      if (millis() > lastShieldFiredAt)//sets shield active to true and resets shield cooldown by 8 seconds
       {
         shieldActive = true;
         shieldCharges--;
