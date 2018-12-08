@@ -37,7 +37,7 @@ class Enemy
     enemyWidth = enemyPic.width;
     enemyHeight = enemyPic.height;
     xSpeed = 0;
-    ySpeed = 250;
+    ySpeed = 350;
     enemyType = newEnemyType;
     spawnXPos = newXPos;
     maxHitPoints = hitPoints;
@@ -65,7 +65,7 @@ class Enemy
     {
       yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
       //sin(yPos * frequency) * wave length) + xPos spawnPosition
-      xPos = (sin(yPos * 0.015) * 140) + spawnXPos + enemyWidth * float(millis() - ticksLastUpdate) * 0.001;
+      xPos = (sin(yPos * 0.01) * 140) + spawnXPos + enemyWidth * float(millis() - ticksLastUpdate) * 0.001;
       ticksLastUpdate = millis(); 
 
       /*
