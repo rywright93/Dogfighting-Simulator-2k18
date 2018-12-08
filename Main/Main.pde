@@ -427,7 +427,7 @@ void saveHighscore()
 void loadHighscore()
 {
   highscoreNames = loadStrings("highscoreNames.txt");
-  highscores = int(loadStrings("highscoreScores.txt"));
+  highscores = int(loadStrings("highscoreScores.txt"));  
   for (int i = 0; i<highscores.length; i++)
   {
     println(i +1 + " " + highscoreNames[i] + ": " + highscores[i]);
