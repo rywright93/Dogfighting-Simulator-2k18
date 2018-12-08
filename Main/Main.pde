@@ -36,7 +36,7 @@ void setup()
 {
   size(700, 900);
 
-  gameState = 1;//starts game at level, pick 0 for final build, set value to level for playtesting 0-7
+  gameState = 0;//starts game at level, pick 0 for final build, set value to level for playtesting 0-7
 
   enemySprite = loadImage("enemy c.png");
   bossSprite = loadImage("boss.png");
@@ -55,8 +55,6 @@ void setup()
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
 
   explosionSpriteSheet = loadImage("explosion animation b.png");
-
-  curLevel = new Level(gameState);
   
   inputName = "";
 }
@@ -177,9 +175,12 @@ void keyPressed()
   }
   
   //If 
-  if(gameState == 7 || gameState == 6 && key > 96 && key < 123 && inputName.length() < 4)
+  if(gameState == 7 || gameState == 6)
   {
-    createInputName();
+    if(key > 96 && key < 123 && inputName.length() < 4)
+    {
+      createInputName();
+    }
   }
 }
 
@@ -227,7 +228,8 @@ void mousePressed()
     {
       if (mouseY >= 400 && mouseY <= 500)
       {
-        gameState = 1;//starts game
+        gameState = 1;
+        changeLevel(gameState);
       }
     }
     //Checks for clicks on "Exit Game?" button on Main Menu
@@ -493,5 +495,10 @@ void enterNewHighscoreName()
       highscoreNames[i] = inputName; //replace the blank entry with the name that has been entered by the player
     }
   }
-  
+}
+
+
+void changeLevel(int i)
+{
+  curLevel = new Level(i);
 }
