@@ -120,7 +120,7 @@ class Enemy
     {
       if (random(0, 100) < 100)//one fifth of enemies should drop a pickup
       {
-        curLevel.getPickups().add(new Pickup(xPos, yPos, int (random(0, 3))));//adds dropped pickup to Pickup Array List in Level Class
+        curLevel.getPickups().add(new Pickup(xPos, yPos, int(random(0, 4))));//adds dropped pickup to Pickup Array List in Level Class
       }
       
       givePoints();
