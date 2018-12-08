@@ -61,7 +61,6 @@ void setup()
 
 void draw()
 {
-  println("inputname is: " + inputName);
   background(160, 160, 160);
 
   //Updates player position and collisions every frame

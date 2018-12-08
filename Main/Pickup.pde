@@ -71,6 +71,11 @@ class Pickup
 
   public void triggerPickup()
   {
+    
+    for (int i = 0; i < curLevel.getParticles().length; i++)
+    {
+      curLevel.getParticles()[i] = new Confetti(xPos + pickupWidth, yPos + pickupHeight, random(-200, 200),random(-400, 0));
+    }
     println("type is: " + pickupType);
     if (pickupType == 0)
     {
