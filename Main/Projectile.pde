@@ -85,19 +85,19 @@ class Projectile
   public void playerCollision()
   {
     
-    if (drawColPoint(player.getXPos(), player.getYPos(), player.getPlayerHeight(), player.getPlayerWidth()) == true && shotBy == "Enemy" || shotBy == "Boss" && player.getShieldActive() == false)
+    if (drawColPoint(player.getXPos(), player.getYPos(), player.getPlayerHeight(), player.getPlayerWidth()) == true && shotBy == "Enemy" || shotBy == "Boss")
     {
-      player.isHit();
-      destroy();
+      if (player.getShieldActive() == false)//if shield is not active, hit player
+      {
+        player.isHit();
+        destroy();
+      } else if (player.getShieldActive() == true)//if shield is not active, no damage to player, destroy projectile
+      {
+        destroy();
+      }
     }
-
-    if (player.getShieldActive() == true)
-    {
-      destroy();
-    }
-    
   }
-  
+
   //Detects collision with instances of Obstacle in the arraylist obstacles
   public void obstacleCollision()
   {

@@ -36,7 +36,7 @@ void setup()
 {
   size(700, 900);
 
-  gameState = 5;//for testing game screens
+  gameState = 1;//starts game at level, pick 0 for final build, set value to level for playtesting 0-7
 
   enemySprite = loadImage("enemy c.png");
   bossSprite = loadImage("boss.png");

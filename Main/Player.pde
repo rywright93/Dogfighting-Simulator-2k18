@@ -70,6 +70,15 @@ class Player
     //fill(144, 11, 30);//Red
     //rect(xPos, yPos, playerWidth, playerHeight);
     image(playerPic, xPos, yPos);
+    
+    if (shieldActive == true)
+    {
+      noFill();
+      stroke(0, 255, 0);
+      strokeWeight(3);
+      rect(xPos, yPos, playerWidth + 1, playerHeight + 1);
+      noStroke();
+    }
   }
 
   //Updates position of player
@@ -153,14 +162,14 @@ class Player
       {
         shieldActive = true;
         shieldCharges--;
-        lastShieldFiredAt = millis() + shieldCooldown;
+        lastShieldFiredAt = millis() + shieldEffectLength;
       }
     }
     if (shieldCharges <= 0)
     {
       shieldCharges = 0;
     }
-    if (millis() > lastShieldFiredAt + shieldEffectLength)//turns shield effect off after set number of seconds
+    if (millis() > lastShieldFiredAt)//turns shield effect off after set number of seconds
     {
       shieldActive = false;
     }
