@@ -87,7 +87,8 @@ void draw()
   textSize(20);
   fill(0,0,0);
   text("My Score: "+points, 50, 50);
-  text("Shield Charges:" + player.getshieldCharge(), 50, 80);
+  text("Shield Charges: " + player.getshieldCharge(), 50, 80);
+  text("Level: " + gameState, 600, 50);
   noFill();
   //Used for testing. Updates every instance of Boss in the ArrayList
   /* for (Boss b : bosses)
