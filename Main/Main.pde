@@ -412,6 +412,7 @@ void reset()
   player.resetPlayer();
   inputName = "";
   saveHighscore();
+  points = 0;
   // start movement, change gamestate, draw playing screen,
 }
 
