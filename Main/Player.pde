@@ -35,7 +35,7 @@ class Player
     xSpeed = 300;
     ySpeed = 300;
     shieldCharges = 3;
-    gunType = 1;
+    gunType = 2;
     shieldActive = false;
     hitPoints = 1;
     //TO DO: PImage = something later but for now it's a square
@@ -77,7 +77,10 @@ class Player
       stroke(0, 255, 0);
       strokeWeight(3);
       rect(xPos, yPos, playerWidth + 1, playerHeight + 1);
+      fill(0, 255, 0);
+      rect(xPos, yPos + playerHeight + 10, -map((float)millis(), (float)lastShieldFiredAt, (float)lastShieldFiredAt + (float)shieldEffectLength, 0, playerWidth), 10);
       noStroke();
+      noFill();
     }
   }
 
