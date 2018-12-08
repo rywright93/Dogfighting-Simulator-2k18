@@ -98,9 +98,9 @@ class Boss
     xPos = -1000;
     xSpeed = 0;
     ySpeed = 0;
-    
-    
+
     givePoints();
+    changeLevel(gameState++);
   }
   
   public void display()
