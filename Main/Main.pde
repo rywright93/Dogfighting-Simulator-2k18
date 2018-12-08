@@ -174,7 +174,8 @@ void keyPressed()
     keys[5] = true;
   }
   
-  if(gameState == 7 && key > 96 && key < 123)
+  //If 
+  if(gameState == 7 || gameState == 6 && key > 96 && key < 123 && inputName.length() < 4)
   {
     createInputName();
   }
@@ -274,15 +275,14 @@ void gameOver()
 
 void gameOverScreen()//draw Game Over screen
 {
-
     fill(255, 0, 0);
     textSize(70);
     text("GAME OVER", width/2-200, 150);
     
     displayHighscore();
-   
 }
 
+//draws the highscore list in the window as well as a play again and exit button
 void displayHighscore()
 {
    fill(255);
@@ -472,25 +472,23 @@ void resetHighscoreList()
 }
 
 
-//is used to create inputName. Should only be called if inputName < 4 characters long, and if the key pressed was a letter.
+//is used to create inputName, which is the new highscore entry
 void createInputName()
 {
   inputName += key; //add the character to the String
-  println(inputName);
 }
 
 
-//The argument should be the variable inputName once it is completed. The name will then be placed on the highscore list
+//Enters the inputName into the array highscoreNames
 void enterNewHighscoreName()
 {
-  println("got called");
   //go through every entry in the array highscoreNames
   for (int i = 0; i < highscoreNames.length; i++)
   {
-    //locates the entry that is blank (this is done in rearrangeHighscoreList())
+    //locates the entry that is blank
     if (highscoreNames[i] == "")
     {
-      highscoreNames[i] = inputName; //replace the blank entry with the one from the parameter
+      highscoreNames[i] = inputName; //replace the blank entry with the name that has been entered by the player
     }
   }
   
