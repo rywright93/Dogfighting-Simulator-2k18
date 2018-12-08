@@ -36,7 +36,7 @@ void setup()
 {
   size(700, 900);
 
-  gameState = 2;//for testing game screens
+  gameState = 1;//for testing game screens
 
   enemySprite = loadImage("enemy c.png");
   bossSprite = loadImage("boss.png");

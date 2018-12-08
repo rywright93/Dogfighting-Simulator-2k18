@@ -39,18 +39,18 @@ class Spawner
     if(spawnType == 1)
     {
       //Instantiates a new Enemy with EnemyType1 in enemies ArrayList
-      curLevel.getEnemies().add(new Enemy(xPos, 0-enemySprite.height, 20, 1));
+      curLevel.getEnemies().add(new Enemy(xPos, 0-enemySprite.height, 10, 1));
     }
     else if(spawnType == 2)
     {
       //Instantiates a new Enemy with EnemyType2 in enemies ArrayList
-      curLevel.getEnemies().add(new Enemy(xPos, 0-enemySprite.height, 20, 2));
+      curLevel.getEnemies().add(new Enemy(xPos, 0-enemySprite.height, 10, 2));
     }
       
     else if(spawnType == 3)
     {
       //Instantiates a new Enemy with EnemyType3 in enemies ArrayList
-      curLevel.getEnemies().add(new Enemy(xPos, 0-enemySprite.height, 20, 3));
+      curLevel.getEnemies().add(new Enemy(xPos, 0-enemySprite.height, 10, 3));
     }
       
     else if(spawnType == 4)
