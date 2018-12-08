@@ -40,7 +40,7 @@ class Obstacle
   {
     if(obstacleType == 0)
     {
-      fill(210, 210, 210);
+      fill(30, 30, 30);
       rect(xPos, yPos, obstacleWidth, obstacleHeight);
       noFill();
     }

@@ -37,7 +37,7 @@ class Player
     shieldCharges = 3;
     gunType = 1;
     shieldActive = false;
-    hitPoints = 1;
+    hitPoints = 1000;
     //TO DO: PImage = something later but for now it's a square
     shieldEffectLength = 3000;//Value in milliseconds
     shieldCooldown = 1000;//Value in milliseconds
