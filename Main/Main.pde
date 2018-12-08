@@ -317,16 +317,17 @@ void displayHighscore()
   {
     if (highscoreNames[i] == "")
     {
-      text(inputName, width/2-200, 400 + 50*i);
+      text("Congrats! Add a 4 Letter Name to continue", width/2-250, 380);
+      text(inputName, width/2-200, 420 + 50*i);
     } else
     {
-      text(highscoreNames[i], width/2-200, 400 + 50*i);
+      text(highscoreNames[i], width/2-200, 420 + 50*i);
     }
   }
 
   for (int i = 0; i < highscores.length; i++)
   {
-    text(highscores[i], width/2+100, 400 + 50*i);
+    text(highscores[i], width/2+100, 420 + 50*i);
   }
 }
 
