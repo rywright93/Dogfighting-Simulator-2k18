@@ -77,6 +77,7 @@ class Level
     updateProjectiles();
     updateExplosions();
     updateSpawner();
+    updatePickups();
   }
   
   public void readTextFile()
