@@ -1,8 +1,8 @@
 /*
 Description:
-Authors:
-Comments:
-*/
+ Authors:
+ Comments:
+ */
 
 class Enemy
 {
@@ -23,7 +23,7 @@ class Enemy
   private PVector direction; //A directional vector that enemies of type 3 use to home in on the player
   private boolean destroyed = false;
   private int maxHitPoints;
-  
+
   Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
   {
   }
@@ -41,26 +41,26 @@ class Enemy
     spawnXPos = newXPos;
     maxHitPoints = hitPoints;
   }
-  
+
   //Is called in Main. It updates everything that needs updating.
   public void update()
   {
     display();
     move();
   }
-  
+
   //Moves the position of the enemy based on its speed and time fix
   public void move()
   {
-    if(enemyType == 1)
+    if (enemyType == 1)
     {
       xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
       yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
-      ticksLastUpdate = millis(); 
+      ticksLastUpdate = millis();
     }
-    
+
     //move in sine wave
-    if(enemyType == 2)
+    if (enemyType == 2)
     {
       yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
       //sin(yPos * frequency) * wave length) + xPos spawnPosition
@@ -69,60 +69,65 @@ class Enemy
 
       /*
       yPos = yPos + ySpeed/100;
-      //sin(yPos * frequency) * wave length) + xPos spawnPosition
-      xPos = (sin(yPos * 0.02) * 150) + spawnXPos + enemyWidth;
-      */
-      if(millis() > lastProjectileFiredAt)
+       //sin(yPos * frequency) * wave length) + xPos spawnPosition
+       xPos = (sin(yPos * 0.02) * 150) + spawnXPos + enemyWidth;
+       */
+      if (millis() > lastProjectileFiredAt)
       {
         shoot();
         lastProjectileFiredAt = millis() + fireRate;
       }
     }
-    
+
     //Kamikaze pilot
-    if(enemyType == 3)
+    if (enemyType == 3)
     {
       direction = new PVector (player.getXPos(), player.getYPos());
       /*
       //coordinates for the target location
-      targetLocation = new PVector (mouseX, mouseY);
-      */
+       targetLocation = new PVector (mouseX, mouseY);
+       */
       //calculate the direction based on the starting point and end point
       direction.sub(xPos, yPos);
       //normalize the vector so that it has a length of 1
       direction.normalize();
       //scale it to make it move at greater length each update
       direction.mult(400);
-      
+
       xPos += direction.x * float(millis() - ticksLastUpdate) * 0.001;
       yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
       ticksLastUpdate = millis(); 
       //location.add(velocity);
     }
     //Destroy the enemy if it moves past the bottom of the screen
-    if(yPos > height)
+    if (yPos > height)
     {
       destroy();
     }
   }
-  
+
   public void shoot()
   {
     curLevel.getProjectiles().add(new Projectile(xPos + enemyWidth/2, yPos + enemyHeight, 0, 400, "Enemy", color(255, 0, 0), 20));
   }
-  
+
   //When the enemy collides with a Projectile fired from the player it takes damage
   public void isHit()
   {
     hitPoints--;
-    
-    if(hitPoints <= 0)
+
+    if (hitPoints <= 0)
     {
+      if (random(0, 100) < 20)//one fifth of enemies should drop a pickup
+      {
+        curLevel.getPickups().add(new Pickup(xPos, yPos, int (random(0, 4))));//adds dropped pickup to Pickup Array List in Level Class
+      }
+      
       givePoints();
       destroy();
     }
   }
-  
+
   public void destroy()
   {
     //Moves the enemy out of screen and stops it from moving
@@ -131,13 +136,13 @@ class Enemy
     ySpeed = 0;
     destroyed = true;
   }
-  
+
   //yield points to the player when dying
   public void givePoints()
   {
     points = points + 100;
   }
-  
+
   //Display the enemy in the window at its current location
   public void display()
   {
@@ -149,36 +154,36 @@ class Enemy
     noFill();
     /*
     //Display the health of the enemy
-    textSize(20);
-    text(hitPoints + " HP", xPos, yPos);
-    */
+     textSize(20);
+     text(hitPoints + " HP", xPos, yPos);
+     */
   }
-  
+
   public float getXPos()
   {
     return xPos;
   }
-  
+
   public float getYPos()
   {
     return yPos;
   }
-  
+
   public float getEnemyHeight()
   {
     return enemyHeight;
   }
-  
+
   public float getEnemyWidth()
   {
     return enemyWidth;
   }
-  
+
   public int getHitPoints()
   {
     return hitPoints;
   }
-  
+
   public boolean getDestroyed()
   {
     return destroyed;
