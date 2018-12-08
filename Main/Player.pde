@@ -60,6 +60,10 @@ class Player
     {
       shoot();
     }
+    if (keys[4] == true)//if 'e' is pressed
+    {
+      shield();
+    }
   }
 
   //Draws player on screen
@@ -146,7 +150,7 @@ class Player
   //Sets conditions to activate shield, and keeps player from taking damage when shield is active
   public void shield()
   {
-    if (shieldActive == false && shieldCharges < 0 && keys[4] == true) //if the player has shield charges && presses 'e' key
+    if (shieldActive == false && shieldCharges > 0 && keys[4] == true) //if the player has shield charges && presses 'e' key
     {
       if (millis() > lastShieldFiredAt)
       {
