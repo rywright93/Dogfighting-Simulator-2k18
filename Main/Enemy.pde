@@ -118,7 +118,7 @@ class Enemy
 
     if (hitPoints <= 0)
     {
-      if (random(0, 100) < 20)//one fifth of enemies should drop a pickup
+      if (random(0, 100) < 200)//one fifth of enemies should drop a pickup TODO: set this back to 20%
       {
         curLevel.getPickups().add(new Pickup(xPos, yPos, int (random(0, 4))));//adds dropped pickup to Pickup Array List in Level Class
       }

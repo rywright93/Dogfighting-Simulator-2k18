@@ -59,12 +59,12 @@ class Pickup
       colorUpdate = millis();
       fill(0, 0, 255);
     }
-    ellipse(xPos, yPos, pickupHeight, pickupWidth);
+    rect(xPos, yPos, pickupHeight, pickupWidth);
   }
 
   public void giveShield()
   {
-    player.setShieldActive(true);
+    player.setShieldCharge();
   }
 
   public void giveGun()
@@ -81,7 +81,7 @@ class Pickup
     {
       giveGun();
     }
-
+    println(pickupType);
     destroy();
     isPickedUp = true;
   }

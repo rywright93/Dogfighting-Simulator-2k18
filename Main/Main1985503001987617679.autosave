@@ -36,7 +36,7 @@ void setup()
 {
   size(700, 900);
 
-  gameState = 5;//for testing game screens
+  gameState = 3;//for testing game screens
 
   enemySprite = loadImage("enemy c.png");
   bossSprite = loadImage("boss.png");
@@ -63,7 +63,7 @@ void setup()
 
 void draw()
 {
-  background(160, 160, 160);
+  background(120, 120, 120);
   
   //Updates player position and collisions every frame
   if (gameState == 0)
@@ -87,7 +87,7 @@ void draw()
   textSize(20);
   fill(0,0,0);
   text("My Score: "+points, 50, 50);
-  text("Shield Charges:" + player.getshieldCharge(), 50, 80);
+  text("Shield Charges: " + player.getShieldCharges(), 50, 80);
   noFill();
   //Used for testing. Updates every instance of Boss in the ArrayList
   /* for (Boss b : bosses)
