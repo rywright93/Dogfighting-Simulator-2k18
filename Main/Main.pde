@@ -55,25 +55,25 @@ void setup()
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
 
   explosionSpriteSheet = loadImage("explosion animation b.png");
-  
+
   inputName = "";
 }
 
 void draw()
 {
   background(160, 160, 160);
-  
+
   //Updates player position and collisions every frame
   if (gameState == 0)
   {
     mainMenuScreen();
   }
-  if(gameState >= 1 && gameState <= 5)
+  if (gameState >= 1 && gameState <= 5)
   {
     curLevel.update();
     player.update();
   }
-  
+
   if (gameState == 6)
   {
     youWinScreen();
@@ -82,12 +82,17 @@ void draw()
   {
     gameOverScreen();
   }
-  textSize(20);
-  fill(0,0,0);
-  text("My Score: "+points, 50, 50);
-  text("Shield Charges: " + player.getshieldCharge(), 50, 80);
-  text("Level: " + gameState, 600, 50);
-  noFill();
+
+  if (gameState >= 1 && gameState <= 5)
+  {
+    textSize(20);
+    fill(30, 100, 255);
+    text("My Score: "+points, 30, 50);
+    text("Shield Charges: " + player.getshieldCharge(), 30, 80);
+    text("Level: " + gameState, 600, 50);
+    noFill();
+  }
+  
   //Used for testing. Updates every instance of Boss in the ArrayList
   /* for (Boss b : bosses)
    {
@@ -173,11 +178,11 @@ void keyPressed()
   {
     keys[5] = true;
   }
-  
+
   //If 
-  if(gameState == 7 || gameState == 6)
+  if (gameState == 7 || gameState == 6)
   {
-    if(key > 96 && key < 123 && inputName.length() < 4)
+    if (key > 96 && key < 123 && inputName.length() < 4)
     {
       createInputName();
     }
@@ -214,8 +219,8 @@ void keyReleased()
 
 void exitGame()
 {
-    saveHighscore();
-    exit();
+  saveHighscore();
+  exit();
 }
 
 void mousePressed()
@@ -279,104 +284,110 @@ void gameOver()
 
 void gameOverScreen()//draw Game Over screen
 {
-    fill(255, 0, 0);
-    textSize(70);
-    text("GAME OVER", width/2-200, 150);
-    
-    displayHighscore();
+  fill(255, 0, 0);
+  textSize(70);
+  text("GAME OVER", width/2-200, 150);
+
+  displayHighscore();
 }
 
 //draws the highscore list in the window as well as a play again and exit button
 void displayHighscore()
 {
-   fill(255);
+  fill(255);
+  rect(width/2-300, 200, 200, 100);
+  rect (width/2+100, 200, 200, 100);
+  fill(0);
+  textSize(25);
+  text("Play Again?", width/2 - 265, 255);
+  text("Exit Game?", width/2 + 135, 255);
+
+  textSize(30);
+  fill(255, 200, 200);
+  text("High Scores:", width/2 - 90, 350);
+  textSize(25);
+  for (int i = 0; i < highscoreNames.length; i++)
+  {
+    if (highscoreNames[i] == "")
+    {
+      text(inputName, width/2-200, 400 + 50*i);
+    } else
+    {
+      text(highscoreNames[i], width/2-200, 400 + 50*i);
+    }
+  }
+
+  for (int i = 0; i < highscores.length; i++)
+  {
+    text(highscores[i], width/2+100, 400 + 50*i);
+  }
+}
+
+void youWinScreen()//draw You Win screen
+{
+  fill(255, 0, 0);
+  textSize(70);
+  fill(255, 255, 0);
+  text("YOU WIN!", width/2-150, 150);
+  displayHighscore();
+  /*
+    fill(255);
    rect(width/2-300, 200, 200, 100);
    rect (width/2+100, 200, 200, 100);
    fill(0);
    textSize(25);
    text("Play Again?", width/2 - 265, 255);
    text("Exit Game?", width/2 + 135, 255);
-
+   
    textSize(30);
    fill(255, 200, 200);
    text("High Scores:", width/2 - 90, 350);
    textSize(25);
-   for(int i = 0; i < highscoreNames.length; i++)
-   {
-     if(highscoreNames[i] == "")
-     {
-       text(inputName, width/2-200, 400 + 50*i);
-     }
-     else
-     {
-       text(highscoreNames[i], width/2-200, 400 + 50*i);
-     }
-   }
-    
-   for(int i = 0; i < highscores.length; i++)
-   {
-     text(highscores[i], width/2+100, 400 + 50*i);
-   }
-}
-
-void youWinScreen()//draw You Win screen
-{
-    fill(255, 0, 0);
-    textSize(70);
-    fill(255, 255, 0);
-    text("YOU WIN!", width/2-150, 150);
-    displayHighscore();
-    /*
-    fill(255);
-    rect(width/2-300, 200, 200, 100);
-    rect (width/2+100, 200, 200, 100);
-    fill(0);
-    textSize(25);
-    text("Play Again?", width/2 - 265, 255);
-    text("Exit Game?", width/2 + 135, 255);
-
-    textSize(30);
-    fill(255, 200, 200);
-    text("High Scores:", width/2 - 90, 350);
-    textSize(25);
-    text(highscoreNames[0], width/2-200, 400);
-    text(highscores[0], width/2+100, 400);
-    text(highscoreNames[1], width/2-200, 450);
-    text(highscores[1], width/2+100, 450);
-    text(highscoreNames[2], width/2-200, 500);
-    text(highscores[2], width/2+100, 500);
-    text(highscoreNames[3], width/2-200, 550);
-    text(highscores[3], width/2+100, 550);
-    text(highscoreNames[4], width/2-200, 600);
-    text(highscores[4], width/2+100, 600);
-    text(highscoreNames[5], width/2-200, 650);
-    text(highscores[5], width/2+100, 650);
-    text(highscoreNames[6], width/2-200, 700);
-    text(highscores[6], width/2+100, 700);
-    text(highscoreNames[7], width/2-200, 750);
-    text(highscores[7], width/2+100, 750);
-    text(highscoreNames[8], width/2-200, 800);
-    text(highscores[8], width/2+100, 800);
-    text(highscoreNames[9], width/2-200, 850);
-    text(highscores[9], width/2+100, 850);
-    */
+   text(highscoreNames[0], width/2-200, 400);
+   text(highscores[0], width/2+100, 400);
+   text(highscoreNames[1], width/2-200, 450);
+   text(highscores[1], width/2+100, 450);
+   text(highscoreNames[2], width/2-200, 500);
+   text(highscores[2], width/2+100, 500);
+   text(highscoreNames[3], width/2-200, 550);
+   text(highscores[3], width/2+100, 550);
+   text(highscoreNames[4], width/2-200, 600);
+   text(highscores[4], width/2+100, 600);
+   text(highscoreNames[5], width/2-200, 650);
+   text(highscores[5], width/2+100, 650);
+   text(highscoreNames[6], width/2-200, 700);
+   text(highscores[6], width/2+100, 700);
+   text(highscoreNames[7], width/2-200, 750);
+   text(highscores[7], width/2+100, 750);
+   text(highscoreNames[8], width/2-200, 800);
+   text(highscores[8], width/2+100, 800);
+   text(highscoreNames[9], width/2-200, 850);
+   text(highscores[9], width/2+100, 850);
+   */
 }
 
 void mainMenuScreen()//draw Main Menu
 {
   if (gameState == 0)
   {
-    background(161, 161, 161);
+    background(0);
     fill(240, 50, 50);
     textSize(30);
-    text("Combat Racing Simulator 2k18", 140, 120);
+    text("Combat Racing Simulator 2k18", width/2-200, 120);
     fill(255);
     rect(width/2-100, 400, 200, 100);
     rect(width/2-100, 600, 200, 100);
-    fill(0);
     textSize(25);
+    fill(30, 100, 255);
     text("Wanna Play?", width/2-75, 455);
-    text("Exit Game?", width/2-70, 655);
+    text("Exit Game?", width/2-65, 655);
+    fill(30, 100, 255);
+    text("CONTROLS:", width/2-60, 200);
+    text("Arrow Keys for up, down, left, right movement,", width/2-260, 240);
+    text("Space bar to shoot,", width/2-85, 280);
+    text("'E' button to use shield", width/2-100, 320);
+    text("Good Luck!", width/2-50, 360);
+    noFill();
   }
 }
 
@@ -425,7 +436,7 @@ void loadHighscore()
 //returns true if the current score (points) is greater than, or equals to, one of the scores in the highscorelist
 boolean checkHighscore()
 {
-  if(checkedHighscore == false)
+  if (checkedHighscore == false)
   {
     //goes through the array highscores and compares the entries' values with current score (points)
     for (int i = 0; i < highscores.length; i++)
