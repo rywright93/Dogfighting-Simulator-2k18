@@ -42,6 +42,7 @@ class Player
     shieldEffectLength = 3000;//Value in milliseconds
     shieldCooldown = 1000;//Value in milliseconds
     fireRate = 200;//Value in milliseconds
+    shieldActive = false;
     isDead = false;
   }
 
@@ -238,6 +239,10 @@ class Player
   public boolean getShieldActive()
   {
     return shieldActive;
+  }
+  public void setShieldActive(boolean newShieldActive)
+  {
+    shieldActive = newShieldActive;
   }
 
   public void setShieldCharge()
