@@ -23,6 +23,7 @@ class Player
   private float lastShieldFiredAt;//indicates when last shield charge was used
   private float shieldEffectLength;//number of milliseconds shield effect lasts when triggered
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
+  private boolean isDead;
 
   // Constructor, provides starting values for all player variables
   Player(float newXPos, float newYPos)
@@ -41,6 +42,7 @@ class Player
     shieldEffectLength = 3000;//Value in milliseconds
     shieldCooldown = 1000;//Value in milliseconds
     fireRate = 200;//Value in milliseconds
+    isDead = false;
   }
 
   public void update()
@@ -166,9 +168,10 @@ class Player
   {
     hitPoints--;
 
-    if (hitPoints <= 0)
+    if (hitPoints <= 0 && isDead == false)
     {
       hitPoints = 0;
+      isDead = true;
       destroy();
     }
   }
@@ -335,7 +338,6 @@ class Player
           setSpeed(50,50);
         }
       }
-      println(xSpeed + " " + ySpeed);
     }
   }
 
@@ -353,5 +355,10 @@ class Player
   public void setGunType(int gun)
   {
     gunType = gun;
+  }
+  
+  public void resetPlayer()
+  {
+    isDead = false;
   }
 }

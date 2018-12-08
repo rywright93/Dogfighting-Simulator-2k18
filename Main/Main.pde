@@ -30,6 +30,8 @@ PImage playerSprite;
 
 Level curLevel;
 
+boolean checkedHighscore = false;
+
 void setup()
 {
   size(700, 900);
@@ -42,20 +44,21 @@ void setup()
 
   spawnPlayer();
 
-  keys = new boolean [7];
+  keys = new boolean [6];
   keys[0] = false;// 'w' key for upward movement defined in Player class
   keys[1] = false;// 'a' key for leftward movement defined in Player class
   keys[2] = false;// 's' key for downward movement defined in Player class
   keys[3] = false;// 'd' key for rightward movement defined in Player class
   keys[4] = false;// 'e' key for shield toggling defined in Player class
   keys[5] = false;// space bar for shooting defined in Player class
-  keys[6] = false;//'r' key resets and exits program  
 
   loadHighscore(); //loads the highscorelist from the .txt file into the arrays
 
   explosionSpriteSheet = loadImage("explosion animation b.png");
 
   curLevel = new Level(gameState);
+  
+  inputName = "";
 }
 
 void draw()
@@ -146,19 +149,19 @@ void draw()
 //Checks on each key pressed event if the player needs to fire a projectile
 void keyPressed()
 {
-  if (key == 119)//'w' key
+  if (keyCode == UP)//up arrow
   {
     keys[0] = true;
   }
-  if (key == 97)//'a' key
+  if (keyCode == LEFT)// left arrow
   {
     keys[1] = true;
   }
-  if (key == 115)//'s' key
+  if (keyCode == DOWN)// down arrow
   {
     keys[2] = true;
   }
-  if (key == 100)//'d' key
+  if (keyCode == RIGHT)// right arrow
   {
     keys[3] = true;
   }
@@ -170,28 +173,28 @@ void keyPressed()
   {
     keys[5] = true;
   }
-  if (key == 114)//'r' key
+  
+  if(gameState == 7 && key > 96 && key < 123)
   {
-    keys[6] = true;
-    exitGame();
+    createInputName();
   }
 }
 
 void keyReleased()
 {
-  if (key == 119)//'w' key
+  if (keyCode == UP)//up arrow
   {
     keys[0] = false;
   }
-  if (key == 97)//'a' key
+  if (keyCode == LEFT)//left arrow
   {
     keys[1] = false;
   }
-  if (key == 115)//'s' key
+  if (keyCode == DOWN)//down arrow
   {
     keys[2] = false;
   }
-  if (key == 100)//'d' key
+  if (keyCode == RIGHT)//right arrow
   {
     keys[3] = false;
   }
@@ -203,20 +206,12 @@ void keyReleased()
   {
     keys[5] = false;
   }
-  if (key == 114) //used for testing, Press the "r" key to terminate the program
-  {
-    keys[6] = false;
-  }
 }
 
 void exitGame()
 {
-  if (keys[6] == true)
-  {
-    checkHighscore();
     saveHighscore();
     exit();
-  }
 }
 
 void mousePressed()
@@ -237,7 +232,7 @@ void mousePressed()
     {
       if (mouseY >= 600 && mouseY <= 700)
       {
-        exit();//exits game
+        exitGame();
       }
     }
   }
@@ -249,7 +244,9 @@ void mousePressed()
       if (mouseY >= 200 && mouseY <= 300)
       {
         gameState = 1;//re-starts game
+        enterNewHighscoreName();
         curLevel = new Level(gameState);
+        reset();
       }
     }
     //Checks for clicks on "Exit Game?" button on Game Over screen
@@ -257,7 +254,8 @@ void mousePressed()
     {
       if (mouseY >= 200 && mouseY <= 300)
       {
-        exit();//exits game
+        enterNewHighscoreName();
+        exitGame();
       }
     }
   }
@@ -270,63 +268,61 @@ void spawnPlayer()
 
 void gameOver()
 {
-  inputName = "";
   gameState = 7;
   checkHighscore();
 }
 
 void gameOverScreen()//draw Game Over screen
 {
-  if (gameState == 7)
-  {
+
     fill(255, 0, 0);
     textSize(70);
     text("GAME OVER", width/2-200, 150);
-    fill(255);
-    rect(width/2-300, 200, 200, 100);
-    rect (width/2+100, 200, 200, 100);
-    fill(0);
-    textSize(25);
-    text("Play Again?", width/2 - 265, 255);
-    text("Exit Game?", width/2 + 135, 255);
-
-    textSize(30);
-    fill(255, 200, 200);
-    text("High Scores:", width/2 - 90, 350);
-    textSize(25);
-    text(highscoreNames[0], width/2-200, 400);
-    text(highscores[0], width/2+100, 400);
-    text(highscoreNames[1], width/2-200, 450);
-    text(highscores[1], width/2+100, 450);
-    text(highscoreNames[2], width/2-200, 500);
-    text(highscores[2], width/2+100, 500);
-    text(highscoreNames[3], width/2-200, 550);
-    text(highscores[3], width/2+100, 550);
-    text(highscoreNames[4], width/2-200, 600);
-    text(highscores[4], width/2+100, 600);
-    text(highscoreNames[5], width/2-200, 650);
-    text(highscores[5], width/2+100, 650);
-    text(highscoreNames[6], width/2-200, 700);
-    text(highscores[6], width/2+100, 700);
-    text(highscoreNames[7], width/2-200, 750);
-    text(highscores[7], width/2+100, 750);
-    text(highscoreNames[8], width/2-200, 800);
-    text(highscores[8], width/2+100, 800);
-    text(highscoreNames[9], width/2-200, 850);
-    text(highscores[9], width/2+100, 850);
     
-    enterNewHighscoreName();
-  }
+    displayHighscore();
+   
+}
+
+void displayHighscore()
+{
+   fill(255);
+   rect(width/2-300, 200, 200, 100);
+   rect (width/2+100, 200, 200, 100);
+   fill(0);
+   textSize(25);
+   text("Play Again?", width/2 - 265, 255);
+   text("Exit Game?", width/2 + 135, 255);
+
+   textSize(30);
+   fill(255, 200, 200);
+   text("High Scores:", width/2 - 90, 350);
+   textSize(25);
+   for(int i = 0; i < highscoreNames.length; i++)
+   {
+     if(highscoreNames[i] == "")
+     {
+       text(inputName, width/2-200, 400 + 50*i);
+     }
+     else
+     {
+       text(highscoreNames[i], width/2-200, 400 + 50*i);
+     }
+   }
+    
+   for(int i = 0; i < highscores.length; i++)
+   {
+     text(highscores[i], width/2+100, 400 + 50*i);
+   }
 }
 
 void youWinScreen()//draw You Win screen
 {
-  if (gameState == 6)
-  {
     fill(255, 0, 0);
     textSize(70);
     fill(255, 255, 0);
     text("YOU WIN!", width/2-150, 150);
+    displayHighscore();
+    /*
     fill(255);
     rect(width/2-300, 200, 200, 100);
     rect (width/2+100, 200, 200, 100);
@@ -359,9 +355,7 @@ void youWinScreen()//draw You Win screen
     text(highscores[8], width/2+100, 800);
     text(highscoreNames[9], width/2-200, 850);
     text(highscores[9], width/2+100, 850);
-    
-    enterNewHighscoreName();
-  }
+    */
 }
 
 void mainMenuScreen()//draw Main Menu
@@ -399,6 +393,10 @@ void mainMenuScreen()//draw Main Menu
 
 void reset()
 {
+  checkedHighscore = false;
+  player.resetPlayer();
+  inputName = "";
+  saveHighscore();
   // start movement, change gamestate, draw playing screen,
 }
 
@@ -423,13 +421,17 @@ void loadHighscore()
 //returns true if the current score (points) is greater than, or equals to, one of the scores in the highscorelist
 boolean checkHighscore()
 {
-  //goes through the array highscores and compares the entries' values with current score (points)
-  for (int i = 0; i < highscores.length; i++)
+  if(checkedHighscore == false)
   {
-    if (points >= highscores[i])
+    //goes through the array highscores and compares the entries' values with current score (points)
+    for (int i = 0; i < highscores.length; i++)
     {
-      rearrangeHighscoreList(i);
-      return true;
+      if (points >= highscores[i])
+      {
+        rearrangeHighscoreList(i);
+        checkedHighscore = true;
+        return true;
+      }
     }
   }
   //If it went through the entire for-loop and didn't return true at any point, it means that the current score does not beat any of the existing ones
@@ -469,23 +471,27 @@ void resetHighscoreList()
   }
 }
 
+
 //is used to create inputName. Should only be called if inputName < 4 characters long, and if the key pressed was a letter.
 void createInputName()
 {
   inputName += key; //add the character to the String
+  println(inputName);
 }
+
 
 //The argument should be the variable inputName once it is completed. The name will then be placed on the highscore list
 void enterNewHighscoreName()
 {
+  println("got called");
   //go through every entry in the array highscoreNames
   for (int i = 0; i < highscoreNames.length; i++)
   {
     //locates the entry that is blank (this is done in rearrangeHighscoreList())
-    if (highscoreNames[i] == inputName)
+    if (highscoreNames[i] == "")
     {
-      highscoreNames[i] += key; //replace the blank entry with the one from the parameter
-      inputName += key; //TODO: need to make this code add a new name to highscore list when a highscore is broken
+      highscoreNames[i] = inputName; //replace the blank entry with the one from the parameter
     }
   }
+  
 }
