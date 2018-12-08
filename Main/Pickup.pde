@@ -8,6 +8,7 @@ class Pickup
 {
   private int pickupType;// 4 possibilities: 0 = give shield, 1 = give gunType 1, 2 = give gunType 2, 3 = give gunType 3
   private int ticksLastUpdate;
+  private int colorUpdate;
   private int colorTimer;
   private float xPos;
   private float yPos;
@@ -23,13 +24,14 @@ class Pickup
     yPos = newYPos;
     ySpeed = 200;
     ticksLastUpdate = millis();
+    colorUpdate = millis();
     pickupType = newPickupType;
     pickupHeight = 10;
     pickupWidth = 10;
     isPickedUp = false;
     destroyed = false;
   }
-  
+
   public void update()
   {
     move();
@@ -39,21 +41,22 @@ class Pickup
   public void move()
   {
     yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+    ticksLastUpdate = millis();
     if (yPos > height)
     {
       destroy();
     }
   }
-  
+
   public void display()
   {
     noStroke();
     fill(255);
-    colorTimer = millis() - ticksLastUpdate;
-    
+    colorTimer = millis() - colorUpdate;
+
     if (colorTimer >= 215) // flashes pickup color white and blue
     {
-      ticksLastUpdate = millis();
+      colorUpdate = millis();
       fill(0, 0, 255);
     }
     ellipse(xPos, yPos, pickupHeight, pickupWidth);
@@ -61,26 +64,25 @@ class Pickup
 
   public void giveShield()
   {
-    if (pickupType == 0)
-    {
-      player.setShieldActive(true);
-    }
+    player.setShieldActive(true);
   }
 
   public void giveGun()
   {
-    if (pickupType == 1)
+    player.setGunType(pickupType);
+  }
+  
+  public void triggerPickup()
+  {
+    if (pickupType == 0)
     {
-      player.setGunType(1);
-    }
-    if (pickupType == 2)
+      giveShield();
+    }else if (pickupType > 0);
     {
-      player.setGunType(2);
+      giveGun();
     }
-    if (pickupType == 3)
-    {
-      player.setGunType(3);
-    }
+    
+    isPickedUp = true;
   }
 
   public void destroy()
@@ -121,7 +123,7 @@ class Pickup
   {
     return isPickedUp;
   }
-  
+
   public boolean getDestroyed()
   {
     return destroyed;

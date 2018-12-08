@@ -23,7 +23,6 @@ class Enemy
   private PVector direction; //A directional vector that enemies of type 3 use to home in on the player
   private boolean destroyed = false;
   private int maxHitPoints;
-  private Pickup P;
 
   Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
   {

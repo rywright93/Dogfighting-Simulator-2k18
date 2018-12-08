@@ -179,6 +179,32 @@ class Player
 
   public void pickupCollision()
   {
+    //A for each loop which checks collision for every instance of Enemy in enemies array list.
+    for (Pickup pu : curLevel.getPickups())
+    {
+      //Player top border collision check
+      if (yPos >= pu.getYPos() && yPos <= pu.getYPos() + pu.getPickupHeight() && xPos >= pu.getXPos() && xPos <= pu.getXPos() + pu.getPickupWidth())
+      {
+        pu.triggerPickup();
+      }
+
+      //Player bottom border collision check
+      if (yPos + playerHeight >= pu.getYPos() && yPos + playerHeight <= pu.getYPos() + pu.getPickupHeight() && xPos >= pu.getXPos() && xPos <= pu.getXPos() + pu.getPickupWidth())
+      {
+        pu.triggerPickup();
+      }
+      //Player left border collision check
+      if (xPos >= pu.getXPos() && xPos <= pu.getXPos() + pu.getPickupWidth() && yPos + playerHeight >= pu.getYPos() && yPos <= pu.getYPos() + pu.getPickupHeight())
+      {
+        pu.triggerPickup();
+      }
+
+      //Player right border collision check
+      if (xPos + playerWidth >= pu.getXPos() && xPos + playerWidth <= pu.getXPos() + pu.getPickupWidth() && yPos >= pu.getYPos() && yPos <= pu.getYPos() + pu.getPickupHeight())
+      {
+        pu.triggerPickup();
+      }
+    }
   }
 
   //Player checks itself for colliding with Enemies, takes damage
@@ -240,6 +266,7 @@ class Player
   {
     return shieldActive;
   }
+  
   public void setShieldActive(boolean newShieldActive)
   {
     shieldActive = newShieldActive;
