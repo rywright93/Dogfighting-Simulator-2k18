@@ -18,7 +18,7 @@ class Player
   private int hitPoints;
   private PImage playerPic = playerSprite;
   private float fireRate;//Delay between shots in milliseconds
-  private float shieldCooldown;//Delay between uses of sheild ability
+  //private float shieldCooldown;//Delay between uses of sheild ability(CURRENTLY NOT USING, MAY DELETE FOR HAND IN)
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   private float lastShieldFiredAt;//indicates when last shield charge was used
   private float shieldEffectLength;//number of milliseconds shield effect lasts when triggered
@@ -40,7 +40,7 @@ class Player
     hitPoints = 1;
     //TO DO: PImage = something later but for now it's a square
     shieldEffectLength = 3000;//Value in milliseconds
-    shieldCooldown = 8000;//Value in milliseconds
+    //shieldCooldown = 8000;//Value in milliseconds
     fireRate = 200;//Value in milliseconds
     shieldActive = false;
     isDead = false;
