@@ -26,8 +26,8 @@ class Pickup
     ticksLastUpdate = millis();
     colorUpdate = millis();
     pickupType = newPickupType;
-    pickupHeight = 30;
-    pickupWidth = 30;
+    pickupHeight = 50;
+    pickupWidth = 50;
     isPickedUp = false;
     destroyed = false;
   }
