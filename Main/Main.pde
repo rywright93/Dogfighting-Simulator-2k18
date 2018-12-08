@@ -56,11 +56,12 @@ void setup()
 
   explosionSpriteSheet = loadImage("explosion animation b.png");
 
-  inputName = "";
+  //inputName = "";
 }
 
 void draw()
 {
+  println("inputname is: " + inputName);
   background(160, 160, 160);
 
   //Updates player position and collisions every frame
@@ -232,9 +233,9 @@ void mousePressed()
     if (mouseX >= width/2-100 && mouseX <= width/2+100)
     {
       if (mouseY >= 400 && mouseY <= 500)
-      {
-        gameState = 1;
-        changeLevel(gameState);
+      { 
+          gameState = 1;
+          changeLevel(gameState);
       }
     }
     //Checks for clicks on "Exit Game?" button on Main Menu
@@ -253,10 +254,13 @@ void mousePressed()
     {
       if (mouseY >= 200 && mouseY <= 300)
       {
-        gameState = 1;//re-starts game
-        enterNewHighscoreName();
-        curLevel = new Level(gameState);
-        reset();
+        if(inputName.length() > 3)
+        {
+          gameState = 1;//re-starts game
+          enterNewHighscoreName();
+          curLevel = new Level(gameState);
+          reset();
+        }
       }
     }
     //Checks for clicks on "Exit Game?" button on Game Over screen
@@ -264,8 +268,11 @@ void mousePressed()
     {
       if (mouseY >= 200 && mouseY <= 300)
       {
-        enterNewHighscoreName();
-        exitGame();
+        if(inputName.length() > 3)
+        {
+          enterNewHighscoreName();
+          exitGame();
+        }
       }
     }
   }
@@ -410,7 +417,7 @@ void reset()
 {
   checkedHighscore = false;
   player.resetPlayer();
-  inputName = "";
+  //inputName = "";
   saveHighscore();
   points = 0;
   // start movement, change gamestate, draw playing screen,
@@ -469,6 +476,7 @@ void rearrangeHighscoreList(int i)
   }
   highscores[i] = points; //set the new highscore
   highscoreNames[i] = ""; //clear the corresponding spot for a new name
+  inputName = "";
 }
 
 //Resets the highscore list back to default
