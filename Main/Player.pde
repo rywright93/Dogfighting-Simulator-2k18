@@ -35,7 +35,7 @@ class Player
     xSpeed = 300;
     ySpeed = 300;
     shieldCharges = 3;
-    gunType = 3;
+    gunType = 1;
     shieldActive = false;
     hitPoints = 1;
     //TO DO: PImage = something later but for now it's a square
