@@ -77,8 +77,8 @@ class Boss
   //Instantiates projectiles that can only collide with an instance of Player
   public void shoot()
   {
-    curLevel.getProjectiles().add(new Projectile(xPos, yPos + bossHeight, 0, 270, "Enemy", color(0,0,255), 40));
-    curLevel.getProjectiles().add(new Projectile(xPos + bossWidth, yPos + bossHeight, 0,270, "Enemy", color(0,0,255), 40));
+    curLevel.getProjectiles().add(new Projectile(xPos, yPos + bossHeight, 0, 270, "Enemy", color(255,0,0), 40));
+    curLevel.getProjectiles().add(new Projectile(xPos + bossWidth, yPos + bossHeight, 0,270, "Enemy", color(255,0,0), 40));
   }
   
   //When the boss collides with a Projectile fired from the player it takes damage
@@ -108,7 +108,7 @@ class Boss
   {
     if(hitPoints > 0)
     {
-      fill(0, 0, 255);
+      fill(255, 0, 0);
       //rect(xPos, yPos, bossWidth, bossHeight);
       rect(xPos, yPos - 20, map(hitPoints, 0, maxHitPoints, 0, bossWidth), 10); //displays a healthbar
       noFill();

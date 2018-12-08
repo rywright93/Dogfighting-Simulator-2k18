@@ -56,7 +56,7 @@ class Spawner
     else if(spawnType == 4)
     {
       //Instantiates a new Boss in bosses ArrayList
-      curLevel.getBosses().add(new Boss(30));
+      curLevel.getBosses().add(new Boss(100));
     }
  
     spawned = true;
