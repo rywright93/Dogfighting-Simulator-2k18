@@ -295,4 +295,9 @@ class Level
     return obstacles;
   }
   
+  public ArrayList<Pickup> getPickups()
+  {
+    return pickups;
+  }
+  
 }
