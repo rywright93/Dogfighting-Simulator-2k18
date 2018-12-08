@@ -360,7 +360,7 @@ class Player
         
         else if (o.getObstacleType() == 1)
         {
-          setSpeed(50,50);
+          setSpeed(100,100);
         }
       }
       //Player left border collision check
@@ -412,5 +412,9 @@ class Player
   public void resetPlayer()
   {
     isDead = false;
+    gunType = 1;
+    xPos = width/2-20;
+    yPos = height - 100;
+    shieldCharges = 3;
   }
 }
