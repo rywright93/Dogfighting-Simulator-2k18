@@ -21,14 +21,7 @@ String[] highscoreNames; //an array of the names in the highscore list
 boolean[] keys; //Boolean array for checking if keys are being pressed. Enables multiple concurrent button presses
 
 Player player;
-/*
- ArrayList<Boss> bosses;
- ArrayList<Enemy> enemies;
- 
- ArrayList<Projectile> projectiles;
- 
- ArrayList<Explosion> explosions;
- */
+
 PImage explosionSpriteSheet; //spritesheet containing several frames of an explosion animation
 
 //2D sprites used to display instances of Enemy, Boss, and Player
@@ -101,63 +94,6 @@ void draw()
   {
     gameOverScreen();
   }
-  
-  //Used for testing. Updates every instance of Boss in the ArrayList
-  /* for (Boss b : bosses)
-   {
-   b.update();
-   }
-   
-   //update every Projectile in the ArrayList. Used for testing
-   for (Projectile p : projectiles)
-   {
-   p.update();
-   }
-   
-   //Iterator used to remove Projectiles from the ArrayList if they are dead.
-   Iterator<Projectile> itr = projectiles.iterator();
-   while (itr.hasNext()) 
-   { 
-   Projectile element = itr.next(); 
-   if (element.getDestroyed() == true) 
-   { 
-   itr.remove();
-   }
-   }
-   
-   //Update every Enemy in the ArrayList enemies. Used for testing
-   for (Enemy e : enemies)
-   {
-   e.update();
-   }
-   
-   //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
-   Iterator<Enemy> itrE = enemies.iterator();
-   while (itrE.hasNext()) 
-   { 
-   Enemy elementE = itrE.next(); 
-   if (elementE.getHitPoints() <= 0) 
-   { 
-   itrE.remove();
-   }
-   }
-   
-   //Update every Explosion in the ArrayList explosions
-   for (Explosion ex : explosions)
-   {
-   ex.display();
-   }
-   
-   //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
-   Iterator<Explosion> itrEx = explosions.iterator();
-   while (itrEx.hasNext()) 
-   { 
-   Explosion elementEx = itrEx.next(); 
-   if (elementEx.getAnimationEnded() == true) 
-   { 
-   itrEx.remove();
-   }
-   }*/
 }
 
 void keyPressed()
@@ -361,40 +297,6 @@ void youWinScreen()
   fill(255, 255, 0);
   text("YOU WIN!", width/2-150, 150);
   displayHighscore();
-  /*
-    fill(255);
-   rect(width/2-300, 200, 200, 100);
-   rect (width/2+100, 200, 200, 100);
-   fill(0);
-   textSize(25);
-   text("Play Again?", width/2 - 265, 255);
-   text("Exit Game?", width/2 + 135, 255);
-   
-   textSize(30);
-   fill(255, 200, 200);
-   text("High Scores:", width/2 - 90, 350);
-   textSize(25);
-   text(highscoreNames[0], width/2-200, 400);
-   text(highscores[0], width/2+100, 400);
-   text(highscoreNames[1], width/2-200, 450);
-   text(highscores[1], width/2+100, 450);
-   text(highscoreNames[2], width/2-200, 500);
-   text(highscores[2], width/2+100, 500);
-   text(highscoreNames[3], width/2-200, 550);
-   text(highscores[3], width/2+100, 550);
-   text(highscoreNames[4], width/2-200, 600);
-   text(highscores[4], width/2+100, 600);
-   text(highscoreNames[5], width/2-200, 650);
-   text(highscores[5], width/2+100, 650);
-   text(highscoreNames[6], width/2-200, 700);
-   text(highscores[6], width/2+100, 700);
-   text(highscoreNames[7], width/2-200, 750);
-   text(highscores[7], width/2+100, 750);
-   text(highscoreNames[8], width/2-200, 800);
-   text(highscores[8], width/2+100, 800);
-   text(highscoreNames[9], width/2-200, 850);
-   text(highscores[9], width/2+100, 850);
-   */
 }
 
 //draw Main Menu
@@ -422,21 +324,6 @@ void mainMenuScreen()
     noFill();
   }
 }
-
-/*void playScreen()
- {
- if (gameState == 2)
- {
- draw();
- spawnPlayer();
- spawnBoss(); //testing function call
- spawnEnemy();//testing function call
- 
- //projectiles = new ArrayList<Projectile>(); //Used for testing
- 
- //explosions = new ArrayList<Explosion>();
- }
- }*/
 
 //Resets necessary variable states back to defeault
 void reset()
