@@ -30,7 +30,6 @@ class Boss
   }
   
   //Calls appropriate methods that needs to be updated in Boss. 
-  //Update() is then the only method that needs to be called from Level which manages all bosses
   public void update()
   {
     display();

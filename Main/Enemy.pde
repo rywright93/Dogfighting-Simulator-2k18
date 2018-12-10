@@ -38,7 +38,7 @@ class Enemy
     maxHitPoints = hitPoints;
   }
 
-  //Is called in Level. It updates everything that needs updating in Enemy.
+  //Call every method in Enemey required to update Enemy
   public void update()
   {
     display();
