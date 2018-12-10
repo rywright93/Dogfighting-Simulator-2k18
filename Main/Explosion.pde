@@ -3,34 +3,37 @@ Description:
 Authors:
 Comments:
 */
+
 class Explosion
 {
-  private float xPos;
-  private float yPos;
+  private float xPos; //curent x position
+  private float yPos; //current y position
   private int durationOneFrame = 100; //in milliseconds
-  private int frame = 0;
-  private int frameMax = 8;
+  private int frame = 0; //keeps track of each frame in the animation should be displayed
+  private int frameMax = 8; //number of frames in animation
   private int ticksLast = millis();
   private PImage spriteSheet = explosionSpriteSheet;
   private boolean animationEnded = false;
   
+  //Constructor
   Explosion(float x, float y)
   {
     xPos = x;
     yPos = y;
   }
   
+  //Display explosion in window at current position
   public void display()
   {
     imageMode(CENTER);
-    //display frame from sprite sheet with Magic Numbers (frame 0 starts at (10, 168) with a size of 16x36 pixels):
-    PImage f = spriteSheet.get(0 + (frame * 66), 0, 66, 66); //6
+    PImage f = spriteSheet.get(0 + (frame * 66), 0, 66, 66); //displays part of the spritesheet
     image(f, xPos, yPos);
     imageMode(CORNER);
     int delta = millis() - ticksLast;
+    //If more time has passed than the length of one frame
     if (delta >= durationOneFrame)
     {
-      frame++;
+      frame++; //switch frame
       if (frame >= frameMax) 
       { 
         animationEnded = true;

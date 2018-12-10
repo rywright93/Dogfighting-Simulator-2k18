@@ -1,20 +1,20 @@
 /*
 Description: Level structure
- Authors: Ryan and Casper
+ Authors: 
  Comments:
  */
 
 class Level
 {
-  private ArrayList<Obstacle> obstacles; //ArrayList containing all the obstacles
-  private ArrayList<Boss> bosses; //ArrayList containing all living bosses
-  private ArrayList<Enemy> enemies; //ArrayList containing all active enemy
-  private ArrayList<Projectile> projectiles; //ArrayList containing all active projectiles
-  private ArrayList<Pickup> pickups;//ArrayList containing all active pickups
-  private ArrayList<Explosion> explosions; //ArrayList containing all active explosions
-  private ArrayList<Spawner> spawners;
+  private ArrayList<Obstacle> obstacles; //ArrayList containing all instances of Obstacle
+  private ArrayList<Boss> bosses; //ArrayList containing all instances of Boss
+  private ArrayList<Enemy> enemies; //ArrayList containing all active instances of Enemy
+  private ArrayList<Projectile> projectiles; //ArrayList containing all active Instances of Projectile
+  private ArrayList<Pickup> pickups;//ArrayList containing all active instances of Pickup
+  private ArrayList<Explosion> explosions; //ArrayList containing all active instances of Explosion
+  private ArrayList<Spawner> spawners; //ArrayList containing all active instances of Spawner
   private Roadstripe[] roadstripes;
-  private String[] levelTiling; //array of string containing the level structure from a .txt file
+  private String[] levelTiling; //array of strings containing the level structure from a .txt file
   private Confetti[] particles;
 
   //Constructor
@@ -58,9 +58,11 @@ class Level
     obstacles = new ArrayList<Obstacle>();
     spawners = new ArrayList<Spawner>();
     pickups = new ArrayList<Pickup>();
+    //Instantiate arrays
     roadstripes = new Roadstripe[4];
     particles = new Confetti[100];
-
+    
+    //Fill roadstripes with instances of Roadstripe
     for (int i = 0; i < roadstripes.length; i++)
     {
       roadstripes[i] = new Roadstripe(height - 250*i);
@@ -69,9 +71,10 @@ class Level
     readTextFile();
   }
 
-  //updates every instance of enemy, boss, projectile, explosion, and obstacles in the level
+  //updates every instance of enemy, boss, projectile, explosion, obstacle, roadstripe, spawner, pickup, and confetti in the level
   public void update()
   {
+    println(spawners.size());
     updateRoadstripes();
     updateObstacles();
     updateEnemies();
@@ -82,49 +85,49 @@ class Level
     updatePickups();
     updateParticles();
   }
-
+  
+  //Reads .txt file from disc containing level structure and instantiates appropriate classes
   public void readTextFile()
   {
     //Instantiate class at correct position
-    //Every loop goes through one row in txt file
+    //Every loop goes through one row in .txt file
     for (int i = 0; i < levelTiling.length; i++)
     {
       //Every nested loop goes through each char in the String
       for (int j = 0; j < levelTiling[i].length(); j++)
       {
-        //0=Boulder
+        //If char=0, it's a Obstacle of type boulder
         if (levelTiling[i].charAt(j) == '0')
         {
           //constructor(starting/default x + Wall width * column number + 1 to avoid multiplication by zero, starting/default y + wall height * row number + 1 to avoid multiplication by zero, xspeed, yspeed)
           obstacles.add(new Obstacle(0+140*j, -140*levelTiling.length+140*i, 0));
         }
 
-        //"/"= Pool of mud
+        //if char=/ it's an Obstacle of type mud
         if (levelTiling[i].charAt(j) == '/')
         {
-          //constructor(starting/default x + Wall width * column number + 1 to avoid multiplication by zero, starting/default y + wall height * row number + 1 to avoid multiplication by zero, xspeed, yspeed)
           obstacles.add(new Obstacle(0+140*j, -140*levelTiling.length+140*i, 1));
         }
 
-        //Instantiates EnemyType1
+        //Instantiates Spawner containing EnemyType 1
         else if (levelTiling[i].charAt(j) == '1')
         {
           spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 1));
         }
 
-        //Instantiates EnemyType2
+        //Instantiates Spawner containing EnemyType 2
         else if (levelTiling[i].charAt(j) == '2')
         {
           spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 2));
         }
 
-        //Instantiates EnemyType3
+        //IInstantiates Spawner containing EnemyType 1
         else if (levelTiling[i].charAt(j) == '3')
         {
           spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 3));
         }
 
-        //Instantiates Boss
+        //Instantiates Spawner containing Boss
         else if (levelTiling[i].charAt(j) == '4')
         {
           spawners.add(new Spawner(0+140*j, -140*levelTiling.length+140*i, 4));
@@ -135,7 +138,7 @@ class Level
 
   public void updateEnemies()
   {
-    //Update every Enemy in the ArrayList enemies. Used for testing
+    //Update every Enemy in the ArrayList enemies
     for (Enemy e : enemies)
     {
       e.update();
@@ -143,19 +146,21 @@ class Level
 
     //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
     Iterator<Enemy> itrE = enemies.iterator();
+    //As long as there is another entry in enemies
     while (itrE.hasNext()) 
     { 
       Enemy elementE = itrE.next(); 
+      //if enemy is destroyed
       if (elementE.getDestroyed() == true) 
       { 
-        itrE.remove();
+        itrE.remove(); //remove it from the ArrayList
       }
     }
   }
 
   public void updateBosses()
   {
-    //Used for testing. Updates every instance of Boss in the ArrayList
+    //Updates every instance of Boss in the ArrayList
     for (Boss b : bosses)
     {
       b.update();
@@ -164,27 +169,29 @@ class Level
 
   public void updateProjectiles()
   {
-    //update every Projectile in the ArrayList. Used for testing
+    //update every Projectile in the ArrayList
     for (Projectile p : projectiles)
     {
       p.update();
     }
 
-    //Iterator used to remove Projectiles from the ArrayList if they are dead.
+    //Iterator used to remove Projectiles from the ArrayList if they are destroyed.
     Iterator<Projectile> itr = projectiles.iterator();
+    //As long as there is another entry in projectiles
     while (itr.hasNext()) 
     { 
       Projectile element = itr.next(); 
+      //if projectile is destroyed
       if (element.getDestroyed() == true) 
       { 
-        itr.remove();
+        itr.remove(); //remove it from the ArrayList
       }
     }
   }
 
   public void updatePickups()
   {
-    //update every Pickup in the ArrayList. Used for testing
+    //update every Pickup in the ArrayList
     for (Pickup pu : pickups)
     {
       pu.update();
@@ -192,12 +199,14 @@ class Level
 
     //Iterator used to remove Pickups from the ArrayList if they are destroyed/picked up.
     Iterator<Pickup> itr = pickups.iterator();
+    //As long as there is another entry in pickups
     while (itr.hasNext()) 
     { 
       Pickup element = itr.next(); 
+      //if projectile is destroyed
       if (element.getDestroyed() == true) 
       { 
-        itr.remove();
+        itr.remove(); //remove from ArrayList
       }
     }
   }
@@ -210,27 +219,28 @@ class Level
       ex.display();
     }
 
-    //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
+    //Iterator used to remove Explosion from the ArrayList explosions if they are done animating
     Iterator<Explosion> itrEx = explosions.iterator();
     while (itrEx.hasNext()) 
     { 
       Explosion elementEx = itrEx.next(); 
+      //if explosion animation has ended
       if (elementEx.getAnimationEnded() == true) 
       { 
-        itrEx.remove();
+        itrEx.remove(); //remove it from the ArrayList
       }
     }
   }
 
   public void updateObstacles()
   {
-    //Update every Explosion in the ArrayList explosions
+    //Update every Obstacle in the ArrayList obstacles
     for (Obstacle o : obstacles)
     {
       o.update();
     }
 
-    //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
+    //Iterator used to remove Obstacle from the ArrayList obstacles if they have moved beyond the bottom border of the screen
     Iterator<Obstacle> itrO = obstacles.iterator();
     while (itrO.hasNext()) 
     { 
@@ -244,25 +254,26 @@ class Level
 
   public void updateSpawner()
   {
-    //Update every Enemy in the ArrayList enemies. Used for testing
+    //Update every Spawner in the ArrayList spawners
     for (Spawner s : spawners)
     {
       s.move();
     }
-    /*
-    //Iterator used to remove Enemy from the ArrayList enemies if they are dead.
-     Iterator<Enemy> itrE = enemies.iterator();
-     while (itrE.hasNext()) 
+    
+    //Iterator used to remove Spawner from the ArrayList spawners if they have spawned their entity.
+     Iterator<Spawner> itrS = spawners.iterator();
+     while (itrS.hasNext()) 
      { 
-     Enemy elementE = itrE.next(); 
-     if (elementE.getHitPoints() <= 0) 
-     { 
-     itrE.remove();
+       Spawner elementS = itrS.next(); 
+       if (elementS.getSpawned() == true) 
+       { 
+         itrS.remove();
+       }
      }
-     }
-     */
+     
   }
-
+  
+  //Updates array of roadstripes.
   public void updateRoadstripes()
   {
     for (int i = 0; i < roadstripes.length; i++)
@@ -306,14 +317,15 @@ class Level
     return particles;
   }
 
+  //Updates array of Confetti
   public void updateParticles()
   {
 
     for (int i = 0; i < particles.length; i++)
     {
+      //Only update instances of Confetti if particles is not empty
       if(particles[i] != null)
       {
-        println("did thing");
         particles[i].display();
         particles[i].move();
       }

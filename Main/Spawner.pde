@@ -62,4 +62,9 @@ class Spawner
     spawned = true;
   }
   
+  public boolean getSpawned()
+  {
+    return spawned;
+  }
+  
 }
