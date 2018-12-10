@@ -10,24 +10,20 @@ class Enemy
   private float yPos; //current y-position
   private PImage enemyPic = enemySprite; //Image used to display Enemy
   private int hitPoints; //The health of the enemy
-  private int typeOfGun; //Different shooting patterns are mapped to different values in this variable
   private float enemyWidth; //Width of enemy image
   private float enemyHeight; //height of enemy image
   private float xSpeed; //Enemy's speed along the x-axis
   private float ySpeed; //Enemy's speed along thet y-axis
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
   private int enemyType; //EnemyType 1: fly straight, don't shoot. Type 2: sin wave, and shoot. Type 3: kamikaze
-  private float spawnXPos; //the x-coodinate of the Enemy's spawn position
-  private float fireRate = 800;
+  private float spawnXPos; //the x-coodinate of the Enemy's spawn position. Used for EnemyType 3
+  private float fireRate = 800; //The frequency by which enemy can shoot
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   private PVector direction; //A directional vector that enemies of type 3 use to home in on the player
   private boolean destroyed = false;
-  private int maxHitPoints;
+  private int maxHitPoints; //The maximum amount of hitpoints is stored to make depleting healthbars
 
-  Enemy(float newXPos, float newYPos, PImage newEnemyPic, int newHitPoints, int newTypeOfGun)
-  {
-  }
-  //Test constructor
+  //Constructor
   Enemy(float newXPos, float newYPos, int newHitPoints, int newEnemyType)
   {
     xPos = newXPos;
@@ -42,7 +38,7 @@ class Enemy
     maxHitPoints = hitPoints;
   }
 
-  //Is called in Main. It updates everything that needs updating.
+  //Is called in Level. It updates everything that needs updating in Enemy.
   public void update()
   {
     display();
@@ -52,6 +48,7 @@ class Enemy
   //Moves the position of the enemy based on its speed and time fix
   public void move()
   {
+    //EnemyType 1 movement
     if (enemyType == 1)
     {
       xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
@@ -59,19 +56,13 @@ class Enemy
       ticksLastUpdate = millis();
     }
 
-    //move in sine wave
+    //EnemyType 2 movement. Moves in sine wave and shoots
     if (enemyType == 2)
     {
       yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
-      //sin(yPos * frequency) * wave length) + xPos spawnPosition
       xPos = (sin(yPos * 0.01) * 140) + spawnXPos + enemyWidth * float(millis() - ticksLastUpdate) * 0.001;
       ticksLastUpdate = millis(); 
 
-      /*
-      yPos = yPos + ySpeed/100;
-       //sin(yPos * frequency) * wave length) + xPos spawnPosition
-       xPos = (sin(yPos * 0.02) * 150) + spawnXPos + enemyWidth;
-       */
       if (millis() > lastProjectileFiredAt)
       {
         shoot();
@@ -79,14 +70,10 @@ class Enemy
       }
     }
 
-    //Kamikaze pilot
+    //EnemyType 3 is a Kamikaze car. It drives towards the player position
     if (enemyType == 3)
     {
       direction = new PVector (player.getXPos(), player.getYPos());
-      /*
-      //coordinates for the target location
-       targetLocation = new PVector (mouseX, mouseY);
-       */
       //calculate the direction based on the starting point and end point
       direction.sub(xPos, yPos);
       //normalize the vector so that it has a length of 1
@@ -94,10 +81,9 @@ class Enemy
       //scale it to make it move at greater length each update
       direction.mult(400);
 
-      xPos += direction.x * float(millis() - ticksLastUpdate) * 0.001;
-      yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
+      xPos += direction.x * float(millis() - ticksLastUpdate) * 0.001; //Home in on the players x-position
+      yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001; //moves down the screen every update so it won't drive back towards the player if it misses
       ticksLastUpdate = millis(); 
-      //location.add(velocity);
     }
     //Destroy the enemy if it moves past the bottom of the screen
     if (yPos > height)
@@ -106,21 +92,22 @@ class Enemy
     }
   }
 
+  //Instantiates projectiles that can only collide with an instance of Player
   public void shoot()
   {
     curLevel.getProjectiles().add(new Projectile(xPos + enemyWidth/2, yPos + enemyHeight, 0, 400, "Enemy", color(255, 0, 0), 20));
   }
 
-  //When the enemy collides with a Projectile fired from the player it takes damage
+  //When the enemy collides with a Projectile fired from the player, or a shielded player, it takes damage
   public void isHit()
   {
     hitPoints--;
 
     if (hitPoints <= 0)
     {
-      if (random(0, 100) < 10)//one fifth of enemies should drop a pickup
+      if (random(0, 100) < 10)//one in 10 enemies should drop a Pickup
       {
-        curLevel.getPickups().add(new Pickup(xPos, yPos, int(random(0, 4))));//adds dropped pickup to Pickup Array List in Level Class
+        curLevel.getPickups().add(new Pickup(xPos, yPos, int(random(0, 4))));//Instantiates new Pickup and adds it to pickups ArrayList in Level
       }
       
       givePoints();
@@ -128,9 +115,9 @@ class Enemy
     }
   }
 
+  //Moves Enemy off screen and halts its movement.
   public void destroy()
   {
-    //Moves the enemy out of screen and stops it from moving
     xPos = -1000;
     xSpeed = 0;
     ySpeed = 0;
@@ -146,17 +133,10 @@ class Enemy
   //Display the enemy in the window at its current location
   public void display()
   {
-    //A rectangle is used as placeholder
     fill(255, 0, 0);
     rect(xPos, yPos - 20, map(hitPoints, 0, maxHitPoints, 0, enemyWidth), 10); //displays a healthbar
     image(enemyPic, xPos, yPos);
-    //rect(xPos, yPos, enemyWidth, enemyHeight);
     noFill();
-    /*
-    //Display the health of the enemy
-     textSize(20);
-     text(hitPoints + " HP", xPos, yPos);
-     */
   }
 
   public float getXPos()
