@@ -1,6 +1,5 @@
 /*
 Description: Spawner is basically an x-y coordinate which moves. Once it reaches the top border of the screen it will instantiate the boss or enemy which it represents
- Authors:
  Comments:
  */
 
@@ -22,18 +21,19 @@ class Spawner
     ySpeed = 200;
   }
   
-  //Moves the Spawner
+  //Changes the position of the Spawner depending on its movement speed
   public void move()
   {    
     yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
     ticksLastUpdate = millis(); 
-    //If Spawner has reached the top of the screen (adding 140 to not use the top border of the tile but the bottom border
+    //If Spawner has reached the top of the screen (140 is the height of 1 tile)
     if(yPos+140 >= 0 && spawned == false)
     {
       spawn();
     }
   }
-  //Instantiate entity
+  
+  //Spawn entity which Spawner represents
   public void spawn()
   {
     if(spawnType == 1)
