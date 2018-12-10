@@ -1,6 +1,5 @@
 /*
 Description: Level structure
- Authors: 
  Comments:
  */
 

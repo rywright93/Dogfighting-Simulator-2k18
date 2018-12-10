@@ -1,6 +1,5 @@
 /*
-Description: An obstacle on the road which the player can collide with.
-Authors: 
+Description: An obstacle on the road which the player can collide with. 
 Comments: Can both be a boulder which destroys the player, and a pool of mud which slows them down.
 */
 

@@ -1,24 +1,22 @@
 /*
 Description: The player character
- Authors: Ryan and Casper
  Comments:
  */
 
 class Player
 {
-  private float xSpeed;
-  private float ySpeed;
-  private float xPos;
-  private float yPos;
-  private float playerHeight;
-  private float playerWidth;
-  private int shieldCharges;
-  private int gunType;
-  private boolean shieldActive;
-  private int hitPoints;
+  private float xSpeed; //speed by which it moves along the x-axis
+  private float ySpeed; //speed by which it moves along the y-axis
+  private float xPos; //current x-position
+  private float yPos; //current y-position
+  private float playerHeight; //height of the player
+  private float playerWidth; //width of the player
+  private int shieldCharges; //number of times the player can use shield
+  private int gunType; //indicates the type of gun currently active
+  private boolean shieldActive; //indicates whether the shield is currently active
+  private int hitPoints; //the health of the player
   private PImage playerPic = playerSprite;
   private float fireRate;//Delay between shots in milliseconds
-  //private float shieldCooldown;//Delay between uses of sheild ability(CURRENTLY NOT USING, MAY DELETE FOR HAND IN)
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   private float lastShieldFiredAt;//indicates when last shield charge was used
   private float shieldEffectLength;//number of milliseconds shield effect lasts when triggered
@@ -38,9 +36,7 @@ class Player
     gunType = 1;
     shieldActive = false;
     hitPoints = 1;
-    //TO DO: PImage = something later but for now it's a square
     shieldEffectLength = 3000;//Value in milliseconds
-    //shieldCooldown = 8000;//Value in milliseconds
     fireRate = 200;//Value in milliseconds
     shieldActive = false;
     isDead = false;
@@ -48,12 +44,12 @@ class Player
 
   public void update()
   {
-    display();//Displays player instance every frame in Main
-    move(); //Updates position of player every frame in Main
-    borderCollision();//Checks if player is on screen border every frame in Main
-    enemyCollision();//Checks if player has collided with enemy every frame in Main
-    bossCollision();//Checks if player has collided with boss every frame in Main
-    pickupCollision();//Checks if player has collided with pickup every frame in Main
+    display();
+    move(); 
+    borderCollision();
+    enemyCollision();
+    bossCollision();
+    pickupCollision();
     obstacleCollision();
     shield();
     
@@ -63,21 +59,21 @@ class Player
     }
   }
 
-  //Draws player on screen
+  //Displays player instance every frame on screen
   public void display()
   {
     strokeWeight(0);
-    //fill(144, 11, 30);//Red
-    //rect(xPos, yPos, playerWidth, playerHeight);
     image(playerPic, xPos, yPos);
     
     if (shieldActive == true)
     {
+      //Draws a rectangular shield around the player
       noFill();
       stroke(0, 255, 0);
       strokeWeight(3);
       rect(xPos, yPos, playerWidth + 1, playerHeight + 1);
       fill(0, 255, 0);
+      //Depleting bar indicating how long the shield lasts
       rect(xPos, yPos + playerHeight + 10, -map((float)millis(), (float)lastShieldFiredAt, (float)lastShieldFiredAt + (float)shieldEffectLength, 0, playerWidth), 10);
       noStroke();
       noFill();
@@ -87,26 +83,26 @@ class Player
   //Updates position of player
   public void move()
   {
-    if (keys[0] == true)//Moves player up when 'w' is pressed
+    if (keys[0] == true)//Moves player up when up arrow is pressed
     {
       yPos -= ySpeed * float(millis() - ticksLastUpdate) * 0.001;
     }
-    if (keys[1] == true)//Moves player down when 'a' is pressed
+    if (keys[1] == true)//Moves player left when left arrow is pressed
     {
       xPos -= xSpeed * float(millis() - ticksLastUpdate) * 0.001;
     }
-    if (keys[2] == true)//Moves player down when 's' is pressed
+    if (keys[2] == true)//Moves player down when down arrow is pressed
     {
       yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
     }
-    if (keys[3] == true)//Moves player down when 'd' is pressed
+    if (keys[3] == true)//Moves player right when right arrow is pressed
     {
       xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
     }
     ticksLastUpdate = millis();
   }
 
-  //Player collides with screen borders and stops moving
+  //Checks if Player collides with screen borders and stops movement if that's the case
   public void borderCollision()
   {
     if (yPos + playerHeight >= height)//Bottom border
@@ -127,10 +123,10 @@ class Player
     }
   }
 
-  //Player shoots by pressing space bar
+  //Player instantiates Projectile by pressing space bar
   public void shoot()
   {
-    //Sets projectile patterns for different gun types
+    //Depending on gunType, the player shoots in different patterns
     if (gunType == 1)
     {
       if (millis() > lastProjectileFiredAt)
@@ -158,28 +154,30 @@ class Player
     }
   }
 
-  //Sets conditions to activate shield, and keeps player from taking damage when shield is active
+  //Sets conditions to activate shield, and keeps player from taking damage when colliding with Projectile and Enemy
   public void shield()
   {
     if (shieldActive == false && shieldCharges > 0 && keys[4] == true) //if the player has shield charges && presses 'e' key
     {
-      if (millis() > lastShieldFiredAt)//sets shield active to true and resets shield cooldown by 8 seconds
+      if (millis() > lastShieldFiredAt)//sets shield active to true
       {
         shieldActive = true;
         shieldCharges--;
         lastShieldFiredAt = millis() + shieldEffectLength;
       }
     }
+    //Makes sure that the UI won't display negative numbers if player presses 'e' when having no shield 
     if (shieldCharges <= 0)
     {
       shieldCharges = 0;
     }
-    if (millis() > lastShieldFiredAt)//turns shield effect off after set number of seconds
+    if (millis() > lastShieldFiredAt)//turns shield effect off after set number of miliseconds
     {
       shieldActive = false;
     }
   }
-
+  
+  //Player takes damage
   public void isHit()
   {
     hitPoints--;
@@ -192,6 +190,7 @@ class Player
     }
   }
 
+  //Checks if player has collided with pickup
   public void pickupCollision()
   {
     //A for each loop which checks collision for every instance of Enemy in enemies array list.
@@ -222,7 +221,7 @@ class Player
     }
   }
 
-  //Player checks itself for colliding with Enemies, takes damage
+  //Checks if player has collided with enemy
   public void enemyCollision()
   {
     //A for each loop which checks collision for every instance of Enemy in enemies array list.
@@ -231,11 +230,13 @@ class Player
       //Player top border collision check
       if (yPos >= e.getYPos() && yPos <= e.getYPos() + e.getEnemyHeight() && xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth())
       {
+        //If shield is not active, both enemy and player gets hit
         if(shieldActive == false)
         {
           isHit();
           e.isHit();
         }
+        //If shield is active, only enemy takes damage, and gets destroyed
         else if(shieldActive == true)
         {
           e.setHitPoints(0);
@@ -328,7 +329,8 @@ class Player
   {
     return shieldCharges;
   }
-
+  
+  //Checks if player has collided with boss
   public void bossCollision()
   {
     //A for each loop which checks collision for every instance of Boss in bosses array list.
@@ -367,19 +369,24 @@ class Player
   //Player checks itself for colliding with Obstacles
   public void obstacleCollision()
   {
-    setSpeed(300, 300);
+    setSpeed(300, 300); //reset the player movement speed to account for instances where the player has gotten out of mud
+    
     //A for each loop which checks collision for every instance of Obstacle in obstacles array list.
     for (Obstacle o : curLevel.getObstacles())
     {
       //Player top border collision check
       if (yPos >= o.getYPos() && yPos <= o.getYPos() + o.getObstacleHeight() && xPos >= o.getXPos() && xPos <= o.getXPos() + o.getObstacleWidth())
       {
+        //If the obstacle is a boulder, the player gets hit
         if(o.getObstacleType() == 0)
         {
           isHit();
         }
-
-        setSpeed(50,50);
+        //if the obstacle is a pool of mud, the player's speed gets slowed down
+        else if (o.getObstacleType() == 1)
+        {
+          setSpeed(100,100);
+        }
       }
 
       //Player bottom border collision check
@@ -405,7 +412,7 @@ class Player
         
         else if (o.getObstacleType() == 1)
         {
-          setSpeed(50,50);
+          setSpeed(100,100);
         }
       }
 
@@ -419,7 +426,7 @@ class Player
         
         else if (o.getObstacleType() == 1)
         {
-          setSpeed(50,50);
+          setSpeed(100,100);
         }
       }
     }
@@ -430,17 +437,20 @@ class Player
     gameOver();
   }
   
+  //Change the movement speed of the player
   public void setSpeed(float newXSpeed, float newYSpeed)
   {
     xSpeed = newXSpeed;
     ySpeed = newYSpeed;
   }
-
+  
+  //Change the gun type of the player
   public void setGunType(int gun)
   {
     gunType = gun;
   }
   
+  //Reset variables back to default. Used when resetting the game
   public void resetPlayer()
   {
     isDead = false;

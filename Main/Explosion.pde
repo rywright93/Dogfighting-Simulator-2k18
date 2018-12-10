@@ -1,6 +1,5 @@
 /*
 Description:
-Authors:
 Comments:
 */
 
