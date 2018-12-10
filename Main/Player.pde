@@ -42,6 +42,7 @@ class Player
     isDead = false;
   }
 
+  //Call every method in Player required to update Player
   public void update()
   {
     display();

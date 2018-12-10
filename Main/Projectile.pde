@@ -1,6 +1,5 @@
 /*
-Description: Projectiles that the Player and enemies fire.
- Authors:
+Description: Projectiles that the Player, boss and enemies fire.
  Comments:
  */
 
@@ -28,7 +27,7 @@ class Projectile
     c = newColor;
     destroyed = false;
   }
-
+  //Call every method in Projectile required to update Projectile
   public void update()
   {
     bossCollision();
@@ -45,6 +44,7 @@ class Projectile
     //A for each loop which checks collision for every instance of Boss in bosses list.
     for (Boss b : curLevel.getBosses()) 
     {
+      //If the projectile collides with boss, and it was shot by the player
       if (drawColPoint(b.getXPos(), b.getYPos(), b.getBossHeight(), b.getBossWidth()) == true && shotBy == "Player")
       {
         curLevel.getExplosions().add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
@@ -57,8 +57,8 @@ class Projectile
   //Used to move the projectile off-screen and stop it when it hits something (or misses entirely)
   public void destroy()
   {
-    //Moves the Projectile to the corner of the screen
-    xPos = 0;
+    //Moves the Projectile off screen
+    xPos = -1000;
     yPos = 0;
     //Stops its velocity
     xSpeed = 0;
@@ -73,6 +73,7 @@ class Projectile
     //A for each loop which checks collision for every instance of Enemy in enemies list.
     for (Enemy e : curLevel.getEnemies()) 
     {
+      //If the projectile collides with e and it was shot by the player
       if (drawColPoint(e.getXPos(), e.getYPos(), e.getEnemyHeight(), e.getEnemyWidth()) == true && shotBy == "Player")
       {
         curLevel.getExplosions().add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
@@ -82,16 +83,17 @@ class Projectile
     }
   }
 
+  //Detects collision with instances of Playey
   public void playerCollision()
   {
-    
+    //If the projectile collides with the player and it was shot by either an enemy or boss
     if (drawColPoint(player.getXPos(), player.getYPos(), player.getPlayerHeight(), player.getPlayerWidth()) == true && shotBy == "Enemy" || shotBy == "Boss")
     {
       if (player.getShieldActive() == false)//if shield is not active, hit player
       {
         player.isHit();
         destroy();
-      } else if (player.getShieldActive() == true)//if shield is not active, no damage to player, destroy projectile
+      } else if (player.getShieldActive() == true)//if shield is active, no damage to player, destroy projectile
       {
         destroy();
       }
@@ -104,6 +106,7 @@ class Projectile
     //A for each loop which checks collision for every instance of Enemy in enemies list.
     for (Obstacle o : curLevel.getObstacles()) 
     {
+      //If projectile collides with obstacle, the obstacle is a boulder (and not mud)
       if (drawColPoint(o.getXPos(), o.getYPos(), o.getObstacleHeight(), o.getObstacleWidth()) == true && o.getObstacleType() == 0)
       {
         curLevel.getExplosions().add(new Explosion(xPos, yPos)); //Instantiates an explosion animation at current position
@@ -119,10 +122,6 @@ class Projectile
     xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
     yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
     ticksLastUpdate = millis(); 
-    /*
-    xPos += xSpeed;
-     yPos += ySpeed;
-     */
 
     //If the Projectile is above the screen, destroy it
     if (yPos + diameter/2 < 0)
@@ -130,37 +129,22 @@ class Projectile
       destroy();
     }
 
-    //If the Projectile is above the screen, destroy it
+    //If the Projectile is below the screen, destroy it
     if (yPos + diameter/2 > height)
     {
       destroy();
     }
   }
 
-  //Displays the projectile in the window
+  //Displays the projectile at its current location in the window
   public void display()
   {
-    /* 
-     //If the rectangle and projectile the fill changes
-     if(drawColPoint(400,300,200,200) == true)
-     {
-     fill(0, 255, 0);
-     }
-     else
-     {
-     fill(0,0,255);
-     }
-     //this represents is a boss
-     rect(400,300, 200, 200);
-     noFill();
-     */
     fill(c);
-    //This represents the projectile
-    ellipse(xPos, yPos, diameter, diameter);
+    ellipse(xPos, yPos, diameter, diameter);//This represents the projectile
     noStroke();
   }
 
-  //Checks collision between a projectile and a rectangle. The parameters it takes are that of the Enemy/Player picture. Returns true if they collide
+  //Checks collision between a projectile and a rectangle. The parameters it takes are that of the Enemy/Player/Boss picture. Returns true if they collide
   public boolean drawColPoint(float picX, float picY, float picHeight, float picWidth)
   {
     fill(255, 0, 0);
@@ -228,9 +212,7 @@ class Projectile
     {
       return true;
     }
-
-    //Display the closest point to the Projectile on the rectangle
-    //ellipse(closestX, closestY, 10, 10);
+    
     noFill();
 
     //If the distance between the closest point on the rectangle and the projectile is less than the projectile's radius, they have collided
