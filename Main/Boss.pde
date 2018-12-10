@@ -14,10 +14,10 @@ class Boss
   private int hitPoints; //Boss' health
   private int xSpeed = 300; //Speed by which it moves along the x-axis
   private int ySpeed = 180; //speed by which it moves along the y-axis
-  private float fireRate = 500;
+  private float fireRate = 500; //The frequency by which boss can shoot
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
-  private int maxHitPoints;
+  private int maxHitPoints; //The maximum amount of hitpoints is stored to make depleting healthbars
   
   Boss(int newHitPoints)
   {
@@ -29,6 +29,8 @@ class Boss
     maxHitPoints = hitPoints;
   }
   
+  //Calls appropriate methods that needs to be updated in Boss. 
+  //Update() is then the only method that needs to be called from Level which manages all bosses
   public void update()
   {
     display();
@@ -41,12 +43,11 @@ class Boss
     }
   }
   
-  //Slowly ascends into the screen from the top
+  //Slowly descends into the screen from the top
   public void enterLevel()
   {
     yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
     ticksLastUpdate = millis();
-    //yPos += ySpeed;
   }
 
   //Moves the boss from side to side
@@ -55,12 +56,13 @@ class Boss
     
     xPos += xSpeed * float(millis() - ticksLastUpdate) * 0.001;
     ticksLastUpdate = millis();
-    //xPos += xSpeed;
+
     //If boss moves beyond right border, reverse its speed
     if(xPos + bossWidth > width)
     {
       xSpeed = -xSpeed;
     }
+    
     //If boss moves beyond the left screen border, reverse its speed
     if(xPos < 0)
     {
@@ -100,23 +102,19 @@ class Boss
     ySpeed = 0;
 
     givePoints();
-    gameState++;
-    changeLevel(gameState);
+    gameState++; //change gameState
+    changeLevel(gameState); //change the current level
   }
   
+  //Display the boss on screen
   public void display()
   {
     if(hitPoints > 0)
     {
       fill(255, 0, 0);
-      //rect(xPos, yPos, bossWidth, bossHeight);
       rect(xPos, yPos - 20, map(hitPoints, 0, maxHitPoints, 0, bossWidth), 10); //displays a healthbar
       noFill();
       image(bossPic, xPos, yPos);
-      /*
-      textSize(25);
-      text(hitPoints + " HP", xPos, yPos);
-      */
     }
   }
   
