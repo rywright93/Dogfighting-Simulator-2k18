@@ -231,28 +231,60 @@ class Player
       //Player top border collision check
       if (yPos >= e.getYPos() && yPos <= e.getYPos() + e.getEnemyHeight() && xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth())
       {
-        isHit();
-        e.isHit();
+        if(shieldActive == false)
+        {
+          isHit();
+          e.isHit();
+        }
+        else if(shieldActive == true)
+        {
+          e.setHitPoints(0);
+          e.isHit();
+        }
       }
 
       //Player bottom border collision check
       if (yPos + playerHeight >= e.getYPos() && yPos + playerHeight <= e.getYPos() + e.getEnemyHeight() && xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth())
       {
-        isHit();
+        if(shieldActive == false)
+        {
+          isHit();
         e.isHit();
+        }
+        else if(shieldActive == true)
+        {
+          e.setHitPoints(0);
+          e.isHit();
+        }
       }
       //Player left border collision check
       if (xPos >= e.getXPos() && xPos <= e.getXPos() + e.getEnemyWidth() && yPos + playerHeight >= e.getYPos() && yPos <= e.getYPos() + e.getEnemyHeight())
       {
-        isHit();
-        e.isHit();
+        if(shieldActive == false)
+        {
+          isHit();
+          e.isHit();
+        }
+        else if(shieldActive == true)
+        {
+          e.setHitPoints(0);
+          e.isHit();
+        }
       }
 
       //Player right border collision check
       if (xPos + playerWidth >= e.getXPos() && xPos + playerWidth <= e.getXPos() + e.getEnemyWidth() && yPos >= e.getYPos() && yPos <= e.getYPos() + e.getEnemyHeight())
       {
-        isHit();
-        e.isHit();
+        if(shieldActive == false)
+        {
+          isHit();
+          e.isHit();
+        }
+        else if(shieldActive == true)
+        {
+          e.setHitPoints(0);
+          e.isHit();
+        }
       }
     }
   }

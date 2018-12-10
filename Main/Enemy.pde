@@ -188,4 +188,9 @@ class Enemy
   {
     return destroyed;
   }
+  
+  public void setHitPoints(int newHitPoints)
+  {
+    hitPoints = newHitPoints;
+  }
 }
