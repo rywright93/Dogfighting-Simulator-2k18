@@ -242,6 +242,9 @@ void gameOver()
 //Draws the Game Over screen
 void gameOverScreen()
 {
+  textSize(20);
+  fill(30, 100, 255);
+  text("My Score: "+points, 30, 50);
   fill(255, 0, 0);
   textSize(70);
   text("GAME OVER", width/2-200, 150);
