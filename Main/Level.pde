@@ -73,7 +73,6 @@ class Level
   //updates every instance of enemy, boss, projectile, explosion, obstacle, roadstripe, spawner, pickup, and confetti in the level
   public void update()
   {
-    println(spawners.size());
     updateRoadstripes();
     updateObstacles();
     updateEnemies();

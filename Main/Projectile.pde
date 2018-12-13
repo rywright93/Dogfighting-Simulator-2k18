@@ -147,7 +147,6 @@ class Projectile
   //Checks collision between a projectile and a rectangle. The parameters it takes are that of the Enemy/Player/Boss picture. Returns true if they collide
   public boolean drawColPoint(float picX, float picY, float picHeight, float picWidth)
   {
-    fill(255, 0, 0);
     float closestX = 0; //the x coordinate of the closest point to the projectile on the target rect
     float closestY = 0;//the y coordinate of the closest point to the projectile on the target rect
 
