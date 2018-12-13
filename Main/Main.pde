@@ -292,6 +292,11 @@ void displayHighscore()
 //draws You Win screen
 void youWinScreen()
 {
+  if(checkedHighscore == false)
+  {
+    checkHighscore();
+    checkedHighscore = true;
+  }
   fill(255, 0, 0);
   textSize(70);
   fill(255, 255, 0);

@@ -66,8 +66,10 @@ class Level
     {
       roadstripes[i] = new Roadstripe(height - 250*i);
     }
-
-    readTextFile();
+    if(gameState > 0 && gameState < 6)
+    {
+      readTextFile();
+    }
   }
 
   //updates every instance of enemy, boss, projectile, explosion, obstacle, roadstripe, spawner, pickup, and confetti in the level
