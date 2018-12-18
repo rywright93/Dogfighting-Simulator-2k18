@@ -60,7 +60,7 @@ class Player
     }
   }
 
-  //Displays player instance every frame on screen
+  //Displays player at its current location
   public void display()
   {
     strokeWeight(0);
@@ -124,18 +124,18 @@ class Player
     }
   }
 
-  //Player instantiates Projectile by pressing space bar
+  //Player shoots Projectile by pressing space bar
   public void shoot()
   {
     //Depending on gunType, the player shoots in different patterns
-    if (gunType == 1)
+    if (gunType == 1)// standard 'pea shooter', shoots single line of standard-sized projectiles
     {
       if (millis() > lastProjectileFiredAt)
       {
         lastProjectileFiredAt = millis() + fireRate;
         curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/2, yPos, 0.0, -400.0, "Player", color(0, 255, 0), 15));
       }
-    } else if (gunType == 2)
+    } else if (gunType == 2)// 'chain gun', shoots two lines of smaller-sized projectiles
     {
       if (millis() > lastProjectileFiredAt)
       {
@@ -143,7 +143,7 @@ class Player
         curLevel.getProjectiles().add(new Projectile(xPos + playerWidth/4, yPos, 0.0, -400.0, "Player", color(0, 255, 0), 7));
         curLevel.getProjectiles().add(new Projectile(xPos + (playerWidth/4 * 3), yPos, 0.0, -400.0, "Player", color(0, 255, 0), 7));
       }
-    } else if (gunType == 3)
+    } else if (gunType == 3)// 'shotgun', shoots larger-sized projectiles in three directions
     {
       if (millis() > lastProjectileFiredAt)
       {

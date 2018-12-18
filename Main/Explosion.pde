@@ -1,5 +1,5 @@
 /*
-Description:
+Description: An animation which depicts an explosion.
 Comments:
 */
 
@@ -21,7 +21,7 @@ class Explosion
     yPos = y;
   }
   
-  //Display explosion in window at current position
+  //Display explosion at current position
   public void display()
   {
     imageMode(CENTER);
@@ -37,7 +37,6 @@ class Explosion
       { 
         animationEnded = true;
       } 
-      //ticksLast = millis(); //adds up time overshooting error
       ticksLast += delta; //avoids adding up error
     }
   }

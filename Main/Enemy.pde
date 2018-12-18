@@ -1,6 +1,7 @@
 /*
-Description:
- Comments:
+Description: Class that creates enemies. When instantiated, enemies accept their positional values,
+their health value, and designated as 1 of 3 enemy types
+ Comments: EnemyType 1: fly straight, don't shoot. Type 2: sin wave, and shoot. Type 3: kamikaze enemy, drives toward the player
  */
 
 class Enemy
@@ -14,7 +15,7 @@ class Enemy
   private float xSpeed; //Enemy's speed along the x-axis
   private float ySpeed; //Enemy's speed along thet y-axis
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
-  private int enemyType; //EnemyType 1: fly straight, don't shoot. Type 2: sin wave, and shoot. Type 3: kamikaze
+  private int enemyType; //assigns enemy type
   private float spawnXPos; //the x-coodinate of the Enemy's spawn position. Used for EnemyType 3
   private float fireRate = 800; //The frequency by which enemy can shoot
   private float lastProjectileFiredAt; //indicates when the last shot was fire in milliseconds
@@ -55,7 +56,7 @@ class Enemy
       ticksLastUpdate = millis();
     }
 
-    //EnemyType 2 movement. Moves in sine wave and shoots
+    //EnemyType 2 movement. Moves in sin wave and shoots
     if (enemyType == 2)
     {
       yPos += ySpeed * float(millis() - ticksLastUpdate) * 0.001;
@@ -91,7 +92,7 @@ class Enemy
     }
   }
 
-  //Instantiates projectiles that can only collide with an instance of Player
+  //Instantiates projectiles that can only collides with instances of Player and Obstacle
   public void shoot()
   {
     curLevel.getProjectiles().add(new Projectile(xPos + enemyWidth/2, yPos + enemyHeight, 0, 400, "Enemy", color(255, 0, 0), 20));
@@ -129,7 +130,7 @@ class Enemy
     points = points + 100;
   }
 
-  //Display the enemy in the window at its current location
+  //Display the enemy at its current location
   public void display()
   {
     fill(255, 0, 0);

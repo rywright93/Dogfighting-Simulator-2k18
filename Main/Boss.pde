@@ -1,6 +1,6 @@
 /*
-Description:
-Comments:
+Description: Class that creates boss enemies at the end of each level. When instantiated, bosses accept a value for their
+hit points. Bosses move and shoot in a set pattern. 
 */
 
 class Boss
@@ -100,7 +100,7 @@ class Boss
     ySpeed = 0;
 
     givePoints();
-    gameState++; //change gameState
+    gameState++; //change gameState when boss is defeated
     changeLevel(gameState); //change the current level
   }
   

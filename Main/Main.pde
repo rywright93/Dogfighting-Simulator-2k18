@@ -57,7 +57,7 @@ void setup()
 
   loadHighscore();
   
-  inputName = "N/A/";
+  inputName = "N/A/"; //sets default string for high score list names
 }
 
 void draw()
@@ -77,6 +77,8 @@ void draw()
     player.update();
     textSize(20);
     fill(30, 100, 255);
+    
+    //UI elements on screen during play
     text("My Score: "+points, 30, 50);
     text("Shield Charges: " + player.getshieldCharge(), 30, 80);
     text("Level: " + gameState, 600, 50);
@@ -162,6 +164,7 @@ void keyReleased()
   }
 }
 
+//when player presses "Exit Game" button on main menu, "game over" screen, or the "you win" screen, exits game and saves high scores to disk.
 void exitGame()
 {
   saveHighscore();
@@ -170,7 +173,7 @@ void exitGame()
 
 void mousePressed()
 {
-  //Checks whether the mouse is pressing a button on the screen
+  //Checks whether the mouse is pressing a button on a menu
   if (gameState == 0)
   {
     //Checks for clicks on "Wanna Play?" button on Main Menu
@@ -191,7 +194,7 @@ void mousePressed()
       }
     }
   }
-  //Checks if the player presses the buttons with the mouse on You Win and Game Over screen
+  //Checks if the player presses the buttons with the mouse on You Win and Game Over screens
   if (gameState == 7 || gameState == 6)
   {
     //Checks for clicks on "Play Again?" button on Game Over screen OR You Win screen
@@ -252,7 +255,7 @@ void gameOverScreen()
   displayHighscore();
 }
 
-//draws the highscore list in the window as well as a play again and exit button
+//draws the highscore list in the window as well as a "play again" and "exit game" button
 void displayHighscore()
 {
   //Buttons
@@ -416,14 +419,14 @@ void resetHighscoreList()
 //is used to create inputName, which will be the new highscore entry
 void createInputName()
 {
-  inputName += key; //add the character to the String
+  inputName += key; //add the typed character to the String
 }
 
 
 //Enters the inputName into the array highscoreNames
 void enterNewHighscoreName()
 {
-  //go through every entry in the array highscoreNames
+  //goes through every entry in the array highscoreNames
   for (int i = 0; i < highscoreNames.length; i++)
   {
     //locates the entry that is blank

@@ -11,7 +11,7 @@ class Obstacle
   private float obstacleWidth; //width of the obstacle
   private float obstacleHeight; //height of the obstacle
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
-  private int obstacleType; //type 0 is a boulder. type 1 is a pool of mud
+  private int obstacleType; //type 0 is a boulder. type 1 is a pool of mud.
   
   //Constructor
   Obstacle(float newXPos, float newYPos, int newObstacleType)

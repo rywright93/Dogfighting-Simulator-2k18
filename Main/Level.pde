@@ -1,5 +1,6 @@
 /*
-Description: Level structure
+Description: Level structure which is responsible for instantiating and updating Obstacle, Boss, Enemy, Projectile, Pickup. Explosion, Spawner, Roadstripe. 
+It reads the level .txt files and places obstacles, spawners etc. accordingly.
  Comments:
  */
 
@@ -17,7 +18,7 @@ class Level
   private Confetti[] particles;
 
   //Constructor
-  Level(int curGameState)
+  Level(int curGameState) //accepts current GameState in order to display the appropriate level
   {
     //Level 1
     if (curGameState == 1)
@@ -50,9 +51,9 @@ class Level
     }
 
     //Instantiate all the arraylists
-    enemies = new ArrayList<Enemy>(); //Used for testing
+    enemies = new ArrayList<Enemy>();
     bosses = new ArrayList<Boss>();
-    projectiles = new ArrayList<Projectile>(); //Used for testing
+    projectiles = new ArrayList<Projectile>();
     explosions = new ArrayList<Explosion>();
     obstacles = new ArrayList<Obstacle>();
     spawners = new ArrayList<Spawner>();
@@ -99,7 +100,8 @@ class Level
         //If char=0, it's a Obstacle of type boulder
         if (levelTiling[i].charAt(j) == '0')
         {
-          //constructor(starting/default x + Wall width * column number + 1 to avoid multiplication by zero, starting/default y + wall height * row number + 1 to avoid multiplication by zero, xspeed, yspeed)
+          //Ensures obstacles are instantiated off screen above the player according to the following parameters:
+          //constructor(starting x + Wall width * column number, starting y + wall height * row number, spawner type)
           obstacles.add(new Obstacle(0+140*j, -140*levelTiling.length+140*i, 0));
         }
 

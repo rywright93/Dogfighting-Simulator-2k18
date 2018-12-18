@@ -1,6 +1,5 @@
 /*
-Description:
- Comments:
+Description: Enemies have a 10% chance of dropping pickups. Pickups can provide players with charges to use their shield, or give the player a new gun type. 
  */
 
 class Pickup
@@ -52,9 +51,8 @@ class Pickup
   public void display()
   {
     noStroke();
-    fill(random(0,255), random(0,255), random(0, 255));
+    fill(random(0, 255), random(0, 255), random(0, 255));
     rect(xPos, yPos, pickupHeight, pickupWidth);
-    
   }
 
   //Gives the player an extra shield charge
@@ -62,25 +60,25 @@ class Pickup
   {
     player.setShieldCharge();
   }
-  
+
   //Changes the players gunType
   public void giveGun()
   {
-    if(pickupType > 0 && pickupType < 4)
+    if (pickupType > 0 && pickupType < 4)
     {
       player.setGunType(pickupType);
     }
   }
-  
+
   //Calls the appropriate method depending on which pickupType it is
   public void triggerPickup()
   {
     //Instantiate an array of Confetti, to make a confetti explosion when picked up by player
     for (int i = 0; i < curLevel.getParticles().length; i++)
     {
-      curLevel.getParticles()[i] = new Confetti(xPos + pickupWidth, yPos + pickupHeight, random(-200, 200),random(-400, 0));
+      curLevel.getParticles()[i] = new Confetti(xPos + pickupWidth, yPos + pickupHeight, random(-200, 200), random(-400, 0));
     }
-  
+
     if (pickupType == 0)
     {
       giveShield();
@@ -92,7 +90,7 @@ class Pickup
     destroy();
     isPickedUp = true;
   }
-  
+
   //moves pickup off-screen
   public void destroy()
   {

@@ -1,6 +1,5 @@
 /*
-Description:
-Comments:
+Description: A simple particle system that adds a colorful explosion when the player picks up a pickup.
 */
 
 class Confetti
