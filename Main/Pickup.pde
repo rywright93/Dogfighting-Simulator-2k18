@@ -66,7 +66,15 @@ class Pickup
   {
     if (pickupType > 0 && pickupType < 4)
     {
-      player.setGunType(pickupType);
+      //If gunType is the same as pickupType, the Pickup should yield a shield charge instead of giving the player the gun which is already active 
+      if(player.getGunType() == pickupType)
+      {
+        giveShield();
+      }
+      else
+      {
+        player.setGunType(pickupType);
+      }
     }
   }
 

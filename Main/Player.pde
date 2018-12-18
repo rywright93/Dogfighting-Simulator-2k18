@@ -460,4 +460,9 @@ class Player
     yPos = height - 100;
     shieldCharges = 3;
   }
+  
+  public int getGunType()
+  {
+    return gunType;
+  }
 }
