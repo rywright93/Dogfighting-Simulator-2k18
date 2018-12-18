@@ -1,6 +1,6 @@
 /*
 Description: Spawner is basically an x-y coordinate which moves. Once it reaches the top border of the screen it will instantiate the boss or enemy which it represents
- Comments:
+Comments: The reason for including this class is to better control the enemy and boss behaviour. So that they don't start moving or shooting before they are on-screen.
  */
 
 class Spawner

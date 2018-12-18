@@ -1,6 +1,6 @@
 /*
-Description: The player character
- Comments:
+Description: The player character. Responds to player input, if it is hit, the player loses and the Game Over sequence is started.
+Can move, shoot, use a shield which makes it temporarily invincible to damage from projectiles and enemy collision.
  */
 
 class Player

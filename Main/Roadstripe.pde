@@ -1,6 +1,5 @@
 /*
-Description: 
-Comments: A purely visual addition to the game to simulate driving on a road
+Description: A purely visual addition to the game to simulate driving on a road 
 */
 
 class Roadstripe

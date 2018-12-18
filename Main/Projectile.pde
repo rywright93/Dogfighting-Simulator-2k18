@@ -1,6 +1,5 @@
 /*
-Description: Projectiles that the Player, boss and enemies fire.
- Comments:
+Description: Projectiles that the Player, boss and enemies fire. It detects collision with obstacles, the player, bosses, and enemies.
  */
 
 class Projectile
@@ -12,7 +11,7 @@ class Projectile
   private float diameter; //diameter of projectile
   private String shotBy; //indicates if projectile was fired by Enemy or Player
   private boolean destroyed;
-  color c; //Color of projectile
+  private color c; //Color of projectile
   private int ticksLastUpdate = millis(); //time fix used to make movement the same across different hardware
 
   //Constructor
@@ -41,7 +40,7 @@ class Projectile
   //Detects collision with instances of Boss in the arraylist bosses
   public void bossCollision()
   {
-    //A for each loop which checks collision for every instance of Boss in bosses list.
+    //A for-each loop which checks collision for every instance of Boss in bosses list.
     for (Boss b : curLevel.getBosses()) 
     {
       //If the projectile collides with boss, and it was shot by the player
@@ -70,7 +69,7 @@ class Projectile
   //Detects collision with instances of Enemy in the arraylist enemies
   public void enemyCollision()
   {
-    //A for each loop which checks collision for every instance of Enemy in enemies list.
+    //A for-each loop which checks collision for every instance of Enemy in enemies list.
     for (Enemy e : curLevel.getEnemies()) 
     {
       //If the projectile collides with e and it was shot by the player
@@ -83,7 +82,7 @@ class Projectile
     }
   }
 
-  //Detects collision with instances of Playey
+  //Detects collision with instances of Player
   public void playerCollision()
   {
     //If the projectile collides with the player and it was shot by either an enemy or boss
@@ -103,7 +102,7 @@ class Projectile
   //Detects collision with instances of Obstacle in the arraylist obstacles
   public void obstacleCollision()
   {
-    //A for each loop which checks collision for every instance of Enemy in enemies list.
+    //A for-each loop which checks collision for every instance of Enemy in enemies list.
     for (Obstacle o : curLevel.getObstacles()) 
     {
       //If projectile collides with obstacle, the obstacle is a boulder (and not mud)
@@ -130,13 +129,13 @@ class Projectile
     }
 
     //If the Projectile is below the screen, destroy it
-    if (yPos + diameter/2 > height)
+    if (yPos - diameter/2 > height)
     {
       destroy();
     }
   }
 
-  //Displays the projectile at its current location in the window
+  //Displays the projectile at its current location
   public void display()
   {
     fill(c);
